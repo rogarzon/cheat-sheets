@@ -1,11 +1,11 @@
 # Configuración de Git
 
-### Asignar nombre de usuario y correo para los mensajes de los commits:
+## Asignar nombre de usuario y correo para los mensajes de los commits:
 
 1. > git config --global user.name "John Doe"
 2. > git config --global user.email johndoe@example.com
 
-### Listar la configuración:
+## Listar la configuración:
 
 > git config --list
 

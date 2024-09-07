@@ -1,2 +1,2 @@
-# cheat-sheets
+# Cheat-Sheets
 Notas y apuntes importantes
