@@ -17,8 +17,8 @@
 
 # Hacer un backup comprimido
 
-1. `pg_dump --verbose --dbname=bps --username=postgres | gzip > bps-dump.sql.gz`
-2. ``(pg_dump --verbose --dbname=grp9_test.2024-09-04-test --username=odoo | gzip -9) > grp9_test.2024-09-04-test-`date +%Y-%m-%d-%H-%M-%S`.sql.gz``
+1. **Windows:** `pg_dump --verbose --dbname=bps --username=postgres | gzip > bps-dump.sql.gz`
+2. **Linux:** ``(pg_dump --verbose --dbname=grp9_test.2024-09-04-test --username=odoo | gzip -9) > grp9_test.2024-09-04-test-`date +%Y-%m-%d-%H-%M-%S`.sql.gz``
 
 > Nota: Debe de estar instalado el gzip, ya sea instalando git el cual lo hace automáticamente u otra via.
 
