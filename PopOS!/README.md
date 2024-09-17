@@ -25,3 +25,5 @@ https://askubuntu.com/questions/1362829/ubuntu-popos-21-04-screen-blinking
 2. `sudo update-initramfs -c -k $(uname -r)`
 3. `reboot`
 
+# Ver qué tarjeta gráfica se está usando:
+`lspci -k | grep -A 2 -E "(VGA|3D)"`
