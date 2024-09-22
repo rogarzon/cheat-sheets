@@ -348,6 +348,7 @@ You can find your bash shell path (which may vary from the above) using the comm
 * line #8: The `ls` command takes the variable with the stored path and displays the current files and folders.
 
 ### Executing the bash script
+
 To make the script executable, assign execution rights to your user using this command:
 
 `chmod u+x run_all.sh`
@@ -363,3 +364,83 @@ You can run the script using any of the mentioned methods:
 * `sh run_all.sh`
 * `bash run_all.sh`
 * `./run_all.sh`
+
+### Comments in bash scripting
+
+Comments start with a `#` in bash scripting. This means that any line that begins with a `#` is a comment and will be
+ignored by the interpreter.
+
+### Variables and data types in Bash
+
+There are no data types in Bash. In Bash, a variable is capable of storing numeric values, individual characters, or
+strings of characters.
+
+**Assign the value directly:**
+
+`country=Netherlands`
+
+Assign the value based on the output obtained from a program or command, using command substitution.
+> Note that `$` is required to access an existing variable's value.
+
+`same_country=$country`
+
+### Conditional statements (if/else)
+
+Syntax:
+
+`if [[ condition ]];
+then
+    statement
+elif [[ condition ]]; then
+    statement 
+else
+    do this by default
+fi`
+
+### Syntax of bash conditional statements
+
+We can use logical operators such as **AND** `-a` and **OR** `-o` to make comparisons that have more significance.
+
+`if [ $a -gt 60 -a $b -lt 100 ]`
+
+### Looping and branching in Bash
+
+### While loop
+
+In the example below, `(( i += 1 ))` is the counter statement that increments the value of `i`. The loop will run
+exactly 10 times.
+
+`#!/bin/bash
+i=1
+while [[ $i -le 10 ]] ; do
+   echo "$i"
+  (( i += 1 ))
+done`
+
+### For loop
+
+`#!/bin/bash
+for i in {1..5}
+do
+    echo $i
+done`
+
+### Case statements
+
+`case expression in
+    pattern1)
+        # code to execute if expression matches pattern1
+        ;;
+    pattern2)
+        # code to execute if expression matches pattern2
+        ;;
+    pattern3)
+        # code to execute if expression matches pattern3
+        ;;
+    *)
+        # code to execute if none of the above patterns match expression
+        ;;
+esac`
+
+The double semicolon `";;"` separates each block of code to execute for each pattern. The asterisk `"*"` represents the
+default case, which executes if none of the specified patterns match the expression.
