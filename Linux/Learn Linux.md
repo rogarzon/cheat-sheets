@@ -2,6 +2,68 @@
 
 https://www.freecodecamp.org/news/learn-linux-for-beginners-book-basic-to-advanced/
 
+<!-- TOC -->
+* [Linux](#linux)
+  * [CPU architecture](#cpu-architecture)
+  * [The Linux File-system Hierarchy](#the-linux-file-system-hierarchy)
+  * [`cd` Command shortcuts](#cd-command-shortcuts)
+  * [create directories recursively using the -p option](#create-directories-recursively-using-the--p-option)
+  * [Creating new files using the `touch` command](#creating-new-files-using-the-touch-command)
+  * [Removing files and directories using the `rm` and `rmdir` command](#removing-files-and-directories-using-the-rm-and-rmdir-command)
+  * [Moving and renaming files and folders using the `mv` command](#moving-and-renaming-files-and-folders-using-the-mv-command)
+  * [Locating Files and Folders Using the `find` Command](#locating-files-and-folders-using-the-find-command)
+    * [How to search files by name or extension](#how-to-search-files-by-name-or-extension)
+    * [How to search hidden files](#how-to-search-hidden-files)
+    * [How to search log files and configuration files](#how-to-search-log-files-and-configuration-files)
+    * [How to search other files by type](#how-to-search-other-files-by-type)
+    * [How to search directories](#how-to-search-directories)
+    * [How to search files by size](#how-to-search-files-by-size)
+    * [How to search files by modification time](#how-to-search-files-by-modification-time)
+  * [Concatenate and display files using the `cat` command](#concatenate-and-display-files-using-the-cat-command)
+  * [Viewing text files interactively using `less` and `more`](#viewing-text-files-interactively-using-less-and-more)
+  * [Displaying the last part of files using `tail`](#displaying-the-last-part-of-files-using-tail)
+  * [Displaying the beginning of files using `head`](#displaying-the-beginning-of-files-using-head)
+  * [Counting words, lines, and characters using `wc`](#counting-words-lines-and-characters-using-wc)
+  * [Comparing files line by line using `diff`](#comparing-files-line-by-line-using-diff)
+    * [Check whether the files are the same or not](#check-whether-the-files-are-the-same-or-not)
+    * [See how the files differ. For that, you can use the `-u` flag to see a unified output:](#see-how-the-files-differ-for-that-you-can-use-the--u-flag-to-see-a-unified-output)
+    * [To see the diff in a side-by-side format, you can use the `-y` flag:](#to-see-the-diff-in-a-side-by-side-format-you-can-use-the--y-flag)
+  * [How to Create and Execute Bash scripts](#how-to-create-and-execute-bash-scripts)
+    * [Creating your first bash script](#creating-your-first-bash-script)
+    * [Executing the bash script](#executing-the-bash-script)
+    * [Comments in bash scripting](#comments-in-bash-scripting)
+    * [Variables and data types in Bash](#variables-and-data-types-in-bash)
+    * [Conditional statements (if/else)](#conditional-statements-ifelse)
+    * [Syntax of bash conditional statements](#syntax-of-bash-conditional-statements)
+    * [Looping and branching in Bash](#looping-and-branching-in-bash)
+    * [While loop](#while-loop)
+    * [For loop](#for-loop)
+    * [Case statements](#case-statements)
+  * [Managing Software Packages in Linux](#managing-software-packages-in-linux)
+    * [Installing downloaded packages from a website](#installing-downloaded-packages-from-a-website)
+  * [User Management](#user-management)
+    * [Access control: finding and understanding file permission](#access-control-finding-and-understanding-file-permission)
+    * [How to Read Symbolic Permissions or the `rwx` permissions](#how-to-read-symbolic-permissions-or-the-rwx-permissions)
+    * [How to Change File Permissions and Ownership in Linux using `chmod` and `chown`](#how-to-change-file-permissions-and-ownership-in-linux-using-chmod-and-chown)
+    * [How to Change Ownership using the `chown` Command](#how-to-change-ownership-using-the-chown-command)
+  * [Managing local user accounts](#managing-local-user-accounts)
+    * [Creating users from the command line](#creating-users-from-the-command-line)
+    * [Modifying existing users](#modifying-existing-users)
+    * [Deleting users](#deleting-users)
+    * [Changing user passwords](#changing-user-passwords)
+  * [Connecting to Remote Servers via SSH](#connecting-to-remote-servers-via-ssh)
+  * [Advanced Log Parsing and Analysis](#advanced-log-parsing-and-analysis)
+    * [Text extraction using `grep`](#text-extraction-using-grep)
+    * [Text extraction using `sed`](#text-extraction-using-sed)
+    * [Text parsing with `awk`](#text-parsing-with-awk)
+    * [Parsing log files with `cut`](#parsing-log-files-with-cut)
+  * [Automation in Linux – Automate Tasks with Cron Jobs](#automation-in-linux--automate-tasks-with-cron-jobs)
+    * [How to add cron jobs in Linux](#how-to-add-cron-jobs-in-linux)
+    * [Cron job syntax](#cron-job-syntax)
+    * [Cron job examples](#cron-job-examples)
+<!-- TOC -->
+
+
 ## CPU architecture
 
 The `lscpu` command in Linux is used to display information about the CPU architecture. When you run lscpu in the
@@ -46,8 +108,8 @@ the tree**.
 
 .
 └── tools
-└── index
-└── helper-scripts
+    └── index
+        └── helper-scripts
 
 ## Creating new files using the `touch` command
 
@@ -830,11 +892,11 @@ Assume you have a log file structured as follows, where fields are space-separat
 
 * **Combining `cut` with other commands:**
 
-    `grep "ERROR" system.log | cut -d ' ' -f 1,2` 
+  `grep "ERROR" system.log | cut -d ' ' -f 1,2`
 
-    \# Output\
-    2024-04-25 08:25:02\
-    #This command first filters lines that include "ERROR", then extracts the date and time from these lines.
+  \# Output\
+  2024-04-25 08:25:02\
+  #This command first filters lines that include "ERROR", then extracts the date and time from these lines.
 
 
 * **Extracting multiple fields:**
@@ -850,4 +912,67 @@ Assume you have a log file structured as follows, where fields are space-separat
   ...\
   #The above command extracts the first three fields from each log entry that are date, time, and log level.
 
+## Automation in Linux – Automate Tasks with Cron Jobs
+
+How to control access to crons
+
+In order to use cron jobs, an admin needs to allow cron jobs to be added for users in the `/etc/cron.allow` file
+
+If you get a prompt like this, it means you don't have permission to use cron.
+
+`$ crontab -e`
+\
+#You (john) are not allowed to use this program (crontab)
+
+To allow John to use crons, include his name in `/etc/cron.allow`. Create the file if it doesn't exist.
+
+/etc$ `sudo cat cron.allow john`
+
+Users can also be denied access to cron job access by entering their usernames in the file `/etc/cron.d/cron.deny`.
+
+### How to add cron jobs in Linux
+
+First, to use cron jobs, you'll need to check the status of the cron service. If cron is not installed
+
+#Check cron service on Linux system\
+`sudo systemctl status cron.service`
+
+### Cron job syntax
+
+* `crontab -e`: edits crontab entries to add, delete, or edit cron jobs.
+* `crontab -l`: list all the cron jobs for the current user.
+* `crontab -u username -l`: list another user's crons.
+* `crontab -u username -e`: edit another user's crons.
+
+When you list crons and they exist, you'll see something like this:
+
+#Cron job example\
+`* * * * * sh /path/to/script.sh`
+
+In the above example,
+
+* represents **minute(s)** **hour(s)** **day(s)** **month(s)** **weekday(s)**, respectively. See details of these values below:
+
+|          | VALUE | DESCRIPTION                                                  |
+|----------|-------|--------------------------------------------------------------|
+| Minutes  | 0-59  | Command will be executed at the specific minute.             |
+| Hours    | 0-23  | Command will be executed at the specific hour.               |
+| Days     | 1-31  | Commands will be executed in these days of the months.       |
+| Months   | 1-12  | The month in which tasks need to be executed.                |
+| Weekdays | 0-6   | Days of the week where commands will run. Here, 0 is Sunday. |
+
+* `sh` represents that the script is a bash script and should be run from /bin/bash.
+* `/path/to/script.sh` specifies the path to the script.
+
+### Cron job examples
+
+Below are some examples of scheduling cron jobs.
+
+| SCHEDULE     | SCHEDULED VALUE                                           |
+|--------------|-----------------------------------------------------------|
+| 5 0 * 8 *    | At 00:05 in August.                                       |
+| 5 4 * * 6    | At 04:05 on Saturday.                                     |
+| 0 22 * * 1-5 | At 22:00 on every day-of-week from Monday through Friday. |
+
+You can practice and generate cron schedules with the [crontab guru](https://crontab.guru/) website.
 
