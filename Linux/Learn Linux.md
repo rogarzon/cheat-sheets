@@ -7,7 +7,7 @@ https://www.freecodecamp.org/news/learn-linux-for-beginners-book-basic-to-advanc
   * [CPU architecture](#cpu-architecture)
   * [The Linux File-system Hierarchy](#the-linux-file-system-hierarchy)
   * [`cd` Command shortcuts](#cd-command-shortcuts)
-  * [create directories recursively using the -p option](#create-directories-recursively-using-the--p-option)
+  * [create directories recursively using the `-p` option](#create-directories-recursively-using-the--p-option)
   * [Creating new files using the `touch` command](#creating-new-files-using-the-touch-command)
   * [Removing files and directories using the `rm` and `rmdir` command](#removing-files-and-directories-using-the-rm-and-rmdir-command)
   * [Moving and renaming files and folders using the `mv` command](#moving-and-renaming-files-and-folders-using-the-mv-command)
@@ -61,8 +61,12 @@ https://www.freecodecamp.org/news/learn-linux-for-beginners-book-basic-to-advanc
     * [How to add cron jobs in Linux](#how-to-add-cron-jobs-in-linux)
     * [Cron job syntax](#cron-job-syntax)
     * [Cron job examples](#cron-job-examples)
+    * [How to set up a cron job](#how-to-set-up-a-cron-job)
+    * [How to troubleshoot crons](#how-to-troubleshoot-crons)
+  * [Linux Networking Basics](#linux-networking-basics)
+    * [View network interfaces with `ifconfig`](#view-network-interfaces-with-ifconfig)
+    * [View network activity with `netstat`](#view-network-activity-with-netstat)
 <!-- TOC -->
-
 
 ## CPU architecture
 
@@ -102,7 +106,7 @@ the tree**.
 | `cd or cd ~` | 	Go to the home directory |
 | `cd -`       | 	Go to the previous path  |
 
-## create directories recursively using the -p option
+## create directories recursively using the `-p` option
 
 `mkdir -p tools/index/helper-scripts`
 
@@ -975,4 +979,102 @@ Below are some examples of scheduling cron jobs.
 | 0 22 * * 1-5 | At 22:00 on every day-of-week from Monday through Friday. |
 
 You can practice and generate cron schedules with the [crontab guru](https://crontab.guru/) website.
+
+### How to set up a cron job
+
+1. Create a script called **date-script.sh** which prints the system date and time and appends it to a file. The script is shown below:
+
+   #!/bin/bash
+
+   ``echo `date` >> date-out.txt``
+2. Make the script executable by giving it execution rights.
+
+   `chmod 775 date-script.sh`
+
+3. Add the script in the crontab using `crontab -e`.
+
+   `*/1 * * * * /bin/sh /root/date-script.sh`
+
+4. Check the output of the file **date-out.txt**. According to the script, the system date should be printed to this file every minute.
+
+   `cat date-out.txt`
+
+   #output\
+   Wed 26 Jun 16:59:33 PKT 2024\
+   Wed 26 Jun 17:00:01 PKT 2024\
+   .............................
+
+### How to troubleshoot crons
+
+1. Check the schedule.
+
+   First, you can try verifying the schedule that's set for the cron. You can do that with the syntax you saw in the above sections.
+
+2. Check cron logs.
+
+   First, you need to check if the cron has run at the intended time or not. In Ubuntu, you can verify this from the cron logs located at
+   `/var/log/syslog`.
+
+    1 Jun 26 17:02:01 zaira-ThinkPad CRON[27834]: (zaira) CMD (/bin/sh /home/zaira/date-script.sh)\
+    2 Jun 26 17:02:02 zaira-ThinkPad systemd[2094]: Started Tracker metadata extractor.\
+    3 Jun 26 17:03:01 zaira-ThinkPad CRON[28255]: (zaira) CMD (/bin/sh /home/zaira/date-script.sh)\
+
+3. Redirect cron output to a file.
+
+    #Redirect cron output to a file
+
+    `* * * * * sh /path/to/script.sh &> log_file.log`
+
+
+## Linux Networking Basics
+
+### View network interfaces with `ifconfig`
+The `ifconfig` command gives information about network interfaces.
+
+To extract IPv4 and IPv6 addresses, you can use `ip -4 addr` and `ip -6 addr`, respectively.
+
+### View network activity with `netstat`
+
+1. Display all listening and non-listening sockets:
+
+    `netstat -a`
+
+2. Show only listening ports:
+
+    `netstat -l`
+
+3. Display network statistics:
+
+    `netstat -s`
+
+4. Show routing table:
+
+    `netstat -r`
+
+5. Display TCP connections:
+
+    `netstat -t`
+
+6. Display UDP connections:
+
+    `netstat -u`
+
+7. Show network interfaces:
+
+    `netstat -i`
+
+8. Display PID and program names for connections:
+
+    `netstat -p`
+
+9. Show statistics for a specific protocol (for example, TCP):
+
+    `netstat -st`
+
+10. Display extended information:
+
+    `netstat -e`
+
+
+
 
