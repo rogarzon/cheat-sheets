@@ -3,10 +3,12 @@
 https://www.freecodecamp.org/news/git-cheat-sheet-helpful-git-commands-with-examples/
 
 <!-- TOC -->
+
 * [Git Cheat Sheet – Helpful Git Commands with Examples](#git-cheat-sheet--helpful-git-commands-with-examples)
-  * [The Working Directory and the Staging Area](#the-working-directory-and-the-staging-area)
-  * [Working with Branches](#working-with-branches)
-  * [Merging in Git](#merging-in-git)
+    * [The Working Directory and the Staging Area](#the-working-directory-and-the-staging-area)
+    * [Working with Branches](#working-with-branches)
+    * [Merging in Git](#merging-in-git)
+
 <!-- TOC -->
 
 ## The Working Directory and the Staging Area
@@ -120,14 +122,19 @@ Lists all branches that have not been fully merged into your current branch, sho
 
 ## Merging in Git
 
-git merge <branch>
+`git merge <branch>`
+
 Integrates the changes from the specified branch into your current branch, combining their histories.
 
-git merge --no-ff <branch>
+`git merge --no-ff <branch>`
+
 Merges the specified branch into your current branch, always creating a new merge commit even if a fast-forward merge is possible.
 
-git merge --squash <branch>
-Combines all the changes from the specified branch into a single commit, preparing the changes for a commit in the current branch without merging the branch’s history. This allows you to manually edit the commit message.
+`git merge --squash <branch>`
 
-git merge --abort
+Combines all the changes from the specified branch into a single commit, preparing the changes for a commit in the current branch without merging the
+branch’s history. This allows you to manually edit the commit message.
+
+`git merge --abort`
+
 Cancels an ongoing merge process and restores the state of your working directory and index to what it was before the merge started.
