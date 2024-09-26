@@ -1,5 +1,33 @@
 # Configuración de Git
 
+<!-- TOC -->
+* [Configuración de Git](#configuración-de-git)
+  * [Asignar nombre de usuario y correo para los mensajes de los commits:](#asignar-nombre-de-usuario-y-correo-para-los-mensajes-de-los-commits)
+  * [Listar la configuración:](#listar-la-configuración)
+* [Submódulos](#submódulos)
+  * [Starting with Submodules](#starting-with-submodules)
+  * [Cloning a Project with Submodules](#cloning-a-project-with-submodules)
+  * [Working on a Project with Submodules](#working-on-a-project-with-submodules)
+* [Ignorar el cambio de modo](#ignorar-el-cambio-de-modo)
+* [Administrar repositorios remotos](#administrar-repositorios-remotos)
+  * [Solución de problemas: El origen remoto ya existe](#solución-de-problemas-el-origen-remoto-ya-existe)
+  * [Cambiar la URL del repositorio remoto](#cambiar-la-url-del-repositorio-remoto)
+    * [Cambiar direcciones URL remotas de SSH a HTTPS](#cambiar-direcciones-url-remotas-de-ssh-a-https)
+  * [Solución de problemas: No existe tal remoto '_[name]_'](#solución-de-problemas-no-existe-tal-remoto-_name_)
+  * [Renombrar un repositorio remoto](#renombrar-un-repositorio-remoto)
+  * [Solución de problemas: No se pudo renombrar la sección de configuración 'remote._[old name]_' a 'remote._[new name]_'](#solución-de-problemas-no-se-pudo-renombrar-la-sección-de-configuración-remote_old-name_-a-remote_new-name_)
+  * [Solución de problemas: Ya existe el Remoto _[new name]_](#solución-de-problemas-ya-existe-el-remoto-_new-name_)
+  * [Eliminar un repositorio remoto](#eliminar-un-repositorio-remoto)
+* [Connect with SSH](#connect-with-ssh)
+  * [Checking for existing SSH keys](#checking-for-existing-ssh-keys)
+  * [Generating a new SSH key and adding it to the ssh-agent](#generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+  * [Agregar su clave SSH al ssh-agent](#agregar-su-clave-ssh-al-ssh-agent)
+  * [Adding a new SSH key to your GitHub account](#adding-a-new-ssh-key-to-your-github-account)
+  * [Testing your SSH connection](#testing-your-ssh-connection)
+  * [Trabajar con contraseñas de clave SSH](#trabajar-con-contraseñas-de-clave-ssh)
+  * [Asociate ssh key with repository using .`ssh/config` file](#asociate-ssh-key-with-repository-using-sshconfig-file)
+<!-- TOC -->
+
 ## Asignar nombre de usuario y correo para los mensajes de los commits:
 
 1. > git config --global user.name "John Doe"
@@ -135,21 +163,21 @@ https://github.com/USERNAME/REPOSITORY.git
 2. Cambiar el directorio de trabajo actual en tu proyecto local.
 3. Enumerar tus remotos existentes a fin de obtener el nombre de los remotos que deseas cambiar.
 
-> git remote -v
->> origin git@github.com:USERNAME/REPOSITORY.git (fetch)
->>
->> origin git@github.com:USERNAME/REPOSITORY.git (push)
+    > `git remote -v`
+    >> origin git@github.com:USERNAME/REPOSITORY.git (fetch)
+    >>
+    >> origin git@github.com:USERNAME/REPOSITORY.git (push)
 
 4. Cambiar tu URL remota de SSH a HTTPS con el comando **`git remote set-url`**.
 
-> git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
+    > `git remote set-url origin` https://github.com/USERNAME/REPOSITORY.git
 
 5. Verificar que la URL remota ha cambiado.
 
-> git remote -v
->> origin  https://github.com/USERNAME/REPOSITORY.git (fetch)
->>
->> origin  https://github.com/USERNAME/REPOSITORY.git (push)
+    > `git remote -v`
+    >> origin  https://github.com/USERNAME/REPOSITORY.git (fetch)
+    >>
+    >> origin  https://github.com/USERNAME/REPOSITORY.git (push)
 
 ## Solución de problemas: No existe tal remoto '_[name]_'
 
@@ -322,7 +350,7 @@ Puedes cambiar la contraseña por una llave privada existente sin volver a gener
 >> Enter old passphrase: _[Type old passphrase]_
 >>
 >> Key has comment 'your_email@example.com'
->> 
+>>
 >> Enter new passphrase (empty for no passphrase): _[Type new passphrase]_
 >>
 >> Enter same passphrase again: _[Repeat the new passphrase]_
@@ -330,3 +358,14 @@ Puedes cambiar la contraseña por una llave privada existente sin volver a gener
 >> Your identification has been saved with the new passphrase.
 
 Si tu clave ya tiene una contraseña, se te pedirá que la ingreses antes de que puedas cambiar a una nueva contraseña.
+
+## Asociate ssh key with repository using .`ssh/config` file
+
+1. Host github.com
+2.          HostName github.com
+3.          IdentityFile ~/.ssh/id_ed25519_personal
+4. Host gitlab.bps.net
+5.          HostName gitlab.bps.net
+6.          IdentityFile ~/.ssh/id_ed25519
+
+
