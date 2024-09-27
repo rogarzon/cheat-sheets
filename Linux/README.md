@@ -1,4 +1,3 @@
-
 <!-- TOC -->
 * [Python](#python)
   * [Managing Multiple Versions of Python on Ubuntu 18.04](#managing-multiple-versions-of-python-on-ubuntu-1804)
@@ -13,6 +12,15 @@
     * [List installed versions of Python](#list-installed-versions-of-python)
     * [Swapping between versions](#swapping-between-versions)
     * [Install pip3](#install-pip3)
+  * [Cómo crear un entorno virtual Python 3](#cómo-crear-un-entorno-virtual-python-3)
+    * [Actualizar el sistema](#actualizar-el-sistema)
+    * [Instalar pip para python3](#instalar-pip-para-python3)
+    * [Crea un entorno virtual](#crea-un-entorno-virtual)
+    * [Activando entorno virtual](#activando-entorno-virtual)
+    * [Desactivar entorno virtual](#desactivar-entorno-virtual)
+  * [How to create python2.7 virtualenv](#how-to-create-python27-virtualenv)
+      * [Install python2:](#install-python2)
+    * [Create virtual environment using python2.7 the next way:](#create-virtual-environment-using-python27-the-next-way)
 <!-- TOC -->
 
 # Python
@@ -89,7 +97,7 @@ Here's how it works:
 
 ### List installed versions of Python
 
-`update-alternatives --list python` 
+`update-alternatives --list python`
 
 /usr/bin/python3.6 \
 /usr/local/bin/python3.8
@@ -100,8 +108,53 @@ Now we can swap between versions of Python! Run the following:
 
 `update-alternatives --config python`
 
-
 ### Install pip3
 
 `sudo apt install python3-pip` \
 `python3.8 -m pip install --upgrade pip`
+
+## Cómo crear un entorno virtual Python 3
+
+### Actualizar el sistema
+
+`sudo apt update && sudo apt upgrade -y`
+
+### Instalar pip para python3
+
+`sudo apt install python3-pip`
+
+### Crea un entorno virtual
+
+Vamos primero instalar venv paquete usando el siguiente comando:
+
+`sudo apt install python3-venv`
+
+Ahora, para crear un entorno virtual, escriba:
+
+`python3 -m venv <directorio>`
+
+El comando anterior crea un directorio llamado '**directorio**' en el directorio actual, que contiene pip, intérprete, scripts y bibliotecas.
+
+### Activando entorno virtual
+
+Tú puedes ahora activar el entorno virtual, escribe:
+
+`source <directorio>/bin/activate`
+
+### Desactivar entorno virtual
+
+`(<directorio>) oltjano@ubuntu:~ deactivate`
+
+## How to create python2.7 virtualenv
+
+#### Install python2:
+
+Universe repository is being used for this. You could add it if not added the next way: `sudo add-apt-repository universe`.
+
+`sudo apt install python2 virtualenv`
+
+### Create virtual environment using python2.7 the next way:
+
+`virtualenv --python=$(which python2) /path/to/newenv/folder/`
+
+`$(which python2)` will return path to python2 which would be correct argument.
