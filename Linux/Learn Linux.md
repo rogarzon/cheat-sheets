@@ -110,10 +110,12 @@ the tree**.
 
 `mkdir -p tools/index/helper-scripts`
 
+```
 .
 └── tools
     └── index
         └── helper-scripts
+```
 
 ## Creating new files using the `touch` command
 
@@ -331,39 +333,45 @@ The basic syntax of the diff command is:
 
 `diff [options] file1 file2`
 
-\# contents of hello.py\
-def greet(name):\
-return f"Hello, {name}!"
+```
+# contents of hello.py
+def greet(name):
+    return f"Hello, {name}!"
 
-user = input("Enter your name: ")\
+user = input("Enter your name: ")
 print(greet(user))
 
-\# contents of also-hello.py\
-def greet(name):\
-return fHello, {name}!
+# contents of also-hello.py
+def greet(name):
+    return fHello, {name}!
 
-user = input(Enter your name: )\
-print(greet(user))\
+user = input(Enter your name: )
+print(greet(user))
 print("Nice to meet you")
+```
 
 ### Check whether the files are the same or not
 
 `diff -q hello.py also-hello.py`
-> Output
->
->Files hello.py and also-hello.py differ
+
+```
+Output
+Files hello.py and also-hello.py differ
+```
 
 ### See how the files differ. For that, you can use the `-u` flag to see a unified output:
 
 `diff -u hello.py also-hello.py`
 
-1. --- hello.py 2024-05-24 18:31:29.891690478 +0500
-2. +++ also-hello.py 2024-05-24 18:32:17.207921795 +0500
-3. @@ -3,4 +3,5 @@
-4.
-5. user = input(Enter your name: )
-6. print(greet(user))
-7. +print("Nice to meet you")
+```
+--- hello.py 2024-05-24 18:31:29.891690478 +0500
++++ also-hello.py 2024-05-24 18:32:17.207921795 +0500
+@@ -3,4 +3,5 @@
+
+user = input(Enter your name: )
+print(greet(user))
++print("Nice to meet you")
+```
 
 In the above output:
 
@@ -397,15 +405,16 @@ You can find your bash shell path (which may vary from the above) using the comm
 
 ### Creating your first bash script
 
-1. #!/bin/bash
-2. echo "Today is " `date`
-3.
-4. echo -e "\nenter the path to directory"
-5. read the_path
-6.
-7. echo -e "\n you path has the following files and folders: "
-8. ls $the_path
+```
+#!/bin/bash
+echo "Today is " `date`
 
+echo -e "\nenter the path to directory"
+read the_path
+
+echo -e "\n you path has the following files and folders: "
+ls $the_path
+```
 
 * Line #1: The shebang (`#!/bin/bash`) points toward the bash shell path.
 * Line #2: The `echo` command displays the current date and time on the terminal. Note that the `date` is in backticks.
@@ -454,14 +463,16 @@ Assign the value based on the output obtained from a program or command, using c
 
 Syntax:
 
-`if [[ condition ]];
+```
+if [[ condition ]];
 then
     statement
 elif [[ condition ]]; then
     statement 
 else
     do this by default
-fi`
+fi
+```
 
 ### Syntax of bash conditional statements
 
@@ -476,24 +487,29 @@ We can use logical operators such as **AND** `-a` and **OR** `-o` to make compar
 In the example below, `(( i += 1 ))` is the counter statement that increments the value of `i`. The loop will run
 exactly 10 times.
 
-`#!/bin/bash
+```
+#!/bin/bash
 i=1
 while [[ $i -le 10 ]] ; do
    echo "$i"
   (( i += 1 ))
-done`
+done
+```
 
 ### For loop
 
-`#!/bin/bash
+```
+#!/bin/bash
 for i in {1..5}
 do
     echo $i
-done`
+done
+```
 
 ### Case statements
 
-`case expression in
+```
+case expression in
     pattern1)
         # code to execute if expression matches pattern1
         ;;
@@ -506,7 +522,8 @@ done`
     *)
         # code to execute if none of the above patterns match expression
         ;;
-esac`
+esac
+```
 
 The double semicolon `";;"` separates each block of code to execute for each pattern. The asterisk `"*"` represents the
 default case, which executes if none of the specified patterns match the expression.
@@ -786,16 +803,18 @@ Here, `pattern` is a condition that must be met for the action to be performed. 
 
 In the coming examples, you'll use this log file as an example:
 
-2024-04-25 09:00:00 INFO Startup: Application starting\
-2024-04-25 09:01:00 INFO Config: Configuration loaded successfully\
-2024-04-25 09:02:00 INFO Database: Database connection established\
+```
+2024-04-25 09:00:00 INFO Startup: Application starting
+2024-04-25 09:01:00 INFO Config: Configuration loaded successfully
+2024-04-25 09:02:00 INFO Database: Database connection established
 2024-04-25 09:03:00 INFO User: New user registered (UserID: 1001)\
-2024-04-25 09:04:00 INFO Security: Attempted login with incorrect credentials (UserID: 1001)\
-2024-04-25 09:05:00 INFO Network: Network timeout on request (ReqID: 456)\
+2024-04-25 09:04:00 INFO Security: Attempted login with incorrect credentials (UserID: 1001)
+2024-04-25 09:05:00 INFO Network: Network timeout on request (ReqID: 456)
 2024-04-25 09:06:00 INFO Email: Notification email sent (UserID: 1001)\
-2024-04-25 09:07:00 INFO API: API call with response time over threshold (Duration: 350ms)\
-2024-04-25 09:08:00 INFO Session: User session ended (UserID: 1001)\
-2024-04-25 09:09:00 INFO Shutdown: Application shutdown initiated\
+2024-04-25 09:07:00 INFO API: API call with response time over threshold (Duration: 350ms)
+2024-04-25 09:08:00 INFO Session: User session ended (UserID: 1001)
+2024-04-25 09:09:00 INFO Shutdown: Application shutdown initiated
+```
 
 * **Accessing columns using `awk`**
 
@@ -803,27 +822,32 @@ In the coming examples, you'll use this log file as an example:
 
   `awk '{ print $1 }' sample.log`
 
-  \# output\
-  2024-04-25\
-  2024-04-25\
-  2024-04-25\
-  ...........
+     ``` 
+     # output
+      2024-04-25
+      2024-04-25
+      2024-04-25
+      ...........
+    ```
 
   `awk '{ print $2 }' sample.log`
 
-  \# output\
-  09:00:00\
-  09:01:00\
-  09:02:00\
-  .........
-
+    ```
+    # output
+    09:00:00
+    09:01:00
+    09:02:00
+    .........
+    ```
 
 * **Print lines containing a specific pattern (for example, ERROR)**
 
   `awk '/ERROR/ { print $0 }' logfile.log`
 
-  \# output\
+  ```
+  # output
   2024-04-25 09:05:00 ERROR Network: Network timeout on request (ReqID: 456)
+  ```
 
   #This prints all lines that contain "ERROR".
 
@@ -832,11 +856,13 @@ In the coming examples, you'll use this log file as an example:
 
   `awk '{ print $1, $2 }' logfile.log`
 
-  \# output\
-  2024-04-25 09:00:00\
-  2024-04-25 09:01:00\
-  2024-04-25 09:02:00\
-  ...................\
+  ```
+  # output
+  2024-04-25 09:00:00
+  2024-04-25 09:01:00
+  2024-04-25 09:02:00
+  ...................
+  ```
   #This will extract the first two fields from each line, which in this case would be the date and time.
 
 
@@ -844,25 +870,28 @@ In the coming examples, you'll use this log file as an example:
 
   `awk '{ count[$3]++ } END { for (level in count) print level, count[level] }' logfile.log`
 
-  \# output\
-  1\
-  WARN 1\
-  ERROR 1\
-  DEBUG 2\
+  ```
+  # output
+  1
+  WARN 1
+  ERROR 1
+  DEBUG 2
   INFO 6
+  ````  
 
   #The output will be a summary of the number of occurrences of each log level.
-
 
 * **Filter out specific fields (for example, where the 3rd field is INFO)**
 
   ` awk '{ $3="INFO"; print }' sample.log`
 
-  \# output\
-  2024-04-25 09:00:00 INFO Startup: Application starting\
-  2024-04-25 09:01:00 INFO Config: Configuration loaded successfully\
-  2024-04-25 09:02:00 INFO Database: Database connection established\
+  ```
+  # output
+  2024-04-25 09:00:00 INFO Startup: Application starting
+  2024-04-25 09:01:00 INFO Config: Configuration loaded successfully
+  2024-04-25 09:02:00 INFO Database: Database connection established
   ..........
+  ```
 
   #This command will extract all lines where the 3rd field is "INFO".
 
@@ -889,18 +918,23 @@ For example, the command below would extract the first field (separated by a spa
 
 Assume you have a log file structured as follows, where fields are space-separated:
 
-2024-04-25 08:23:01 INFO 192.168.1.10 User logged in successfully.\
-2024-04-25 08:24:15 WARNING 192.168.1.10 Disk usage exceeds 90%.\
-2024-04-25 08:25:02 ERROR 10.0.0.5 Connection timed out.\
+```
+2024-04-25 08:23:01 INFO 192.168.1.10 User logged in successfully.
+2024-04-25 08:24:15 WARNING 192.168.1.10 Disk usage exceeds 90%.
+2024-04-25 08:25:02 ERROR 10.0.0.5 Connection timed out.
 ...
+```
 
 * **Combining `cut` with other commands:**
 
   `grep "ERROR" system.log | cut -d ' ' -f 1,2`
 
-  \# Output\
-  2024-04-25 08:25:02\
-  #This command first filters lines that include "ERROR", then extracts the date and time from these lines.
+  ```
+  # Output
+  2024-04-25 08:25:02
+  ```
+
+  This command first filters lines that include "ERROR", then extracts the date and time from these lines.
 
 
 * **Extracting multiple fields:**
@@ -909,12 +943,15 @@ Assume you have a log file structured as follows, where fields are space-separat
 
   `cut -d ' ' -f 1,2,3 system.log`
 
-  \# Output\
-  2024-04-25 08:23:01 INFO\
-  2024-04-25 08:24:15 WARNING\
-  2024-04-25 08:25:02 ERROR\
-  ...\
-  #The above command extracts the first three fields from each log entry that are date, time, and log level.
+  ```
+  # Output
+  2024-04-25 08:23:01 INFO
+  2024-04-25 08:24:15 WARNING
+  2024-04-25 08:25:02 ERROR
+  ...
+  ```
+
+  The above command extracts the first three fields from each log entry that are date, time, and log level.
 
 ## Automation in Linux – Automate Tasks with Cron Jobs
 
@@ -925,7 +962,7 @@ In order to use cron jobs, an admin needs to allow cron jobs to be added for use
 If you get a prompt like this, it means you don't have permission to use cron.
 
 `$ crontab -e`
-\
+
 #You (john) are not allowed to use this program (crontab)
 
 To allow John to use crons, include his name in `/etc/cron.allow`. Create the file if it doesn't exist.
@@ -938,7 +975,8 @@ Users can also be denied access to cron job access by entering their usernames i
 
 First, to use cron jobs, you'll need to check the status of the cron service. If cron is not installed
 
-#Check cron service on Linux system\
+#Check cron service on Linux system
+
 `sudo systemctl status cron.service`
 
 ### Cron job syntax
@@ -1015,20 +1053,20 @@ You can practice and generate cron schedules with the [crontab guru](https://cro
    First, you need to check if the cron has run at the intended time or not. In Ubuntu, you can verify this from the cron logs located at
    `/var/log/syslog`.
 
-    1 Jun 26 17:02:01 zaira-ThinkPad CRON[27834]: (zaira) CMD (/bin/sh /home/zaira/date-script.sh)\
-    2 Jun 26 17:02:02 zaira-ThinkPad systemd[2094]: Started Tracker metadata extractor.\
-    3 Jun 26 17:03:01 zaira-ThinkPad CRON[28255]: (zaira) CMD (/bin/sh /home/zaira/date-script.sh)\
+   1 Jun 26 17:02:01 zaira-ThinkPad CRON[27834]: (zaira) CMD (/bin/sh /home/zaira/date-script.sh)\
+   2 Jun 26 17:02:02 zaira-ThinkPad systemd[2094]: Started Tracker metadata extractor.\
+   3 Jun 26 17:03:01 zaira-ThinkPad CRON[28255]: (zaira) CMD (/bin/sh /home/zaira/date-script.sh)\
 
 3. Redirect cron output to a file.
 
-    #Redirect cron output to a file
+   #Redirect cron output to a file
 
-    `* * * * * sh /path/to/script.sh &> log_file.log`
-
+   `* * * * * sh /path/to/script.sh &> log_file.log`
 
 ## Linux Networking Basics
 
 ### View network interfaces with `ifconfig`
+
 The `ifconfig` command gives information about network interfaces.
 
 To extract IPv4 and IPv6 addresses, you can use `ip -4 addr` and `ip -6 addr`, respectively.
@@ -1037,39 +1075,39 @@ To extract IPv4 and IPv6 addresses, you can use `ip -4 addr` and `ip -6 addr`, r
 
 1. Display all listening and non-listening sockets:
 
-    `netstat -a`
+   `netstat -a`
 
 2. Show only listening ports:
 
-    `netstat -l`
+   `netstat -l`
 
 3. Display network statistics:
 
-    `netstat -s`
+   `netstat -s`
 
 4. Show routing table:
 
-    `netstat -r`
+   `netstat -r`
 
 5. Display TCP connections:
 
-    `netstat -t`
+   `netstat -t`
 
 6. Display UDP connections:
 
-    `netstat -u`
+   `netstat -u`
 
 7. Show network interfaces:
 
-    `netstat -i`
+   `netstat -i`
 
 8. Display PID and program names for connections:
 
-    `netstat -p`
+   `netstat -p`
 
 9. Show statistics for a specific protocol (for example, TCP):
 
-    `netstat -st`
+   `netstat -st`
 
 10. Display extended information:
 

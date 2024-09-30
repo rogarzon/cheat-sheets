@@ -56,18 +56,22 @@ https://hackersandslackers.com/multiple-versions-python-ubuntu/
 
 ### Install Python dependencies
 
-`sudo apt-get install build-essential checkinstall`\
-`sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \
- libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev`
+```
+sudo apt-get install build-essential checkinstall
+sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev
+libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
+```
 
 The latest version of Python can always be found on the Python Source Releases page on Python.org: \
 https://www.python.org/downloads/source/?ref=hackersandslackers.com
 
 ### Download Python
 
-`cd /opt`\
-`sudo wget https://www.python.org/ftp/python/3.8.9/Python-3.8.9.tgz` \
-`sudo tar xzf Python-3.8.9.tgz`
+```
+cd /opt
+sudo wget https://www.python.org/ftp/python/3.8.9/Python-3.8.9.tgz
+sudo tar xzf Python-3.8.9.tgz
+```
 
 The latest version of Python is now downloaded. Now we just need to install it... correctly.
 
@@ -76,8 +80,10 @@ The latest version of Python is now downloaded. Now we just need to install it..
 To get an optimized build of Python, ``configure --enable-optimizations``
 before you run ``make``.
 
-`cd /<python folder>` \
-`sudo ./configure --enable-optimizations`
+```
+cd /<python folder>` 
+sudo ./configure --enable-optimizations
+```
 
 ### Build Instructions
 
@@ -88,7 +94,7 @@ On Unix, Linux, BSD, macOS, and Cygwin::
     make test
     sudo make install
 
-This will install Python as ``python3``.
+This will install Python as `python3`.
 
 ### Installing Alternative Python from Source
 
@@ -97,9 +103,11 @@ This will install Python as ``python3``.
 Ubuntu allows us to install additional (AKA: alternative) versions of Python by providing us with the `make altinstall`
 command:
 
-`cd Python-3.8.9` \
-`sudo ./configure --enable-optimizations` \
-`sudo make altinstall`
+```
+cd Python-3.8.9
+sudo ./configure --enable-optimizations
+sudo make altinstall
+```
 
 ### Managing Alternative Python Installations
 
@@ -109,8 +117,10 @@ Here's how it works:
 
 ### Set alternative versions for Python
 
-`update-alternatives --install /usr/bin/python python /usr/bin/python3.6 1` \
-`update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2`
+```
+update-alternatives --install /usr/bin/python python /usr/bin/python3.6 1
+update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
+```
 
 ### List installed versions of Python
 
@@ -127,8 +137,10 @@ Now we can swap between versions of Python! Run the following:
 
 ### Install pip3
 
-`sudo apt install python3-pip` \
-`python3.8 -m pip install --upgrade pip`
+```
+sudo apt install python3-pip
+python3.8 -m pip install --upgrade pip
+```
 
 ## Cómo crear un entorno virtual Python 3
 
@@ -184,9 +196,11 @@ https://www.fosslinux.com/41519/how-to-install-java-on-pop_os.htm
 
 To install Java on your system, you can type in the following command:
 
-`sudo apt update` \
-`sudo apt install default-jre` \
-`sudo apt install default-jdk`
+```
+sudo apt update
+sudo apt install default-jre
+sudo apt install default-jdk
+```
 
 With both JDK and JRE installed, you will be able to run all Java-based software on your system
 
@@ -211,9 +225,11 @@ jdk-11.0.7_linux-x64_bin.tar.gz
 
 ### Extract The File To A New “JVM” Directory
 
-`sudo mkdir /usr/lib/jvm` \
-`cd /usr/lib/jvm` \
-`sudo tar -xvzf ~/Downloads/jdk-11.0.7_linux-x64_bin.tar.gz`
+```
+sudo mkdir /usr/lib/jvm
+cd /usr/lib/jvm
+sudo tar -xvzf ~/Downloads/jdk-11.0.7_linux-x64_bin.tar.gz
+```
 
 ### Configure The Java Installation
 
@@ -234,10 +250,12 @@ Make sure that colons separate the PATH variables. Once done, add this environme
 
 Next, you will need to inform your system where Java is installed on your system. To do this, enter the following command in your terminal:
 
-`sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-11.0.7/bin/java" 0` \
-`sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk-11.0.7/bin/javac" 0` \
-`sudo update-alternatives --set java /usr/lib/jvm/jdk-11.0.7/bin/java` \
-`sudo update-alternatives --set javac /usr/lib/jvm/jdk-11.0.7/bin/javac`
+```
+sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-11.0.7/bin/java" 0
+sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk-11.0.7/bin/javac" 0
+sudo update-alternatives --set java /usr/lib/jvm/jdk-11.0.7/bin/java
+sudo update-alternatives --set javac /usr/lib/jvm/jdk-11.0.7/bin/javac
+```
 
 ### Verify if Everything is Working Properly
 
@@ -246,8 +264,10 @@ To finalize the installation of your Oracle JDK 11, it is time to run some comma
 First, let’s see if the system prints the location of Java and javac as we configured in the previous steps. To do this, enter the following commands
 in the terminal:
 
-`update-alternatives --list java` \
-`update-alternatives --list javac`
+```
+update-alternatives --list java
+update-alternatives --list javac
+```
 
 ## Uninstalling Java
 
@@ -267,8 +287,10 @@ This will remove OpenJDK along with all its dependencies and configuration files
 
 Instead of removing OpenJDK, you might want to remove Oracle JDK. To do this, you need to enter the following commands.
 
-`sudo update-alternatives --remove "java" "/usr/lib/jvm/jdk[version]/bin/java"`
-`sudo update-alternatives --remove "javac" "/usr/lib/jvm/jdk[version]/bin/javac"`
+```
+sudo update-alternatives --remove "java" "/usr/lib/jvm/jdk[version]/bin/java"
+sudo update-alternatives --remove "javac" "/usr/lib/jvm/jdk[version]/bin/javac"
+```
 
 # PostgreSQL
 
@@ -280,8 +302,10 @@ https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql
 
 First, update the package index and install the necessary packages:
 
-`sudo apt update` \
-`sudo apt install gnupg2 wget`
+```
+sudo apt update
+sudo apt install gnupg2 wget
+```
 
 Second, add the PostgreSQL repository:
 
@@ -321,9 +345,11 @@ Set the listen_addresses to `*` to allow remote connection:
 
 Configure PostgreSQL to use md5 password authentication in the `pg_hba.conf` file. This is necessary if you want to enable remote connections :
 
-`sudo sed -i '/^host/s/ident/md5/' /etc/postgresql/16/main/pg_hba.conf` \
-`sudo sed -i '/^local/s/peer/trust/' /etc/postgresql/16/main/pg_hba.conf` \
-`echo "host all all 0.0.0.0/0 md5" | sudo tee -a /etc/postgresql/16/main/pg_hba.conf`
+```
+sudo sed -i '/^host/s/ident/md5/' /etc/postgresql/16/main/pg_hba.conf
+sudo sed -i '/^local/s/peer/trust/' /etc/postgresql/16/main/pg_hba.conf
+echo "host all all 0.0.0.0/0 md5" | sudo tee -a /etc/postgresql/16/main/pg_hba.conf
+```
 
 Restart PostgreSQL for the changes to take effect:
 

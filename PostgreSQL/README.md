@@ -64,11 +64,11 @@ In case you want to use SSL mode for the connection, just specify it as shown in
 
 # Cambiar a la cuenta de postgres
 
-> `sudo -i -u postgres`
+`sudo -i -u postgres`
 
 # Acceder a una línea de comandos de Postgres sin cambiar de cuenta
 
-> `sudo -u postgres psql`
+`sudo -u postgres psql`
 
 # Hacer un backup comprimido
 
@@ -78,7 +78,9 @@ In case you want to use SSL mode for the connection, just specify it as shown in
 
 ## Linux:
 
-``(pg_dump --verbose --dbname=grp9_test.2024-09-04-test --username=odoo | gzip -9) > grp9_test.2024-09-04-test-`date +%Y-%m-%d-%H-%M-%S`.sql.gz``
+```
+(pg_dump --verbose --dbname=grp9_test.2024-09-04-test --username=odoo | gzip -9) > grp9_test.2024-09-04-test-`date +%Y-%m-%d-%H-%M-%S`.sql.gz
+```
 
 **Nota:** Debe de estar instalado el gzip, ya sea instalando git el cual lo hace automáticamente u otra via.
 
@@ -90,6 +92,8 @@ In case you want to use SSL mode for the connection, just specify it as shown in
 
 # Restaurar de un backup comprimido
 
-`zcat grp_test.2023-09-01-test.sql.gz | psql --username=odoo --host="127.0.0.1" --port=5432 
---dbname=grp_test_2023_09_01 --no-password`
+```
+zcat grp_test.2023-09-01-test.sql.gz | psql --username=odoo --host="127.0.0.1" --port=5432 
+--dbname=grp_test_2023_09_01 --no-password
+```
 

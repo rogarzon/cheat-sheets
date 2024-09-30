@@ -1,3 +1,10 @@
+<!-- TOC -->
+* [GRUB](#grub)
+* [Ubuntu / PopOS 21.04 - Screen blinking](#ubuntu--popos-2104---screen-blinking)
+* [Ver qué tarjeta gráfica se está usando:](#ver-qué-tarjeta-gráfica-se-está-usando)
+<!-- TOC -->
+
+
 # GRUB
 
 1. sudo apt install grub-efi grub2-common grub-customizer
@@ -14,16 +21,20 @@
 https://askubuntu.com/questions/1362829/ubuntu-popos-21-04-screen-blinking
 
 **Solución 1:**
-1. `nano /etc/defaults/grub`
-2. `GRUB_CMDLINE_LINUX_DEFAULT="quiet splash i915.enable_psr=0"`
-3. `sudo update-grub`
+```
+nano /etc/defaults/grub
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash i915.enable_psr=0"
+sudo update-grub
+```
     
 **Solución 2:**
->Nota: Para personas que no usan grub
+**Nota:** Para personas que no usan grub
 
-1. `sudo echo "options i915 enable_psr=0" >> /etc/modprobe.d/i915.conf`
-2. `sudo update-initramfs -c -k $(uname -r)`
-3. `reboot`
+```
+sudo echo "options i915 enable_psr=0" >> /etc/modprobe.d/i915.conf
+sudo update-initramfs -c -k $(uname -r)
+reboot
+```
 
 # Ver qué tarjeta gráfica se está usando:
 `lspci -k | grep -A 2 -E "(VGA|3D)"`
