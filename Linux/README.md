@@ -38,24 +38,6 @@
     * [Install PostgreSQL 16](#install-postgresql-16)
     * [Configure PostgreSQL server](#configure-postgresql-server)
   * [Connect to the PostgreSQL database server](#connect-to-the-postgresql-database-server)
-  * [psql Commands](#psql-commands)
-    * [Connect to PostgreSQL database](#connect-to-postgresql-database)
-    * [Switch connection to a new database](#switch-connection-to-a-new-database)
-    * [List available databases `\l`](#list-available-databases-l)
-    * [List available tables `\dt`](#list-available-tables-dt)
-    * [Describe a table `\d table_name`](#describe-a-table-d-table_name)
-    * [List available schema `\dn`](#list-available-schema-dn)
-    * [List available functions `\df`](#list-available-functions-df)
-    * [List available views `\dv`](#list-available-views-dv)
-    * [List users and their roles `\du`](#list-users-and-their-roles-du)
-    * [Execute the previous command `\g`](#execute-the-previous-command-g)
-    * [Command history `\s`](#command-history-s)
-    * [Execute psql commands from a file `\i filename`](#execute-psql-commands-from-a-file-i-filename)
-    * [Get help on psql commands `\?`](#get-help-on-psql-commands-)
-    * [Turn on query execution time](#turn-on-query-execution-time)
-    * [Edit command in your editor](#edit-command-in-your-editor)
-    * [Switch output options](#switch-output-options)
-    * [Quit psql `\q`](#quit-psql-q)
 <!-- TOC -->
 
 # Python
@@ -365,83 +347,4 @@ Quit the **psql** by using the `\q` command:
 
 `\q`
 
-## psql Commands
 
-https://www.postgresqltutorial.com/postgresql-administration/psql-commands/
-
-### Connect to PostgreSQL database
-
-`psql -d database -U  user -W`
-
-If you want to connect to a database that resides on another host, you add the -h option as follows:
-
-`psql -h host -d database -U user -W`
-
-In case you want to use SSL mode for the connection, just specify it as shown in the following command:
-
-`psql -U user -h host "dbname=db sslmode=require"`
-
-### Switch connection to a new database
-
-Once you are connected to a database, you can switch the connection to a new database under a user-specified by `user`. The previous connection will
-be closed. If you omit the `user` parameter, the current `user` is assumed.
-
-`\c dbname username`
-
-### List available databases `\l`
-
-### List available tables `\dt`
-
-### Describe a table `\d table_name`
-
-### List available schema `\dn`
-
-### List available functions `\df`
-
-### List available views `\dv`
-
-### List users and their roles `\du`
-
-### Execute the previous command `\g`
-
-### Command history `\s`
-
-If you want to save the command history to a file, you need to specify the file name followed the `\s` command as follows:
-
-`\s filename`
-
-### Execute psql commands from a file `\i filename`
-
-### Get help on psql commands `\?`
-
-For example, if you want to know detailed information on the **ALTER TABLE** statement, you use the following command:
-
-`\h ALTER TABLE`
-
-### Turn on query execution time
-
-To turn on query execution time, you use the `\timing` command.
-
-You use the same command `\timing` to turn it off.
-
-### Edit command in your editor
-
-It is very handy if you can type the command in your favorite editor. To do this in psql, you `\e` command. After issuing the command, psql will open
-the text editor defined by your **EDITOR** environment variable and place the most recent command that you entered in psql into the editor.
-
-After you type the command in the editor, save it, and close the editor, psql will execute the command and return the result.
-
-It is more useful when you edit a function in the editor.
-
-`\ef [function name]`
-
-![](./assets/psql-command-ef-edit-function.jpg)
-
-### Switch output options
-
-psql supports some types of output format and allows you to customize how the output is formatted on the fly.
-
-* \a command switches from aligned to non-aligned column output.
-* \H command formats the output to HTML format.
-
-### Quit psql `\q`
