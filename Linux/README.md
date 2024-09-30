@@ -32,6 +32,30 @@
   * [Uninstalling Java](#uninstalling-java)
     * [Uninstall OpenJDK](#uninstall-openjdk)
     * [Uninstall OracleJDK](#uninstall-oraclejdk)
+* [PostgreSQL](#postgresql)
+  * [Install PostgreSQL Linux](#install-postgresql-linux)
+    * [Add PostgreSQL Repository](#add-postgresql-repository)
+    * [Install PostgreSQL 16](#install-postgresql-16)
+    * [Configure PostgreSQL server](#configure-postgresql-server)
+  * [Connect to the PostgreSQL database server](#connect-to-the-postgresql-database-server)
+  * [psql Commands](#psql-commands)
+    * [Connect to PostgreSQL database](#connect-to-postgresql-database)
+    * [Switch connection to a new database](#switch-connection-to-a-new-database)
+    * [List available databases `\l`](#list-available-databases-l)
+    * [List available tables `\dt`](#list-available-tables-dt)
+    * [Describe a table `\d table_name`](#describe-a-table-d-table_name)
+    * [List available schema `\dn`](#list-available-schema-dn)
+    * [List available functions `\df`](#list-available-functions-df)
+    * [List available views `\dv`](#list-available-views-dv)
+    * [List users and their roles `\du`](#list-users-and-their-roles-du)
+    * [Execute the previous command `\g`](#execute-the-previous-command-g)
+    * [Command history `\s`](#command-history-s)
+    * [Execute psql commands from a file `\i filename`](#execute-psql-commands-from-a-file-i-filename)
+    * [Get help on psql commands `\?`](#get-help-on-psql-commands-)
+    * [Turn on query execution time](#turn-on-query-execution-time)
+    * [Edit command in your editor](#edit-command-in-your-editor)
+    * [Switch output options](#switch-output-options)
+    * [Quit psql `\q`](#quit-psql-q)
 <!-- TOC -->
 
 # Python
@@ -264,6 +288,160 @@ Instead of removing OpenJDK, you might want to remove Oracle JDK. To do this, yo
 `sudo update-alternatives --remove "java" "/usr/lib/jvm/jdk[version]/bin/java"`
 `sudo update-alternatives --remove "javac" "/usr/lib/jvm/jdk[version]/bin/javac"`
 
+# PostgreSQL
 
+## Install PostgreSQL Linux
 
+https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-linux/
 
+### Add PostgreSQL Repository
+
+First, update the package index and install the necessary packages:
+
+`sudo apt update` \
+`sudo apt install gnupg2 wget`
+
+Second, add the PostgreSQL repository:
+
+`sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'`
+
+Third, import the repository signing key:
+
+`curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg`
+
+Finally, update the package list
+
+`sudo apt update`
+
+### Install PostgreSQL 16
+
+First, install PostgreSQL and its contrib modules:
+
+`sudo apt install postgresql-16 postgresql-contrib-16`
+
+Second, start the PostgreSQL service:**
+
+`sudo systemctl start postgresql`
+
+Third, enable PostgreSQL service:
+
+`sudo systemctl enable postgresql`
+
+### Configure PostgreSQL server
+
+PostgreSQL stores the configuration in the `postgresql.conf` file. You can edit the `postgresql.conf` using any text editor such as nano and vim.
+
+`sudo nano /etc/postgresql/16/main/postgresql.conf`
+
+Set the listen_addresses to `*` to allow remote connection:
+
+`listen_addresses = '*'`
+
+Configure PostgreSQL to use md5 password authentication in the `pg_hba.conf` file. This is necessary if you want to enable remote connections :
+
+`sudo sed -i '/^host/s/ident/md5/' /etc/postgresql/16/main/pg_hba.conf` \
+`sudo sed -i '/^local/s/peer/trust/' /etc/postgresql/16/main/pg_hba.conf` \
+`echo "host all all 0.0.0.0/0 md5" | sudo tee -a /etc/postgresql/16/main/pg_hba.conf`
+
+Restart PostgreSQL for the changes to take effect:
+
+`sudo systemctl restart postgresql`
+
+Allow PostgreSQL port through the firewall:
+
+`sudo ufw allow 5432/tcp`
+
+## Connect to the PostgreSQL database server
+
+First, connect to the PostgreSQL server using the `postgres` user:
+
+`sudo -u postgres psql`
+
+Second, set a password for `postgres` user:
+
+`ALTER USER postgres PASSWORD '<password>';`
+
+Quit the **psql** by using the `\q` command:
+
+`\q`
+
+## psql Commands
+
+https://www.postgresqltutorial.com/postgresql-administration/psql-commands/
+
+### Connect to PostgreSQL database
+
+`psql -d database -U  user -W`
+
+If you want to connect to a database that resides on another host, you add the -h option as follows:
+
+`psql -h host -d database -U user -W`
+
+In case you want to use SSL mode for the connection, just specify it as shown in the following command:
+
+`psql -U user -h host "dbname=db sslmode=require"`
+
+### Switch connection to a new database
+
+Once you are connected to a database, you can switch the connection to a new database under a user-specified by `user`. The previous connection will
+be closed. If you omit the `user` parameter, the current `user` is assumed.
+
+`\c dbname username`
+
+### List available databases `\l`
+
+### List available tables `\dt`
+
+### Describe a table `\d table_name`
+
+### List available schema `\dn`
+
+### List available functions `\df`
+
+### List available views `\dv`
+
+### List users and their roles `\du`
+
+### Execute the previous command `\g`
+
+### Command history `\s`
+
+If you want to save the command history to a file, you need to specify the file name followed the `\s` command as follows:
+
+`\s filename`
+
+### Execute psql commands from a file `\i filename`
+
+### Get help on psql commands `\?`
+
+For example, if you want to know detailed information on the **ALTER TABLE** statement, you use the following command:
+
+`\h ALTER TABLE`
+
+### Turn on query execution time
+
+To turn on query execution time, you use the `\timing` command.
+
+You use the same command `\timing` to turn it off.
+
+### Edit command in your editor
+
+It is very handy if you can type the command in your favorite editor. To do this in psql, you `\e` command. After issuing the command, psql will open
+the text editor defined by your **EDITOR** environment variable and place the most recent command that you entered in psql into the editor.
+
+After you type the command in the editor, save it, and close the editor, psql will execute the command and return the result.
+
+It is more useful when you edit a function in the editor.
+
+`\ef [function name]`
+
+![](./assets/psql-command-ef-edit-function.jpg)
+
+### Switch output options
+
+psql supports some types of output format and allows you to customize how the output is formatted on the fly.
+
+* \a command switches from aligned to non-aligned column output.
+* \H command formats the output to HTML format.
+
+### Quit psql `\q`
