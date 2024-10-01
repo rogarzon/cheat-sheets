@@ -1,26 +1,57 @@
+<!-- TOC -->
+* [CSS](#css)
+  * [max](#max)
+  * [margin:](#margin)
+  * [linear-gradient:](#linear-gradient)
+  * [border-left:](#border-left)
+  * [box-shadow:](#box-shadow)
+  * [width:](#width)
+  * [filter:](#filter)
+  * [box-sizing:](#box-sizing)
+  * [display:](#display)
+    * [flex-direction:](#flex-direction)
+    * [flex-wrap:](#flex-wrap)
+    * [justify-content:](#justify-content)
+    * [align-items:](#align-items)
+  * [object-fit:](#object-fit)
+  * [gap:](#gap)
+  * [::after](#after)
+  * [font-family:](#font-family)
+  * [letter-spacing:](#letter-spacing)
+  * [rem:](#rem)
+  * [:not](#not)
+<!-- TOC -->
+
+
 # CSS
 
 ## max
 
 **max** function which returns the largest of a set of comma-separated values. For example:
 
-`img {
+```css
+img {
   width: max(250px, 25vw);
-}`
+}
+```
 
 In the above example, the width of the image will be 250px if the viewport width is less than 1000 pixels. If the viewport width is greater than 1000
 pixels, the width of the image will be 25vw. This is because 25vw is equal to 25% of the viewport width.
 
 ## margin:
 
-`margin: 10px auto;`
+```
+margin: 10px auto  ;
+```
 
 When the shorthand **margin** property has two values, it sets **margin-top** and **margin-bottom** to the first value, and **margin-left** and
 **margin-right** to the second value.
 
 ## linear-gradient:
 
-`linear-gradient(gradientDirection, color1, color2, ...);`
+```
+linear-gradient(gradientDirection, color1, color2, ...);
+```
 
 **gradientDirection** is the direction of the line used for the transition. **color1** and **color2** are color arguments, which are the colors that
 will be used in the transition itself. These can be any type of color, including color keywords, hex, rgb, or hsl.
@@ -32,7 +63,9 @@ in the **linear-gradient** function.
 For example, in this red-black gradient, the transition from red to black takes place at the 90% point along the gradient line, so red takes up most
 of the available space:
 
-`linear-gradient(90deg, red 90%, black);`
+```
+linear-gradient(90deg, red 90%, black);
+```
 
 The first color is at the start (0%), the second is in the middle (50%), and the last is at the end (100%) of the gradient line.
 The **linear-gradient** function automatically calculates these values for you, and places colors evenly along the gradient line by default.
@@ -42,11 +75,15 @@ The **linear-gradient** function automatically calculates these values for you, 
 The **border-left** shorthand property lets you set the left border's width, style, and color at the same time.
 Here is the syntax:
 
-`border-left: width style color;`
+```
+border-left: width style color;
+```
 
 ## box-shadow:
 
-`box-shadow: offsetX offsetY blurRadius color;`
+```
+box-shadow: offsetX offsetY blurRadius color;
+```
 
 If a **blurRadius** value isn't included, it defaults to **0** and produces sharp edges. The higher the value of **blurRadius**, the greater the
 blurring effect is.
@@ -66,9 +103,11 @@ Use the filter property to blur the painting by 2px in the .canvas element.
 
 Here's an example of a rule that add a 3px blur:
 
-`p {
+```css
+p {
   filter: blur(3px);
-}`
+}
+```
 
 ## box-sizing:
 
@@ -126,16 +165,20 @@ The **gap** CSS shorthand property sets the gaps, also known as gutters, between
 The **::after** pseudo-element creates an element that is the last child of the selected element. You can use it to add an empty element after the
 last image. If you give it the same width as the images it will push the last image to the left when the gallery is in a two-column layout.
 
-`.container::after {
-content: "";
-width: 860px;
-}`
+```css
+.container::after {
+    content: "";
+    width: 860px;
+}
+```
 
 ## font-family:
 
 give it a **font-family** set to _Open Sans_ with a fallback of _sans-serif_.
 
-`font-family: 'Open Sans', sans-serif`
+```
+font-family: 'Open Sans', sans-serif
+```
 
 ## letter-spacing:
 
@@ -155,9 +198,11 @@ The **:not** pseudo-selector can be used to select all elements that do not matc
 
 **Example Code**
 
-`div:not(#example) {
+```css
+div:not(#example) {
   color: red;
-}`
+}
+```
 
 The above selects all div elements without an id of example.
 

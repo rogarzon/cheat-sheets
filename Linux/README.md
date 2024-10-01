@@ -87,6 +87,7 @@ sudo ./configure --enable-optimizations
 
 ### Build Instructions
 
+```
 On Unix, Linux, BSD, macOS, and Cygwin::
 
     ./configure
@@ -94,7 +95,8 @@ On Unix, Linux, BSD, macOS, and Cygwin::
     make test
     sudo make install
 
-This will install Python as `python3`.
+This will install Python as python3.
+```
 
 ### Installing Alternative Python from Source
 
