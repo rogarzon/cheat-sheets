@@ -652,34 +652,43 @@ password, preventing the user from logging in until a password is created.
 
 Here are some examples of the `usermod` command in Linux:
 
-1. Change a user's login name:\
+1. Change a user's login name:
+
    `sudo usermod -l newusername oldusername`
 
-2. Change a user's home directory:\
+2. Change a user's home directory:
+
    `sudo usermod -d /new/home/directory -m username`
 
-3. Add a user to a supplementary group:\
+3. Add a user to a supplementary group:
+
    `sudo usermod -aG groupname username`
 
-4. Change a user's shell:\
+4. Change a user's shell:
+
    `sudo usermod -s /bin/bash username`
 
-5. Lock a user's account:\
+5. Lock a user's account:
+
    `sudo usermod -L username`
 
 6. Unlock a user's account:\
    `sudo usermod -U username`
 
-7. Set an expiration date for a user account:\
+7. Set an expiration date for a user account:
+
    `sudo usermod -e YYYY-MM-DD username`
 
-8. Change a user's user ID (UID):\
+8. Change a user's user ID (UID):
+
    `sudo usermod -u newUID username`
 
-9. Change a user's primary group:\
+9. Change a user's primary group:
+
    `sudo usermod -g newgroup username`
 
-10. Remove a user from a supplementary group:\
+10. Remove a user from a supplementary group:
+
     `sudo gpasswd -d username groupname`
 
 ### Deleting users
@@ -719,30 +728,40 @@ Grep is a built-in bash utility. It stands for "global regular expression print"
 
 Here are some common uses of `grep`:
 
-* Search for a specific string in a file:\
+* Search for a specific string in a file:
+
   `grep "search_string" filename`
 
-* Search recursively in directories:\
+* Search recursively in directories:
+
   `grep -r "search_string" /path/to/directory`
 
-* Ignore case while searching:\
+* Ignore case while searching:
+
   `grep -i "search_string" filename`
 
-* Display line numbers with matching lines:\
+* Display line numbers with matching lines:
+
   `grep -n "search_string" filename`
 
-* Count the number of matching lines:\
+* Count the number of matching lines:
+
   `grep -c "search_string" filename`
 
-* Invert match to display lines that do not match:\
-  `grep -v "search_string" filename`\
+* Invert match to display lines that do not match:
+
+  `grep -v "search_string" filename`
+
   This command displays all lines that do not contain "search_string" in the file named filename.
 
-* Search for a whole word:\
+* Search for a whole word:
+
   `grep -w "word" filename`
 
-* Use extended regular expressions:\
-  `grep -E "pattern" filename`\
+* Use extended regular expressions:
+
+  `grep -E "pattern" filename`
+
   This command allows the use of extended regular expressions for more complex pattern matching in the file named filename.
 
 > 💡 **Tip**: If there are multiple files in a folder, you can use the below command to find the list of files containing the desired strings.
@@ -967,7 +986,7 @@ If you get a prompt like this, it means you don't have permission to use cron.
 
 To allow John to use crons, include his name in `/etc/cron.allow`. Create the file if it doesn't exist.
 
-/etc$ `sudo cat cron.allow john`
+`sudo cat cron.allow john`
 
 Users can also be denied access to cron job access by entering their usernames in the file `/etc/cron.d/cron.deny`.
 
