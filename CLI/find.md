@@ -1,5 +1,16 @@
 # Find
 
+<!-- TOC -->
+* [Find](#find)
+  * [Usage](#usage)
+  * [Conditions](#conditions)
+  * [Condition flow](#condition-flow)
+  * [Actions](#actions)
+  * [Access time conditions](#access-time-conditions)
+  * [File sizes](#file-sizes)
+  * [Examples](#examples)
+<!-- TOC -->
+
 https://devhints.io/find
 
 https://www.ionos.es/digitalguide/servidores/configuracion/comando-linux-find/#:~:text=Para%20encontrar%20un%20archivo%20en,todas%20las%20distribuciones%20de%20Linux.
