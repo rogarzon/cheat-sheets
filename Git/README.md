@@ -2,8 +2,16 @@
 
 <!-- TOC -->
 * [Configuración de Git](#configuración-de-git)
+  * [Adicionar todos los archivos](#adicionar-todos-los-archivos)
+  * [Ver estado del repositorio en la version corta](#ver-estado-del-repositorio-en-la-version-corta)
+  * [Ayuda](#ayuda)
+    * [Ayuda sobre un comando ej: **commit**](#ayuda-sobre-un-comando-ej-commit)
+    * [Ayuda sobre todos los comandos](#ayuda-sobre-todos-los-comandos)
   * [Asignar nombre de usuario y correo para los mensajes de los commits:](#asignar-nombre-de-usuario-y-correo-para-los-mensajes-de-los-commits)
   * [Listar la configuración:](#listar-la-configuración)
+* [Ramas](#ramas)
+  * [Eliminar rama](#eliminar-rama)
+  * [Listar todas las ramas, locales y remotas](#listar-todas-las-ramas-locales-y-remotas)
 * [Submódulos](#submódulos)
   * [Starting with Submodules](#starting-with-submodules)
   * [Cloning a Project with Submodules](#cloning-a-project-with-submodules)
@@ -28,6 +36,35 @@
   * [Asociate ssh key with repository using .`ssh/config` file](#asociate-ssh-key-with-repository-using-sshconfig-file)
 <!-- TOC -->
 
+## Adicionar todos los archivos
+
+`git add --all`
+
+> Nota: Atajo para `git add --all` es `git add -A`
+
+## Ver estado del repositorio en la version corta
+
+`git status --short`
+
+```
+Nota: Las banderas son:
+
+?? - Untracked files
+A - Files added to stage
+M - Modified files
+D - Deleted files
+```
+
+## Ayuda
+
+### Ayuda sobre un comando ej: **commit**
+
+`git commit --help`
+
+### Ayuda sobre todos los comandos
+
+`git help --all`
+
 ## Asignar nombre de usuario y correo para los mensajes de los commits:
 
 ```
@@ -38,6 +75,21 @@ git config --global user.email johndoe@example.com
 ## Listar la configuración:
 
 `git config --list`
+
+# Ramas
+
+## Eliminar rama
+
+`git branch -d emergency-fix`
+
+## Listar todas las ramas, locales y remotas
+
+`git branch -a`
+
+>Nota: `branch -r` solo muestra las remotas.
+
+# Contribución
+>Nota: De acuerdo con las convenciones de nomenclatura de Git, se recomienda nombrar su propio repositorio como `origin` y el que bifurcó para `upstream`.
 
 # Submódulos
 
