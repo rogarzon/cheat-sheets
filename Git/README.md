@@ -91,9 +91,7 @@ git config --global user.email johndoe@example.com
 # Contribución
 >Nota: De acuerdo con las convenciones de nomenclatura de Git, se recomienda nombrar su propio repositorio como `origin` y el que bifurcó para `upstream`.
 
-# Submódulos
-
-https://git-scm.com/book/en/v2/Git-Tools-Submodules
+# [Submódulos](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
 
 ## Starting with Submodules
 
