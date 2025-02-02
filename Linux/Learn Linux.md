@@ -1133,5 +1133,57 @@ To extract IPv4 and IPv6 addresses, you can use `ip -4 addr` and `ip -6 addr`, r
     `netstat -e`
 
 
+## How to Debug and Troubleshoot Bash Scripts
 
+### Set the `set -x` option
 
+One of the most useful techniques for debugging Bash scripts is to set the `set -x` option at the beginning of the script. This option enables debugging mode, which causes Bash to print each command that it executes to the terminal, preceded by a `+` sign.
+
+```
+#!/bin/bash
+
+set -x
+
+# Your script goes here 
+```
+
+### Check the exit code
+When Bash encounters an error, it sets an exit code that indicates the nature of the error. You can check the exit code of the most recent command using the `$?` variable. A value of `0` indicates success, while any other value indicates an error.
+
+```
+#!/bin/bash
+
+# Your script code goes here
+
+if [ $? -ne 0 ]; then
+    echo "Error occurred"
+fi
+
+```
+
+### Use `echo` statements
+
+Another useful technique for debugging Bash scripts is to insert echo statements throughout your code.
+
+```
+#!/bin/bash
+
+#Your script code goes here
+
+echo "Value of variable x is: $x"
+
+#More code goes here
+
+```
+
+### Use the `set -e` option
+
+If you want your script to exit immediately when any command in the script fails, you can use the set -e option. This option will cause Bash to exit with an error if any command in the script fails, making it easier to identify and fix errors in your script.
+
+```
+#!/bin/bash
+
+set -e
+
+#Your script code goes here
+```
