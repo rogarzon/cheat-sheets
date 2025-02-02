@@ -66,6 +66,11 @@ https://www.freecodecamp.org/news/learn-linux-for-beginners-book-basic-to-advanc
   * [Linux Networking Basics](#linux-networking-basics)
     * [View network interfaces with `ifconfig`](#view-network-interfaces-with-ifconfig)
     * [View network activity with `netstat`](#view-network-activity-with-netstat)
+  * [How to Debug and Troubleshoot Bash Scripts](#how-to-debug-and-troubleshoot-bash-scripts)
+    * [Set the `set -x` option](#set-the-set--x-option)
+    * [Check the exit code](#check-the-exit-code)
+    * [Use `echo` statements](#use-echo-statements)
+    * [Use the `set -e` option](#use-the-set--e-option)
 <!-- TOC -->
 
 ## CPU architecture
