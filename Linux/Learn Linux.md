@@ -1,9 +1,12 @@
 # Linux
 
+## Sources
 https://www.freecodecamp.org/news/learn-linux-for-beginners-book-basic-to-advanced/
+https://www.youtube.com/watch?v=tK9Oc6AEnR4&t=26s
 
 <!-- TOC -->
 * [Linux](#linux)
+  * [Sources](#sources)
   * [CPU architecture](#cpu-architecture)
   * [The Linux File-system Hierarchy](#the-linux-file-system-hierarchy)
   * [`cd` Command shortcuts](#cd-command-shortcuts)
@@ -39,6 +42,7 @@ https://www.freecodecamp.org/news/learn-linux-for-beginners-book-basic-to-advanc
     * [While loop](#while-loop)
     * [For loop](#for-loop)
     * [Case statements](#case-statements)
+    * [Functions](#functions)
   * [Managing Software Packages in Linux](#managing-software-packages-in-linux)
     * [Installing downloaded packages from a website](#installing-downloaded-packages-from-a-website)
   * [User Management](#user-management)
@@ -532,6 +536,51 @@ esac
 
 The double semicolon `";;"` separates each block of code to execute for each pattern. The asterisk `"*"` represents the
 default case, which executes if none of the specified patterns match the expression.
+
+### Functions
+
+```
+#!/bin/bash
+up="before"
+since="function"
+echo $up
+echo $since
+
+showuptime() {
+    local up=$(uptime -p | cut -c4-)
+    local sice=$(uptime -s)
+    cat << EOF
+    ------
+    This machine has been up for ${up}
+    It has been running sice ${since}
+    ------
+    EOF
+}
+
+shouptime
+echo $up
+echo $sice
+```
+
+```
+#!/bin/bash
+
+showname() {
+    echo hello $1
+    if [ ${1,,} = rogarzon ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+showname $1
+
+# Exit codes
+if [ $? = 1 ]; then
+    echo "Someone unknown called the function!"
+fi
+```
 
 ## Managing Software Packages in Linux
 
