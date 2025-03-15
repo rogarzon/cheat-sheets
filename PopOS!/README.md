@@ -38,3 +38,6 @@ reboot
 
 # Ver qué tarjeta gráfica se está usando:
 `lspci -k | grep -A 2 -E "(VGA|3D)"`
+
+# How to tell if your system is EFI-based or legacy boot?
+`[ -d /sys/firmware/efi ] && echo "Installed in UEFI mode" || echo "Installed in Legacy mode"`
