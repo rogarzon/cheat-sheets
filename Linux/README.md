@@ -8,6 +8,7 @@
     * [How to create a symbolic link to a directory](#how-to-create-a-symbolic-link-to-a-directory)
     * [How to remove a symbolic link](#how-to-remove-a-symbolic-link)
     * [How to overwrite symlinks](#how-to-overwrite-symlinks)
+  * [Check if a package is installed](#check-if-a-package-is-installed)
 <!-- TOC -->
 
 # Linux
@@ -54,3 +55,6 @@ option, then a hard link will be created instead.
 ### How to overwrite symlinks
 
 `ln -sf example_fcc_file.txt fcc_link.txt`
+
+## Check if a package is installed
+`sudo apt list --installed | grep openssh-server`
