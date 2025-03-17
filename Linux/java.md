@@ -42,7 +42,7 @@ Development Kit (JDK) installed on your system.
 ### Download the Oracle JDK file
 
 First, you will need to head on over to
-the [official Oracle JDK website](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html) and download the latest JDK:
+the [official Oracle JDK website](https://www.oracle.com/java/technologies/downloads/) and download the latest JDK:
 jdk-11.0.7_linux-x64_bin.tar.gz
 
 ### Extract The File To A New “JVM” Directory

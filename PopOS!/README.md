@@ -1,21 +1,9 @@
 <!-- TOC -->
-* [GRUB](#grub)
 * [Ubuntu / PopOS 21.04 - Screen blinking](#ubuntu--popos-2104---screen-blinking)
 * [Ver qué tarjeta gráfica se está usando:](#ver-qué-tarjeta-gráfica-se-está-usando)
+* [How to tell if your system is EFI-based or legacy boot?](#how-to-tell-if-your-system-is-efi-based-or-legacy-boot)
 <!-- TOC -->
 
-
-# GRUB
-
-1. sudo apt install grub-efi grub2-common grub-customizer
-2. sudo grub-install
-3. (No error reported)
-4. sudo cp /boot/grub/x86_64-efi/grub.efi /boot/efi/EFI/pop/grubx64.efi
-5. grub-customizer
-6. (Cambiar entorno)
-7. (OUTPUT_FILE: /boot/efi/EFI/pop/grub.cfg)
-8. (Gardar configuración)
-9. (Aplicar)
 
 # Ubuntu / PopOS 21.04 - Screen blinking
 https://askubuntu.com/questions/1362829/ubuntu-popos-21-04-screen-blinking

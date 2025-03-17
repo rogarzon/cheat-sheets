@@ -1,7 +1,7 @@
 <!-- TOC -->
 * [PostgreSQL](#postgresql)
   * [Install PostgreSQL Linux](#install-postgresql-linux)
-    * [Add PostgreSQL Repository](#add-postgresql-repository)
+    * [PostgreSQL Apt Repository](#postgresql-apt-repository)
     * [Install PostgreSQL 16](#install-postgresql-16)
     * [Configure PostgreSQL server](#configure-postgresql-server)
   * [Connect to the PostgreSQL database server](#connect-to-the-postgresql-database-server)
@@ -9,28 +9,32 @@
 
 # PostgreSQL
 
-## [Install PostgreSQL Linux](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-linux/)
+## [Install PostgreSQL Linux](https://www.postgresql.org/download/linux/ubuntu/)
 
-### Add PostgreSQL Repository
-
-First, update the package index and install the necessary packages:
-
+### PostgreSQL Apt Repository
+**Automated repository configuration:**
 ```
+sudo apt install -y postgresql-common
+sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
+```
+
+**To manually configure the Apt repository, follow these steps:**
+```
+# Import the repository signing key:
+sudo apt install curl ca-certificates
+sudo install -d /usr/share/postgresql-common/pgdg
+sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
+
+# Create the repository configuration file:
+sudo sh -c 'echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+
+# Update the package lists:
 sudo apt update
-sudo apt install gnupg2 wget
+
+# Install the latest version of PostgreSQL:
+# If you want a specific version, use 'postgresql-16' or similar instead of 'postgresql'
+sudo apt -y install postgresql
 ```
-
-Second, add the PostgreSQL repository:
-
-`sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'`
-
-Third, import the repository signing key:
-
-`curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg`
-
-Finally, update the package list
-
-`sudo apt update`
 
 ### Install PostgreSQL 16
 
@@ -86,3 +90,14 @@ Quit the **psql** by using the `\q` command:
 
 `\q`
 
+```postgresql
+CREATE ROLE username WITH LOGIN PASSWORD 'password';
+ALTER ROLE username WITH LOGIN;
+ALTER ROLE username WITH CREATEDB;
+ALTER ROLE username WITH REPLICATION;
+GRANT CONNECT ON DATABASE dbname TO username;
+REVOKE privilege_type ON object FROM username;
+REVOKE CONNECT ON DATABASE dbname FROM username;
+
+
+```
