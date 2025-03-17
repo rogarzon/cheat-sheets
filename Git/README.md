@@ -67,6 +67,11 @@ D - Deleted files
 
 ## Asignar nombre de usuario y correo para los mensajes de los commits:
 
+There are 3 levels of git config; **project**, **global** and **system**:
+1. `local`: Project configs are only available for the current project and stored in .git/config in the project's directory.
+2. `global`: Global configs are available for all projects for the current user and stored in ~/.gitconfig.
+3. `system`: System configs are available for all the users/projects and stored in /etc/gitconfig.
+
 ```
 git config --global user.name "John Doe"
 git config --global user.email johndoe@example.com
@@ -437,7 +442,7 @@ Your identification has been saved with the new passphrase.
 
 Si tu clave ya tiene una contraseña, se te pedirá que la ingreses antes de que puedas cambiar a una nueva contraseña.
 
-## Asociate ssh key with repository using .`ssh/config` file
+## Asociate ssh key with repository using `.ssh/config` file
 
 ```
 Host github.com

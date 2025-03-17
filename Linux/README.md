@@ -58,3 +58,8 @@ option, then a hard link will be created instead.
 
 ## Check if a package is installed
 `sudo apt list --installed | grep openssh-server`
+
+## Syncing files and directories
+`rsync -av /source /destination`
+
+`rsync -azP o17_bps_mig_x_2025-02-27-07-53-12.sql.gz omen@192.168.1.112:/home/omen/Descargas`

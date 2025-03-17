@@ -3,6 +3,29 @@
 * [Debuggear odoo en vscode](#debuggear-odoo-en-vscode)
 <!-- TOC -->
 
+# How to install Odoo 17
+## Dependencies
+```commandline
+sudo apt-get update      
+sudo apt-get install python3-dev libxml2-dev libxslt1-dev zlib1g-dev libsasl2-dev libldap2-dev build-essential libssl-dev libffi-dev libmysqlclient-dev libjpeg-dev libpq-dev libjpeg8-dev liblcms2-dev libblas-dev libatlas-base-dev
+
+# If you find errors, force to install the dependencies
+sudo apt-get install -f
+```
+
+## Install PostgreSQL
+```commandline 
+sudo apt install postgresql -y
+sudo -u postgres createuser --superuser $(whoami)
+```
+
+**Note:** If you need RTL support, please install node and rtlcss via the following command:
+
+```commandline
+sudo apt-get install nodejs npm -y
+sudo npm install -g rtlcss
+```
+
 # Desisntalar un módulo mediante CLI
 
 ```commandline
