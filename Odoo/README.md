@@ -19,6 +19,11 @@ sudo apt install postgresql -y
 sudo -u postgres createuser --superuser $(whoami)
 ```
 
+**Note:** If error _Could not execute command lessc_, execute the following command:
+```commandline
+sudo apt install node-less
+```
+
 **Note:** If you need RTL support, please install node and rtlcss via the following command:
 
 ```commandline
