@@ -12,6 +12,7 @@
 * [Ramas](#ramas)
   * [Eliminar rama](#eliminar-rama)
   * [Listar todas las ramas, locales y remotas](#listar-todas-las-ramas-locales-y-remotas)
+* [Contribución](#contribución)
 * [Submódulos](#submódulos)
   * [Starting with Submodules](#starting-with-submodules)
   * [Cloning a Project with Submodules](#cloning-a-project-with-submodules)
@@ -33,7 +34,7 @@
   * [Adding a new SSH key to your GitHub account](#adding-a-new-ssh-key-to-your-github-account)
   * [Testing your SSH connection](#testing-your-ssh-connection)
   * [Trabajar con contraseñas de clave SSH](#trabajar-con-contraseñas-de-clave-ssh)
-  * [Asociate ssh key with repository using .`ssh/config` file](#asociate-ssh-key-with-repository-using-sshconfig-file)
+  * [Asociate ssh key with repository using `.ssh/config` file](#asociate-ssh-key-with-repository-using-sshconfig-file)
 <!-- TOC -->
 
 ## Adicionar todos los archivos
