@@ -1,28 +1,23 @@
 <!-- TOC -->
-* [Ubuntu / PopOS 21.04 - Screen blinking](#ubuntu--popos-2104---screen-blinking)
+* [Mostrar * al escribir contraseña:](#mostrar--al-escribir-contraseña)
 * [Ver qué tarjeta gráfica se está usando:](#ver-qué-tarjeta-gráfica-se-está-usando)
 * [How to tell if your system is EFI-based or legacy boot?](#how-to-tell-if-your-system-is-efi-based-or-legacy-boot)
 <!-- TOC -->
 
 
-# Ubuntu / PopOS 21.04 - Screen blinking
-https://askubuntu.com/questions/1362829/ubuntu-popos-21-04-screen-blinking
+# Mostrar * al escribir contraseña:
+1. `sudo nano /etc/sudoers`
+2. Buscar la línea `Defaults        env_reset`
+3. Añadir `,pwfeedback` al final de la línea
+4. Guardar y salir
 
-**Solución 1:**
-```
-nano /etc/defaults/grub
-GRUB_CMDLINE_LINUX_DEFAULT="quiet splash i915.enable_psr=0"
-sudo update-grub
-```
-    
-**Solución 2:**
-**Nota:** Para personas que no usan grub
+# Personalización:
+1. Instalar de la tienda de PopOS! Gestor de extensiones
+2. Habilitar Wayland
+2.1. `sudo nano /etc/gdm3/custom.conf`
+2.2 Cambiar a `WaylandEnable=true` en la sección `[daemon]`
+2.3 Guardar y reiniciar
 
-```
-sudo echo "options i915 enable_psr=0" >> /etc/modprobe.d/i915.conf
-sudo update-initramfs -c -k $(uname -r)
-reboot
-```
 
 # Ver qué tarjeta gráfica se está usando:
 `lspci -k | grep -A 2 -E "(VGA|3D)"`
