@@ -1,5 +1,6 @@
 <!-- TOC -->
 * [Mostrar * al escribir contraseña:](#mostrar--al-escribir-contraseña)
+* [Personalización:](#personalización)
 * [Ver qué tarjeta gráfica se está usando:](#ver-qué-tarjeta-gráfica-se-está-usando)
 * [How to tell if your system is EFI-based or legacy boot?](#how-to-tell-if-your-system-is-efi-based-or-legacy-boot)
 <!-- TOC -->
