@@ -3,6 +3,8 @@
 * [Personalización:](#personalización)
 * [Ver qué tarjeta gráfica se está usando:](#ver-qué-tarjeta-gráfica-se-está-usando)
 * [How to tell if your system is EFI-based or legacy boot?](#how-to-tell-if-your-system-is-efi-based-or-legacy-boot)
+* [Hybrid](#hybrid)
+* [From the command line](#from-the-command-line)
 <!-- TOC -->
 
 
@@ -15,9 +17,15 @@
 # Personalización:
 1. Instalar de la tienda de PopOS! Gestor de extensiones
 2. Habilitar Wayland
-2.1. `sudo nano /etc/gdm3/custom.conf`
-2.2 Cambiar a `WaylandEnable=true` en la sección `[daemon]`
-2.3 Guardar y reiniciar
+    1. `sudo nano /etc/gdm3/custom.conf`
+    2. Cambiar a `WaylandEnable=true` en la sección `[daemon]`
+    3. Guardar y reiniciar con `sudo reboot`
+3. Instalar `gnome-tweaks` y `gnome-shell-extensions` de la tienda de PopOS!
+4. Abrir extension-manager
+5. Instalar las extensiones:
+    1. Dash to Panel
+    2. [Arc Menu](https://extensions.gnome.org/extension/3628/arcmenu/)
+ 
 
 
 # Ver qué tarjeta gráfica se está usando:
