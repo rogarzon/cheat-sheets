@@ -339,6 +339,8 @@ origin  https://github.com/OWNER/REPOSITORY.git (push)
 ```
 
 # Connect with SSH
+En linux hay una aplicación llamada **ssh-agent** que se encarga de gestionar las claves SSH. También se puede usar Seahorse para gestionar las claves SSH mediante una interfaz de usuario
+En Windows, puedes usar **Git Bash** para ejecutar los comandos SSH.
 
 ## Checking for existing SSH keys
 
