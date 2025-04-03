@@ -9,6 +9,8 @@
     * [How to remove a symbolic link](#how-to-remove-a-symbolic-link)
     * [How to overwrite symlinks](#how-to-overwrite-symlinks)
   * [Check if a package is installed](#check-if-a-package-is-installed)
+  * [Syncing files and directories](#syncing-files-and-directories)
+  * [Cambiar los colores a la consola](#cambiar-los-colores-a-la-consola)
 <!-- TOC -->
 
 # Linux
@@ -63,3 +65,14 @@ option, then a hard link will be created instead.
 `rsync -av /source /destination`
 
 `rsync -azP o17_bps_mig_x_2025-02-27-07-53-12.sql.gz omen@192.168.1.112:/home/omen/Descargas`
+
+## Cambiar los colores a la consola
+1. Cambiarse al usuario con `sudo su - <user>`
+2. Abrir el archivo `~/.bashrc` y buscar la línea `PS1=` debajo de `if [ "$color_prompt" = yes ]; then`
+3. Modificar la línea `PS1` para cambiar los colores usando el sitio web [https://bash-prompt-generator.org/](https://bash-prompt-generator.org/), se pueden agregar o remover elementos.
+4. Copiar el contenido de la línea `PS1` y pegarlo en el sitio web.
+5. Modificar los colores y copiar el resultado.
+6. Pegarlo en el archivo `~/.bashrc` en la línea `PS1=`.
+7. Descomentar la línea `force_color_prompt=yes` si está comentada. _Paso necesario si el usuario es el **root**._
+8. Guardar el archivo.
+9. Ejecutar el comando `source ~/.bashrc` para aplicar los cambios.
