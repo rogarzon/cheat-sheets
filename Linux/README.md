@@ -11,6 +11,13 @@
   * [Check if a package is installed](#check-if-a-package-is-installed)
   * [Syncing files and directories](#syncing-files-and-directories)
   * [Cambiar los colores a la consola](#cambiar-los-colores-a-la-consola)
+  * [Gestión de Usuarios](#gestión-de-usuarios)
+    * [Crear un nuevo usuario](#crear-un-nuevo-usuario)
+    * [Ver información del usuario](#ver-información-del-usuario)
+    * [Cambiar la contraseña de un usuario](#cambiar-la-contraseña-de-un-usuario)
+    * [Agregar un usuario al grupo sudo](#agregar-un-usuario-al-grupo-sudo)
+    * [Cambiar el shell de un usuario](#cambiar-el-shell-de-un-usuario)
+    * [Eliminar un usuario](#eliminar-un-usuario)
 <!-- TOC -->
 
 # Linux
@@ -76,3 +83,44 @@ option, then a hard link will be created instead.
 7. Descomentar la línea `force_color_prompt=yes` si está comentada. _Paso necesario si el usuario es el **root**._
 8. Guardar el archivo.
 9. Ejecutar el comando `source ~/.bashrc` para aplicar los cambios.
+
+## Gestión de Usuarios
+
+### Crear un nuevo usuario
+```bash
+# Crear un nuevo usuario, -m para crear el directorio home
+sudo useradd <username> -m
+```
+
+### Ver información del usuario
+```bash
+# Ver información del usuario como la shell, etc.
+cat /etc/passwd | grep <username>
+# muestra algo como esto:
+# <username>:x:1000:1000:<Username>:/home/<username>:/bin/bash
+````
+
+### Cambiar la contraseña de un usuario
+```bash
+# Cambiar la contraseña de un usuario
+sudo passwd <username>
+```
+
+### Agregar un usuario al grupo sudo
+```bash 
+# Agregar un usuario al grupo sudo, ejecutar como root
+ sudo usermod -aG sudo <username>
+```
+
+
+### Cambiar el shell de un usuario
+```bash
+# Cambiar el shell de un usuario
+sudo usermod -s /bin/bash <username>
+```
+
+### Eliminar un usuario
+```bash
+# Eliminar un usuario
+sudo userdel -rf <username>
+```
