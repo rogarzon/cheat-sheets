@@ -18,7 +18,9 @@
     * [Agregar un usuario al grupo sudo](#agregar-un-usuario-al-grupo-sudo)
     * [Cambiar el shell de un usuario](#cambiar-el-shell-de-un-usuario)
     * [Eliminar un usuario](#eliminar-un-usuario)
-  * [Gestión de permisos de archivos](#gestión-de-permisos-de-archivos)
+  * [Archivos](#archivos)
+    * [Gestión de permisos de archivos](#gestión-de-permisos-de-archivos)
+    * [Compresión y descompresión de archivos](#compresión-y-descompresión-de-archivos)
 <!-- TOC -->
 
 # Linux
@@ -126,7 +128,9 @@ sudo usermod -s /bin/bash <username>
 sudo userdel -rf <username>
 ```
 
-## Gestión de permisos de archivos
+## Archivos
+
+### Gestión de permisos de archivos
 ```bash
 # Cambiar permisos de un archivo
 chmod u=rwx,g=rx,o=rx <archivo>
@@ -134,4 +138,32 @@ chmod u=rwx,g=rx,o=rx <archivo>
 chmod u=rwx,g=rx,o=rx /opt/odoo
 # Cambiar permisos de un archivo y sus subdirectorios
 chmod -R u=rwx,g=rx,o=rx /opt/odoo
+```
+
+### Compresión y descompresión de archivos
+```bash
+# Comprimir un archivo con tar 
+tar -cvf <archivo>.tar.gz <directorio>
+# Descomprimir un archivo con tar
+tar -xvf <archivo>.tar.gz
+# Comprimir un archivo con tar y gzip
+tar -czvf <archivo>.tar.gz <directorio>
+# Descomprimir un archivo con tar y gzip
+tar -xzvf <archivo>.tar.gz
+# Mostrar contentido de archivo comprimido con tar
+tar -tvf <archivo>.tar.gz
+
+# Comprimir un archivo con gzip
+gzip <archivo>
+# Descomprimir un archivo con gzip
+gunzip <archivo>.gz
+# Mostrar contenido de archivo comprimido con gzip
+zcat <archivo>.gz
+
+# Comprimir un archivo con zip
+zip <archivo>.zip <directorio>
+# Descomprimir un archivo con zip
+unzip <archivo>.zip
+# Mostrar contenido de archivo comprimido con zip
+unzip -l <archivo>.zip
 ```

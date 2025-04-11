@@ -97,3 +97,8 @@ zcat grp_test.2023-09-01-test.sql.gz | psql --username=odoo --host="127.0.0.1" -
 --dbname=grp_test_2023_09_01 --no-password
 ```
 
+# Ejecutar un script SQL almacenados en un archivo
+
+```
+psql -h <host> -d <database> -U <user> -W -a -f <archivo.sql> 
+```
