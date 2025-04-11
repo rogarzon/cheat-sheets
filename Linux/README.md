@@ -18,6 +18,7 @@
     * [Agregar un usuario al grupo sudo](#agregar-un-usuario-al-grupo-sudo)
     * [Cambiar el shell de un usuario](#cambiar-el-shell-de-un-usuario)
     * [Eliminar un usuario](#eliminar-un-usuario)
+  * [Gestión de permisos de archivos](#gestión-de-permisos-de-archivos)
 <!-- TOC -->
 
 # Linux
@@ -123,4 +124,14 @@ sudo usermod -s /bin/bash <username>
 ```bash
 # Eliminar un usuario
 sudo userdel -rf <username>
+```
+
+## Gestión de permisos de archivos
+```bash
+# Cambiar permisos de un archivo
+chmod u=rwx,g=rx,o=rx <archivo>
+# Cambiar permisos de un directorio
+chmod u=rwx,g=rx,o=rx /opt/odoo
+# Cambiar permisos de un archivo y sus subdirectorios
+chmod -R u=rwx,g=rx,o=rx /opt/odoo
 ```
