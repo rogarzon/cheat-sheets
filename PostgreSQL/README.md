@@ -9,6 +9,7 @@
   * [Windows:](#windows)
   * [Linux:](#linux)
 * [Restaurar de un backup comprimido](#restaurar-de-un-backup-comprimido)
+* [Ejecutar un script SQL almacenados en un archivo](#ejecutar-un-script-sql-almacenados-en-un-archivo)
 <!-- TOC -->
 
 # psql Commands
