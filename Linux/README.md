@@ -1,5 +1,7 @@
 <!-- TOC -->
 * [Linux](#linux)
+  * [Operators](#operators)
+    * [Operator "&"](#operator-)
   * [Init System  systemd (systemctl) or System V Init (service)](#init-system--systemd-systemctl-or-system-v-init-service)
   * [Running Distribution](#running-distribution)
   * [Symbolic Link](#symbolic-link)
@@ -25,6 +27,15 @@
 <!-- TOC -->
 
 # Linux
+
+## Operators
+
+### Operator "&"
+
+This operator allows us to execute commands in the background. For example, let's say we want to copy a large file. This will obviously take quite a long time and will leave us unable to do anything
+else until the file successfully copies.
+
+The "&" shell operator allows us to execute a command and have it run in the background (such as this file copy) allowing us to do other things!
 
 ## Init System  systemd (systemctl) or System V Init (service)
 
@@ -70,14 +81,17 @@ option, then a hard link will be created instead.
 `ln -sf example_fcc_file.txt fcc_link.txt`
 
 ## Check if a package is installed
+
 `sudo apt list --installed | grep openssh-server`
 
 ## Syncing files and directories
+
 `rsync -av /source /destination`
 
 `rsync -azP o17_bps_mig_x_2025-02-27-07-53-12.sql.gz omen@192.168.1.112:/home/omen/Descargas`
 
 ## Cambiar los colores a la consola
+
 1. Cambiarse al usuario con `sudo su - <user>`
 2. Abrir el archivo `~/.bashrc` y buscar la línea `PS1=` debajo de `if [ "$color_prompt" = yes ]; then`
 3. Modificar la línea `PS1` para cambiar los colores usando el sitio web [https://bash-prompt-generator.org/](https://bash-prompt-generator.org/), se pueden agregar o remover elementos.
@@ -91,12 +105,14 @@ option, then a hard link will be created instead.
 ## Gestión de Usuarios
 
 ### Crear un nuevo usuario
+
 ```bash
 # Crear un nuevo usuario, -m para crear el directorio home
 sudo useradd <username> -m
 ```
 
 ### Ver información del usuario
+
 ```bash
 # Ver información del usuario como la shell, etc.
 cat /etc/passwd | grep <username>
@@ -105,25 +121,28 @@ cat /etc/passwd | grep <username>
 ````
 
 ### Cambiar la contraseña de un usuario
+
 ```bash
 # Cambiar la contraseña de un usuario
 sudo passwd <username>
 ```
 
 ### Agregar un usuario al grupo sudo
+
 ```bash 
 # Agregar un usuario al grupo sudo, ejecutar como root
  sudo usermod -aG sudo <username>
 ```
 
-
 ### Cambiar el shell de un usuario
+
 ```bash
 # Cambiar el shell de un usuario
 sudo usermod -s /bin/bash <username>
 ```
 
 ### Eliminar un usuario
+
 ```bash
 # Eliminar un usuario
 sudo userdel -rf <username>
@@ -132,6 +151,7 @@ sudo userdel -rf <username>
 ## Archivos
 
 ### Gestión de permisos de archivos
+
 ```bash
 # Cambiar permisos de un archivo
 chmod u=rwx,g=rx,o=rx <archivo>
@@ -142,6 +162,7 @@ chmod -R u=rwx,g=rx,o=rx /opt/odoo
 ```
 
 ### Compresión y descompresión de archivos
+
 ```bash
 # Comprimir un archivo con tar 
 tar -cvf <archivo>.tar.gz <directorio>
@@ -170,6 +191,7 @@ unzip -l <archivo>.zip
 ```
 
 ## Proteger el grub
+
 ```bash
 # Proteger el grub
 # Editar el archivo /etc/grub.d/00_header y agregar la siguiente línea al final
