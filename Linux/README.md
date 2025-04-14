@@ -21,6 +21,7 @@
   * [Archivos](#archivos)
     * [Gestión de permisos de archivos](#gestión-de-permisos-de-archivos)
     * [Compresión y descompresión de archivos](#compresión-y-descompresión-de-archivos)
+  * [Proteger el grub](#proteger-el-grub)
 <!-- TOC -->
 
 # Linux
@@ -166,4 +167,20 @@ zip <archivo>.zip <directorio>
 unzip <archivo>.zip
 # Mostrar contenido de archivo comprimido con zip
 unzip -l <archivo>.zip
+```
+
+## Proteger el grub
+```bash
+# Proteger el grub
+# Editar el archivo /etc/grub.d/00_header y agregar la siguiente línea al final
+cat << EOF
+set superusers="<username>"
+password_pbkdf2 <usernam> <hash>
+EOF
+# Generar el hash de la contraseña
+sudo grub-mkpasswd-pbkdf2
+# Escribir la contraseña y copiar el hash generado
+# Guardar el archivo
+# Actualizar el grub
+update-grub
 ```
