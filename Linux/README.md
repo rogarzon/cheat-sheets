@@ -4,6 +4,7 @@
     * [Operator "&"](#operator-)
       * [Ctrl + Z](#ctrl--z)
   * [Init System  systemd (systemctl) or System V Init (service)](#init-system--systemd-systemctl-or-system-v-init-service)
+    * [Services (systemctl)](#services-systemctl)
   * [Running Distribution](#running-distribution)
   * [Symbolic Link](#symbolic-link)
     * [What is the difference between soft and hard links in Linux?](#what-is-the-difference-between-soft-and-hard-links-in-linux)
@@ -47,6 +48,40 @@ This command will suspend the process and put it in the background. This is usef
 If you are unsure which init system your platform uses, run the following command:
 
 `ps --no-headers -o comm 1`
+
+### Services (systemctl)
+To list all running services, use the following command:
+`systemctl list-units --type=service`
+
+To start a service, use the following command:
+`systemctl start <service_name>`
+
+To stop a service, use the following command:
+`systemctl stop <service_name>`
+
+To restart a service, use the following command:
+`systemctl restart <service_name>`
+
+To check the status of a service, use the following command:
+`systemctl status <service_name>`
+
+To enable a service to start on boot, use the following command:
+`systemctl enable <service_name>`
+
+To disable a service from starting on boot, use the following command:
+`systemctl disable <service_name>`
+
+To check if a service is enabled to start on boot, use the following command:
+`systemctl is-enabled <service_name>`
+
+To check if a service is running, use the following command:
+`systemctl is-active <service_name>`
+
+To check if a service is failed, use the following command:
+`systemctl is-failed <service_name>`
+
+To check the logs of a service, use the following command:
+`journalctl -u <service_name>`
 
 ## Running Distribution
 
