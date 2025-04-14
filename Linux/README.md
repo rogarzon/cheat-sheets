@@ -2,6 +2,7 @@
 * [Linux](#linux)
   * [Operators](#operators)
     * [Operator "&"](#operator-)
+      * [Ctrl + Z](#ctrl--z)
   * [Init System  systemd (systemctl) or System V Init (service)](#init-system--systemd-systemctl-or-system-v-init-service)
   * [Running Distribution](#running-distribution)
   * [Symbolic Link](#symbolic-link)
@@ -36,6 +37,10 @@ This operator allows us to execute commands in the background. For example, let'
 else until the file successfully copies.
 
 The "&" shell operator allows us to execute a command and have it run in the background (such as this file copy) allowing us to do other things!
+
+#### Ctrl + Z
+This command will suspend the process and put it in the background. This is useful if you want to stop a process but not kill it. You can then use the `fg` command to bring it back to the foreground.
+
 
 ## Init System  systemd (systemctl) or System V Init (service)
 
