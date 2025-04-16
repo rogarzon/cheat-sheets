@@ -3,6 +3,8 @@
 <!-- TOC -->
 * [Tutorial de Docker](#tutorial-de-docker)
   * [Introducción](#introducción)
+  * [Instalación](#instalación)
+    * [Post instalación](#post-instalación)
   * [Comandos básicos](#comandos-básicos)
     * [Información](#información)
     * [Limpieza](#limpieza)
@@ -38,12 +40,14 @@
     * [Copiar archivos desde y hacia un contenedor](#copiar-archivos-desde-y-hacia-un-contenedor)
     * [Acceder a un contenedor en ejecución](#acceder-a-un-contenedor-en-ejecución)
   * [Volúmenes](#volúmenes)
+    * [Tipos de volúmenes](#tipos-de-volúmenes)
     * [Listar volúmenes](#listar-volúmenes)
     * [Eliminar volúmenes no utilizados](#eliminar-volúmenes-no-utilizados)
     * [Inspeccionar un volumen](#inspeccionar-un-volumen)
   * [Bind mounts](#bind-mounts)
   * [Redes](#redes)
     * [Listar redes](#listar-redes)
+  * [Argumentos <ARG> y variables de entorno <ENV>](#argumentos-arg-y-variables-de-entorno-env)
 <!-- TOC -->
 
 ## Introducción
@@ -52,6 +56,25 @@ Docker es una plataforma de software que permite crear, probar y desplegar aplic
 una aplicación, lo que facilita su despliegue en diferentes entornos sin preocuparse por las dependencias del sistema operativo.
 
 Para ver las imágenes disponibles por docker hub puedes visitar el siguiente enlace: [Docker Hub](https://hub.docker.com/)
+
+## Instalación
+
+* [Docker Engine](https://docs.docker.com/engine/install/)
+* [Docker Desktop](https://www.docker.com/products/docker-desktop)
+
+### Post instalación
+
+* [Linux post-installation steps for Docker Engine](https://docs.docker.com/engine/install/linux-postinstall/)
+
+  Para poder ejecutar los comandos de Docker sin necesidad de usar `sudo`, puedes agregar tu usuario al grupo `docker` con el siguiente comando:
+
+    ```bash
+     sudo usermod -aG docker $USER
+     # Activar los cambios en el grupo
+     newgrp docker
+     # Verificar si puedes usar docker sin sudo
+     docker run hello-world
+    ```
 
 ## Comandos básicos
 
@@ -96,6 +119,8 @@ Establece el directorio de trabajo para las instrucciones RUN, CMD, ENTRYPOINT, 
 Copia archivos o directorios desde el host al sistema de archivos de la imagen.
 
 `COPY . /app/`
+
+> **Nota:** Se puede ignorar archivos a copiar usando un archivo `.dockerignore`, similar a `.gitignore`.
 
 ### ADD
 
@@ -255,7 +280,7 @@ La opción `-v` se utiliza para montar un [volumen](#volúmenes) en el contenedo
  docker run -v <host_path>:<container_path> <image_name>
 ```
 
-Si en `<host_path>` se especifica un nombre, Docker montará el volumen, pero si se especifica una ruta del host, Docker montará un [bind mount](#bind-mounts).
+Si en `<host_path>` se especifica un nombre, Docker montará el volumen nombrado, pero si se especifica una ruta del host, Docker montará un [bind mount](#bind-mounts).
 En el caso de no especificarse `<host_path>` y solo `<container_name>`, Docker creará un volumen anónimo.
 
 ```bash
@@ -362,8 +387,48 @@ Para acceder a un contenedor en ejecución, podemos usar el siguiente comando:
 
 ## Volúmenes
 
-Los volúmenes son una forma de persistir datos generados y utilizados por contenedores. Los volúmenes son independientes del ciclo de vida de un contenedor y pueden ser compartidos entre varios
-contenedores. Son manejados por Docker y no sabemos en qué parte se almacenan en el sistema de archivos del host.
+Los volúmenes son una forma de persistir datos generados y utilizados por contenedores. Los volúmenes específicos tienen mayor prioridad que los genéricos, por lo que si un contenedor tiene un volumen
+específico y otro contenedor tiene un volumen genérico, por ejemplo, `-v /app/node_module`, tendrá prioridad sobre el volumen `-v $(pwd):/app` ya que indica una sub carpeta. Esto se puede usar para
+evitar que ciertas partes se sobreescriban dentro del contenedor en el momento de su creación.
+
+### Tipos de volúmenes
+
+* **Volúmen Anónimo**
+    * Se borra cuando el contenedor es eliminado (atado al contenedor)
+    * Evita que se sobreescriban ciertas partes del contenedor
+    * No se debe usar para compartir datos entre contenedores
+
+```bash
+  docker run``` -v <container_path> <image_name>
+  ```
+
+```dockerfile
+  VOLUME ["<container_path>", ..]
+  # Or 
+  VOLUME <container_path> ...
+```
+
+* **Volumen nombrado**
+    * No están atados a un contenedor (no se eliminan cuando se elimina el contenedor, solo mediante el comando `docker volume rm <volume_name>`)
+    * Se pueden compartir entre contenedores
+
+```bash
+  docker run``` -v <volume_name>:<container_path> <image_name>
+  ```
+
+* **Bind Mount**
+    * Se montan directorios del host en el contenedor
+    * Los cambios en los archivos del host se reflejan en el contenedor y viceversa
+    * Se pueden usar para compartir archivos entre el host y el contenedor
+    * En ocasiones conviene hacerlos de **solo lectura** para el contenedor, de tal forma que no se puedan modificar los archivos del host desde el contenedor, esto se indica adicionando `:ro` al
+      final
+    * No son manejados por Docker
+
+```bash
+  docker run -v <host_path>:<container_path> <image_name>
+  # Bind mount de sólo lectura para el contenedor
+  docker run -v <host_path>:<container_path>:ro <image_name>
+  ```
 
 ### Listar volúmenes
 
@@ -420,4 +485,37 @@ Para listar las redes que tenemos en nuestro sistema, podemos usar el siguiente 
  docker network ls
 ```
 
+## Argumentos <ARG> y variables de entorno <ENV>
 
+* **Argumentos `<ARG>`**
+    * Se definen en el Dockerfile con la instrucción `ARG`
+    * Se pueden usar para pasar variables al momento de construir la imagen
+    * No están disponibles en tiempo de ejecución
+    * Se pueden usar para personalizar la construcción de la imagen
+
+```dockerfile
+  ARG <arg_name>=<default_value>
+```
+
+```bash
+    docker build --build-arg <arg_name>=<value> -t <image_name> .
+```
+
+* **Variables de entorno `<ENV>`**
+    * Se definen en el Dockerfile con la instrucción `ENV`
+    * Se pueden usar para pasar variables al contenedor en tiempo de ejecución
+    * Están disponibles en tiempo de ejecución
+    * Se pueden usar para personalizar la configuración del contenedor
+
+```dockerfile
+  # Se define la variable
+  ENV <env_name>=<value>
+  # Se hace uso de la variable
+  ${env_name}
+```
+
+```bash
+    docker run -e <env_name>=<value> <image_name>
+    # Usando un archivo de variables de entorno ejemplo .env
+    docker run --env-file <file_name> <image_name>
+```
