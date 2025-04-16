@@ -40,6 +40,8 @@
   * [Volúmenes](#volúmenes)
     * [Listar volúmenes](#listar-volúmenes)
     * [Eliminar volúmenes no utilizados](#eliminar-volúmenes-no-utilizados)
+    * [Inspeccionar un volumen](#inspeccionar-un-volumen)
+  * [Bind mounts](#bind-mounts)
   * [Redes](#redes)
     * [Listar redes](#listar-redes)
 <!-- TOC -->
@@ -124,13 +126,13 @@ Establece variables de entorno en la imagen. Estas variables estarán disponible
 
 ### VOLUME
 
-Crea un punto de montaje en el contenedor. Permite que los datos persistan incluso si el contenedor se elimina.
+Crea un punto de montaje (anónimo) en el contenedor. Permite que los datos persistan incluso si el contenedor se elimina.
 
-`VOLUME /data`
+`VOLUME ["/app/data"]`
 
 ### LABEL
 
-Agrega metadatos a la imagen. Los metadatos son pares clave-valor que pueden ser utilizados para organizar y categorizar imágenes.
+Agrega metadatos a la imagen. Los metadatos son pares de clave-valor que pueden ser utilizados para organizar y categorizar imágenes.
 
 `LABEL version="1.0" description="My Docker image"`
 
@@ -247,10 +249,17 @@ La opción `--rm` se utiliza para eliminar automáticamente el contenedor cuando
  docker run --rm <image_name>
 ```
 
-La opción `-v` se utiliza para montar un volumen en el contenedor. Esto permite compartir archivos entre el host y el contenedor.
+La opción `-v` se utiliza para montar un [volumen](#volúmenes) en el contenedor. Esto permite compartir archivos entre el host y el contenedor.
 
 ```bash
  docker run -v <host_path>:<container_path> <image_name>
+```
+
+Si en `<host_path>` se especifica un nombre, Docker montará el volumen, pero si se especifica una ruta del host, Docker montará un [bind mount](#bind-mounts).
+En el caso de no especificarse `<host_path>` y solo `<container_name>`, Docker creará un volumen anónimo.
+
+```bash
+ docker run -v <volume_name>:<container_path> <image_name>
 ```
 
 ### Listar contenedores
@@ -353,6 +362,9 @@ Para acceder a un contenedor en ejecución, podemos usar el siguiente comando:
 
 ## Volúmenes
 
+Los volúmenes son una forma de persistir datos generados y utilizados por contenedores. Los volúmenes son independientes del ciclo de vida de un contenedor y pueden ser compartidos entre varios
+contenedores. Son manejados por Docker y no sabemos en qué parte se almacenan en el sistema de archivos del host.
+
 ### Listar volúmenes
 
 Para listar los volúmenes que tenemos en nuestro sistema, podemos usar el siguiente comando:
@@ -368,6 +380,35 @@ Para eliminar los volúmenes que no están siendo utilizados por ningún contene
 ```bash
  docker volume rm $(docker volume ls -qf dangling=true)
 ```
+
+### Inspeccionar un volumen
+
+Para inspeccionar un volumen y ver su configuración, podemos usar el siguiente comando:
+
+```bash
+ docker volume inspect <volume_name>
+```
+
+## Bind mounts
+
+Los bind mounts son una forma de montar un directorio del host en un contenedor. Esto permite compartir archivos entre el host y el contenedor, los cambios en los archivos del host se reflejan en el
+contendor, lo que es útil para el desarrollo y la depuración.
+Para crear un bind mount, podemos usar el siguiente comando:
+
+```bash
+ docker run -v <host_path>:<container_path> <image_name>
+```
+
+> **Nota:** Cuidado cuando se asocie el directorio de trabajo del contenedor con un directorio del host, ya que los archivos del host pueden sobrescribir los archivos del contenedor (los copiados
+> mediante la instrucción `COPY` en el **Dockerfile** y otros comandos como `RUN npm install`) y así eliminar las dependencias instaladas.
+>
+> Para solucionar esto le indicamos a Docker que hay archivos en el contenedor que no queremos que se sobrescriban, para ello podemos usar un volumen anónimo, la instrucción `VOLUME` en el *
+*Dockerfile**, o ambos. Por ejemplo:
+>  ```bash
+>  docker run -v <host_path>:<container_path> -v <container_path> <image_name>
+> # Ejemplo con NodeJS, la carpeta node_modules estaría a salvo de ser sobreescrita
+>  docker run -v $(pwd):app -v app/node_modules <image_name>
+>  ```
 
 ## Redes
 
