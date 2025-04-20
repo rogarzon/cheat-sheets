@@ -13,8 +13,14 @@
     * [Merge and Rebase:](#merge-and-rebase)
     * [Ignoring Case Sensitivity:](#ignoring-case-sensitivity)
     * [File Permissions:](#file-permissions)
-  * [Adicionar todos los archivos](#adicionar-todos-los-archivos)
-  * [Ver estado del repositorio en la version corta](#ver-estado-del-repositorio-en-la-version-corta)
+  * [Comandos rápidos](#comandos-rápidos)
+    * [Adicionar todos los archivos](#adicionar-todos-los-archivos)
+    * [Ver estado del repositorio en la version corta](#ver-estado-del-repositorio-en-la-version-corta)
+    * [Revertir cambios](#revertir-cambios)
+      * [Cambios no confirmados (sin commit)](#cambios-no-confirmados-sin-commit)
+      * [Cambios confirmados (con commit)](#cambios-confirmados-con-commit)
+      * [Revertir un commit específico en la historia:](#revertir-un-commit-específico-en-la-historia)
+      * [Restablecer la rama a un estado específico:](#restablecer-la-rama-a-un-estado-específico)
   * [Ayuda](#ayuda)
     * [Ayuda sobre un comando ej: **commit**](#ayuda-sobre-un-comando-ej-commit)
     * [Ayuda sobre todos los comandos](#ayuda-sobre-todos-los-comandos)
@@ -114,13 +120,15 @@ environments where file permissions might change unintentionally, like Windows s
 
 * `git config core.fileMode false` disables Git from tracking file permission changes.
 
-## Adicionar todos los archivos
+## Comandos rápidos
+
+### Adicionar todos los archivos
 
 `git add --all`
 
 > Nota: Atajo para `git add --all` es `git add -A`
 
-## Ver estado del repositorio en la version corta
+### Ver estado del repositorio en la version corta
 
 `git status --short`
 
@@ -132,6 +140,38 @@ A - Files added to stage
 M - Modified files
 D - Deleted files
 ```
+
+### Revertir cambios
+
+#### Cambios no confirmados (sin commit)
+
+* Para revertir cambios en un archivo específico:
+  `git checkout -- <file>`
+* Para revertir todos los cambios en el área de trabajo:
+  `git reset -- hard`
+* Para revertir cambios en todos los archivos:
+  `git checkout -- .`
+
+#### Cambios confirmados (con commit)
+
+* Para revertir cambios en el último commit:
+  `git reset HEAD~1`
+* Para revertir cambios en el último commit y mantener los cambios en el área de preparación:
+  `git reset HEAD~1 --soft`
+* Para revertir cambios en el último commit y mantener los cambios en el área de trabajo:
+  `git reset HEAD~1 --mixed`
+* Para revertir cambios en el último commit y eliminar los cambios en el área de trabajo:
+  `git reset HEAD~1 --hard`
+
+#### Revertir un commit específico en la historia:
+
+* Para revertir un commit específico:
+  `git revert <commit-hash>`
+
+#### Restablecer la rama a un estado específico:
+
+* Para restablecer la rama a un commit específico:
+  `git reset --hard <commit-hash>`
 
 ## Ayuda
 
