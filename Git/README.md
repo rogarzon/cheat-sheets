@@ -1,14 +1,23 @@
-# Configuración de Git
+# Git
 
 <!-- TOC -->
-* [Configuración de Git](#configuración-de-git)
+* [Git](#git)
+  * [Configuración](#configuración)
+    * [Listar la configuración:](#listar-la-configuración)
+    * [Asignar nombre de usuario y correo para los mensajes de los commits:](#asignar-nombre-de-usuario-y-correo-para-los-mensajes-de-los-commits)
+    * [Core Configuration:](#core-configuration)
+    * [Aliases:](#aliases)
+    * [Colors:](#colors)
+    * [Credential Management:](#credential-management)
+    * [Push Behavior:](#push-behavior)
+    * [Merge and Rebase:](#merge-and-rebase)
+    * [Ignoring Case Sensitivity:](#ignoring-case-sensitivity)
+    * [File Permissions:](#file-permissions)
   * [Adicionar todos los archivos](#adicionar-todos-los-archivos)
   * [Ver estado del repositorio en la version corta](#ver-estado-del-repositorio-en-la-version-corta)
   * [Ayuda](#ayuda)
     * [Ayuda sobre un comando ej: **commit**](#ayuda-sobre-un-comando-ej-commit)
     * [Ayuda sobre todos los comandos](#ayuda-sobre-todos-los-comandos)
-  * [Asignar nombre de usuario y correo para los mensajes de los commits:](#asignar-nombre-de-usuario-y-correo-para-los-mensajes-de-los-commits)
-  * [Listar la configuración:](#listar-la-configuración)
 * [Ramas](#ramas)
   * [Eliminar rama](#eliminar-rama)
   * [Listar todas las ramas, locales y remotas](#listar-todas-las-ramas-locales-y-remotas)
@@ -36,6 +45,74 @@
   * [Trabajar con contraseñas de clave SSH](#trabajar-con-contraseñas-de-clave-ssh)
   * [Asociate ssh key with repository using `.ssh/config` file](#asociate-ssh-key-with-repository-using-sshconfig-file)
 <!-- TOC -->
+
+## Configuración
+
+### Listar la configuración:
+
+`git config --list`
+
+### Asignar nombre de usuario y correo para los mensajes de los commits:
+
+There are 3 levels of git config; **project**, **global** and **system**:
+
+1. `local`: Project configs are only available for the current project and stored in .git/config in the project's directory.
+2. `global`: Global configs are available for all projects for the current user and stored in ~/.gitconfig.
+3. `system`: System configs are available for all the users/projects and stored in /etc/gitconfig.
+
+```
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+```
+
+### Core Configuration:
+
+* `git config --global user.name "Your Name"` Sets your name globally for commits. Use `--local` for repository-specific settings.
+
+* `git config --global user.email "youremail@example.com"` Sets your email address globally for commits.
+
+* `git config --global core.editor "code --wait"` Sets your preferred text editor for Git operations (e.g., when writing commit messages).
+
+* `git config --global core.autocrlf [true|input|false]` Handles line endings:
+
+    * `true`: Converts CRLF to LF on commit and LF to CRLF on checkout (Windows-friendly).
+
+    * `input`: Converts CRLF to LF on commit, but leaves LF untouched on checkout (for cross-platform work).
+
+    * `false`: Does nothing.
+
+### Aliases:
+
+* `git config --global alias.st status` Creates an alias for `git status` as **git st**. You can set aliases for other commands too, like `git config --global alias.co checkout`.
+
+### Colors:
+
+* `git config --global color.ui auto` Enables colored output for Git commands.
+
+### Credential Management:
+
+* `git config --global credential.helper cache` Caches credentials for a short period. Alternatively, use `store` to save them permanently in plain text.
+
+### Push Behavior:
+
+* `git config --global push.default simple` Ensures Git only pushes the current branch to its upstream counterpart (safe for most users).
+
+### Merge and Rebase:
+
+* `git config --global pull.rebase [true|false]` Configures whether `git pull` uses rebase by default (true) or merge (false).
+
+* `git config --global merge.tool [tool-name]` Defines your preferred merge tool (e.g., **vimdiff**, **kdiff3**).
+
+### Ignoring Case Sensitivity:
+
+* `git config --global core.ignorecase true` Ensures Git is case-insensitive on case-insensitive filesystems (e.g., Windows).
+
+### File Permissions:
+
+Modifies the behavior of Git regarding file permissions. Git ignores changes in file permissions (such as executable bits) when determining if a file has been modified. This is particularly useful in
+environments where file permissions might change unintentionally, like Windows systems or shared repositories, and you don't want these changes to interfere with version control.
+
+* `git config core.fileMode false` disables Git from tracking file permission changes.
 
 ## Adicionar todos los archivos
 
@@ -66,22 +143,6 @@ D - Deleted files
 
 `git help --all`
 
-## Asignar nombre de usuario y correo para los mensajes de los commits:
-
-There are 3 levels of git config; **project**, **global** and **system**:
-1. `local`: Project configs are only available for the current project and stored in .git/config in the project's directory.
-2. `global`: Global configs are available for all projects for the current user and stored in ~/.gitconfig.
-3. `system`: System configs are available for all the users/projects and stored in /etc/gitconfig.
-
-```
-git config --global user.name "John Doe"
-git config --global user.email johndoe@example.com
-```
-
-## Listar la configuración:
-
-`git config --list`
-
 # Ramas
 
 ## Eliminar rama
@@ -92,10 +153,11 @@ git config --global user.email johndoe@example.com
 
 `git branch -a`
 
->Nota: `branch -r` solo muestra las remotas.
+> Nota: `branch -r` solo muestra las remotas.
 
 # Contribución
->Nota: De acuerdo con las convenciones de nomenclatura de Git, se recomienda nombrar su propio repositorio como `origin` y el que bifurcó para `upstream`.
+
+> Nota: De acuerdo con las convenciones de nomenclatura de Git, se recomienda nombrar su propio repositorio como `origin` y el que bifurcó para `upstream`.
 
 # [Submódulos](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
 
@@ -339,6 +401,7 @@ origin  https://github.com/OWNER/REPOSITORY.git (push)
 ```
 
 # Connect with SSH
+
 En linux hay una aplicación llamada **ssh-agent** que se encarga de gestionar las claves SSH. También se puede usar Seahorse para gestionar las claves SSH mediante una interfaz de usuario
 En Windows, puedes usar **Git Bash** para ejecutar los comandos SSH.
 
