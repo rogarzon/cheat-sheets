@@ -26,6 +26,10 @@
     * [Gestión de permisos de archivos](#gestión-de-permisos-de-archivos)
     * [Compresión y descompresión de archivos](#compresión-y-descompresión-de-archivos)
   * [Proteger el grub](#proteger-el-grub)
+  * [Unidades APFS de macOS en Linux](#unidades-apfs-de-macos-en-linux)
+    * [Uso del Controlador APFS-FUSE para Linux**](#uso-del-controlador-apfs-fuse-para-linux)
+    * [Auto-Mount Apple APFS partition on Linux after Restart](#auto-mount-apple-apfs-partition-on-linux-after-restart)
+    * [Usar APFS para Linux por el Programa Paragon](#usar-apfs-para-linux-por-el-programa-paragon)
 <!-- TOC -->
 
 # Linux
@@ -40,8 +44,8 @@ else until the file successfully copies.
 The "&" shell operator allows us to execute a command and have it run in the background (such as this file copy) allowing us to do other things!
 
 #### Ctrl + Z
-This command will suspend the process and put it in the background. This is useful if you want to stop a process but not kill it. You can then use the `fg` command to bring it back to the foreground.
 
+This command will suspend the process and put it in the background. This is useful if you want to stop a process but not kill it. You can then use the `fg` command to bring it back to the foreground.
 
 ## Init System  systemd (systemctl) or System V Init (service)
 
@@ -50,6 +54,7 @@ If you are unsure which init system your platform uses, run the following comman
 `ps --no-headers -o comm 1`
 
 ### Services (systemctl)
+
 To list all running services, use the following command:
 `systemctl list-units --type=service`
 
@@ -246,3 +251,81 @@ sudo grub-mkpasswd-pbkdf2
 # Actualizar el grub
 update-grub
 ```
+
+## [Unidades APFS de macOS en Linux](https://recoverit.wondershare.es/harddrive-tips/mount-apfs-linux.html)
+
+### Uso del Controlador APFS-FUSE para Linux**
+
+- Youtube: [Mount APFS on Linux](https://www.youtube.com/watch?v=47puTVS1Scg)
+- Git: https://github.com/sgan81/apfs-fuse
+
+**Características:**
+
+* Soporta el cifrado FileVault.
+* Soporta el montaje de instantáneas y volúmenes sellados.
+* Soporta tablas de partición.
+* Soporta el montaje de DMGs
+
+**Pros:**
+
+* Cubre múltiples opciones de montaje
+* Soporta unidades de fusión
+
+**Cons:**
+
+* Es un dispositivo de sólo lectura
+* No se admiten enlaces firmes
+* Algunos métodos de compresión aún no son compatibles
+
+```bash
+# Instalar dependencias
+sudo apt update
+sudo apt install fuse libfuse-dev libicu-dev bzip2 libbz2-dev cmake clang git libattr1-dev
+# Clonar el repositorio
+git clone https://github.com/sgan81/apfs-fuse.git
+cd apfs-fuse
+git submodule init
+git submodule update
+# Compilar el controlador
+mkdir build
+cd build
+cmake ..
+make
+# Copiar el controlador
+sudo cp apfs-fuse /usr/local/bin
+# Comprobar si se copiò correctamente
+ls /usr/local/bin/
+
+# Crear el directorio de montaje
+sudo mkdir -p /media/$USERNAME/macos
+
+# Listar los discos disponibles
+sudo fdisk -l
+
+# Montar la unidad APFS
+sudo apfs-fuse -o allow_other <device> /media/$USERNAME/macos
+
+# Desmontar la unidad APFS
+sudo fusermount -u /media/$USERNAME/macos
+```
+
+### Auto-Mount Apple APFS partition on Linux after Restart
+
+Youtube: [Auto-Mount Apple APFS partition on Linux after Restart](https://www.youtube.com/watch?v=kO1ykesGgLc)
+
+### Usar APFS para Linux por el Programa Paragon
+
+El[ programa APFS para Linux de Paragon](https://www.paragon-software.com/business/apfs-linux/) permite leer y escribir datos en el almacenamiento formateado en APFS. Este producto es un programa de
+pago, y la principal diferencia entre Paragon APFS y APFS-Fuse es que, este programa también permite escribir en la unidad.
+
+Pros:
+
+* Funcionamiento a prueba de fallos
+* Protección contra la pérdida y la corrupción de datos
+* Rendimiento equilibrado y constante
+* Uso eficiente del hardware
+
+Cons:
+
+* El tipo de acceso a los volúmenes cifrados y a las instantáneas de APFS es de sólo lectura
+* No es compatible con las unidades de fusión ni con los cifrados del chip de seguridad T2
