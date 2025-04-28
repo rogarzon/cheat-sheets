@@ -48,6 +48,10 @@
   * [Redes](#redes)
     * [Listar redes](#listar-redes)
   * [Argumentos <ARG> y variables de entorno <ENV>](#argumentos-arg-y-variables-de-entorno-env)
+  * [Redes](#redes-1)
+    * [Crear redes](#crear-redes)
+    * [Listar redes](#listar-redes-1)
+    * [Drivers](#drivers)
 <!-- TOC -->
 
 ## Introducción
@@ -519,3 +523,49 @@ Para listar las redes que tenemos en nuestro sistema, podemos usar el siguiente 
     # Usando un archivo de variables de entorno ejemplo .env
     docker run --env-file <file_name> <image_name>
 ```
+
+## Redes
+
+* Dirección interna entre Docker y la PC local: `host.docker.internal`
+* Dirección interna entre contenedores en una misma red Docker: `container_name`
+* Dirección interna entre contenedores en diferentes redes Docker: `container_name.network_name`
+
+### Crear redes
+
+Para crear una red, podemos usar el siguiente comando:
+
+```bash
+ docker network create <network_name>
+``` 
+
+### Listar redes
+
+Para listar las redes que tenemos en nuestro sistema, podemos usar el siguiente comando:
+
+```bash
+ docker network ls
+```
+
+### Drivers
+
+Docker Networks actually support different kinds of `Drivers` which influence the behavior of the Network.
+
+The default driver is the "**bridge**" driver - it provides the behavior shown in this module (i.e. Containers can find each other by name if they are in the same Network).
+
+The driver can be set when a Network is created, simply by adding the --driver option.
+
+```bash
+  docker network create --driver <driver_name> <network_name>
+ ```
+
+Docker also supports these alternative drivers - though you will use the "**bridge**" driver in most cases:
+
+* **host**: For standalone containers, isolation between container and host system is removed (i.e. they share localhost as a network)
+* **overlay**: Multiple Docker daemons (i.e. Docker running on different machines) are able to connect with each other. Only works in "Swarm" mode which is a dated / almost deprecated way of
+  connecting multiple containers
+* **macvlan**: You can set a custom MAC address to a container - this address can then be used for communication with that container
+* **none**: All networking is disabled.
+* **Third-party plugins**: You can install third-party plugins which then may add all kinds of behaviors and functionalities
+
+
+
