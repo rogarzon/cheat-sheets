@@ -39,6 +39,7 @@
     * [Ver los logs de un contendor](#ver-los-logs-de-un-contendor)
     * [Copiar archivos desde y hacia un contenedor](#copiar-archivos-desde-y-hacia-un-contenedor)
     * [Acceder a un contenedor en ejecución](#acceder-a-un-contenedor-en-ejecución)
+    * [Ejecutar un comando desde un contenedor](#ejecutar-un-comando-desde-un-contenedor)
   * [Volúmenes](#volúmenes)
     * [Tipos de volúmenes](#tipos-de-volúmenes)
     * [Listar volúmenes](#listar-volúmenes)
@@ -386,7 +387,16 @@ Para copiar archivos desde un contenedor al host, podemos usar el siguiente coma
 Para acceder a un contenedor en ejecución, podemos usar el siguiente comando:
 
 ```bash
- docker exec -it <container_id> or <container_name> /bin/bash
+ docker exec -it <container_id> or <container_name> bash
+ docker exec -it <container_id> or <container_name> /bin/sh
+```
+
+### Ejecutar un comando desde un contenedor
+
+```bash
+docker exec -it <container_id> or <container_name> <command>
+# Ejemplo instalando curl y ejecutando petición a la API
+docker exec -it goal-frontend-prod sh -c "apk add --no-cache curl && curl http://goal-backend-prod:8000/api/goals/all"
 ```
 
 ## Volúmenes
@@ -526,9 +536,15 @@ Para listar las redes que tenemos en nuestro sistema, podemos usar el siguiente 
 
 ## Redes
 
-* Dirección interna entre Docker y la PC local: `host.docker.internal`
-* Dirección interna entre contenedores en una misma red Docker: `container_name`
-* Dirección interna entre contenedores en diferentes redes Docker: `container_name.network_name`
+* Dirección interna entre Docker y la PC local: `host.docker.internal`.
+* Dirección interna entre contenedores en una misma red Docker: `container_name`.
+* Dirección interna entre contenedores en diferentes redes Docker: `container_name.network_name`.
+* Los contenedores por defecto pueden enviar peticiones a internet.
+* Las redes no se crean automáticamente, deben de ser creadas por el usuario.
+
+```bash
+ docker run -d --name <container_name> --network <network_name> -p <host_port>:<container_port> <image_name>
+```
 
 ### Crear redes
 
