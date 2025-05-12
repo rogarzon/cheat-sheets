@@ -22,9 +22,12 @@ Docker Compose es una herramienta que permite definir y ejecutar aplicaciones Do
 * Por defecto se crea una red para los servicios.
 * `docker-compose up` Inicializa el proceso de construcción y ejecución de los contenedores. Debe ejecutarse en el mismo directorio donde se encuentra el archivo `docker-compose.yml`.
     * `-d` modo "detached".
+    * `--build` Fuerza la reconstrucción de las imágenes antes de iniciar los contenedores.
 * `docker-compose down` Detiene y elimina los contenedores, redes creados por `docker-compose up`.
     * `--volumes` o `-v` Elimina los volúmenes creados por `docker-compose up`.
 * `docker-compose build` Construye o reconstruye los servicios.
+* `docker-compose run <service_name>` Ejecuta un solo servicio. (También usado en los contenedores de utilidad) 
+  * `--rm` Elimina el contenedor después de que se detiene.
 
 ## Version
 

@@ -169,12 +169,14 @@ Agrega metadatos a la imagen. Los metadatos son pares de clave-valor que pueden 
 ### CMD
 
 Especifica el comando que se ejecutará cuando se inicie un contenedor a partir de la imagen. Solo puede haber una instrucción CMD en un Dockerfile. Si hay varias, solo se ejecutará la última.
+Puede ser sobrescrito al ejecutar el contenedor si se especifica un comando al final de `docker run ...`.
 
 `CMD ["python3", "app.py"]`
 
 ### ENTRYPOINT
 
 Especifica el comando que se ejecutará cuando se inicie un contenedor a partir de la imagen. A diferencia de CMD, ENTRYPOINT no puede ser sobrescrito al ejecutar el contenedor.
+Se utiliza para definir el comando principal que se ejecutará en el contenedor. Cualquier comando especificado al final de `docker run ...` se pasará como argumento al comando definido en ENTRYPOINT.
 
 `ENTRYPOINT ["python3", "app.py"]`
 
