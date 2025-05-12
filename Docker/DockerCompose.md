@@ -23,6 +23,7 @@ Docker Compose es una herramienta que permite definir y ejecutar aplicaciones Do
 * `docker-compose up` Inicializa el proceso de construcción y ejecución de los contenedores. Debe ejecutarse en el mismo directorio donde se encuentra el archivo `docker-compose.yml`.
     * `-d` modo "detached".
     * `--build` Fuerza la reconstrucción de las imágenes antes de iniciar los contenedores.
+    * `<container_name> ...` Inicia uno varios contenedores específicados.
 * `docker-compose down` Detiene y elimina los contenedores, redes creados por `docker-compose up`.
     * `--volumes` o `-v` Elimina los volúmenes creados por `docker-compose up`.
 * `docker-compose build` Construye o reconstruye los servicios.
@@ -168,3 +169,25 @@ Sobrescribe el comando predeterminado de la imagen. Esto es útil si deseas ejec
 ```yaml
 command: ["python", "app.py"]
 ```
+
+### Entrypoint
+Sobrescribe el punto de entrada predeterminado de la imagen. Esto es útil si deseas ejecutar un script o comando específico al iniciar el contenedor.
+
+```yaml
+entrypoint: ["python", "app.py"]
+```
+
+### env_file  
+Especifica un archivo de variables de entorno que se cargará en el contenedor. Esto es útil para mantener las variables de entorno organizadas y separadas del archivo docker-compose.yml.
+
+```yaml
+env_file:
+  - ./env/.env
+```
+### working_dir
+Especifica el directorio de trabajo dentro del contenedor. Esto es útil si deseas establecer un directorio específico donde se ejecutarán los comandos.
+
+```yaml
+working_dir: /app
+```
+
