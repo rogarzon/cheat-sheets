@@ -19,3 +19,5 @@ Para desinstalarlo, ejecutar el siguiente comando:
 sudo ./UNINSTALL.sh
 ```
     
+## Instalar, ejecutar aplicaciones ARM y otras cosas
+Hay que instalar la librería `libhoudini`, para eso se usa el repositorio: ([waydroid_script](waydroid_script)) https://github.com/casualsnek/waydroid_script

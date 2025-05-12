@@ -1,3 +1,6 @@
 [submodule "Android/Waydroid/anbox-modules"]
 	path = Android/Waydroid/anbox-modules
 	url = git@github.com:choff/anbox-modules.git
+[submodule "Android/Waydroid/waydroid_script"]
+	path = Android/Waydroid/waydroid_script
+	url = git@github.com:casualsnek/waydroid_script.git
