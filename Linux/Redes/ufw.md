@@ -34,6 +34,22 @@ sudo ufw allow from 192.168.1.100
 
 # Permitir conexiones desde una IP a un puerto específico
 sudo ufw allow from 192.168.1.100 to any port 80
+
+# Permitir conexiones ssh desde una subred determinada
+sudo ufw allow from 192.168.1.0/24 to any port ssh
+
+# limitar el tráfico a una interfaz de red
+sudo ufw allow out on waydroid0 to any port 53,67,80,443
+
+# Permitir el tráfico DNS a la interfaz waydroid0
+sudo ufw allow in on waydroid0 to any port 53 proto udp
+sudo ufw allow in on waydroid0 to any port 53 proto tcp
+
+# Permitir la entrada de paquetes DHCP a la interfaz waydroid0
+sudo ufw allow in on waydroid0 to any port 67 proto udp
+
+# Permitir enrutado de la interfaz wlo1 (wi-fi) a la interfaz waydroid0 (Waydroid)
+sudo ufw route allow in on waydroid0 out on wlo1 comment "FWD from wlo1 to waydorid0"
 ```
 
 ## Denegar conexiones
