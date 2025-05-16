@@ -12,6 +12,9 @@
     * [Depends_on](#depends_on)
     * [stdin_open y tty](#stdin_open-y-tty)
     * [command](#command)
+    * [Entrypoint](#entrypoint)
+    * [env_file](#env_file-)
+    * [working_dir](#working_dir)
 <!-- TOC -->
 
 # [Docker Compose](https://docs.docker.com/reference/compose-file/)

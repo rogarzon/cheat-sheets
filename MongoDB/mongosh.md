@@ -1,6 +1,5 @@
 # [MONGOSH](https://www.mongodb.com/docs/mongodb-shell/) 
 
-```markdown
 # Comandos más usados en `mongosh`
 
 ## Conexión
@@ -18,6 +17,11 @@
   ```javascript
   use <database_name>
   ```
+- **Eliminar una base de datos:**
+  ```javascript
+  db.dropDatabase()
+  ```
+  
 - **Mostrar colecciones:**
   ```javascript
   show collections
@@ -77,5 +81,4 @@
     pwd: "password",
     roles: [{ role: "readWrite", db: "database_name" }]
   })
-  ```
 ```

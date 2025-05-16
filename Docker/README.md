@@ -1,58 +1,60 @@
 # Tutorial de Docker
 
 <!-- TOC -->
+
 * [Tutorial de Docker](#tutorial-de-docker)
-  * [Introducción](#introducción)
-  * [Instalación](#instalación)
-    * [Post instalación](#post-instalación)
-  * [Comandos básicos](#comandos-básicos)
-    * [Información](#información)
-    * [Limpieza](#limpieza)
-  * [Dockerfile](#dockerfile)
-    * [FROM](#from)
-    * [WORKDIR](#workdir)
-    * [COPY](#copy)
-    * [ADD](#add)
-    * [RUN](#run)
-    * [EXPOSE](#expose)
-    * [ENV](#env)
-    * [VOLUME](#volume)
-    * [LABEL](#label)
-    * [CMD](#cmd)
-    * [ENTRYPOINT](#entrypoint)
-  * [Imágenes](#imágenes)
-    * [Crear una imágen](#crear-una-imágen)
-    * [Ejecutar una imágen y exponer puertos](#ejecutar-una-imágen-y-exponer-puertos)
-    * [Listar imágenes](#listar-imágenes)
-    * [Listar imágenes no utilizadas](#listar-imágenes-no-utilizadas)
-    * [Listar imágenes no utilizadas (sin filtro)](#listar-imágenes-no-utilizadas-sin-filtro)
-    * [Eliminar imágenes no utilizadas](#eliminar-imágenes-no-utilizadas)
-    * [Inspeccionar una imágen](#inspeccionar-una-imágen)
-  * [Contenedores](#contenedores)
-    * [Listar contenedores](#listar-contenedores)
-    * [Eliminar contenedores detenidos](#eliminar-contenedores-detenidos)
-    * [Eliminar redes no utilizadas](#eliminar-redes-no-utilizadas)
-    * [Detener contenedor](#detener-contenedor)
-    * [Reiniciar contenedor](#reiniciar-contenedor)
-    * [Iniciar contenedor](#iniciar-contenedor)
-    * [Escuchar en consola las salidas del contenedor](#escuchar-en-consola-las-salidas-del-contenedor)
-    * [Ver los logs de un contendor](#ver-los-logs-de-un-contendor)
-    * [Copiar archivos desde y hacia un contenedor](#copiar-archivos-desde-y-hacia-un-contenedor)
-    * [Acceder a un contenedor en ejecución](#acceder-a-un-contenedor-en-ejecución)
-    * [Ejecutar un comando desde un contenedor](#ejecutar-un-comando-desde-un-contenedor)
-  * [Volúmenes](#volúmenes)
-    * [Tipos de volúmenes](#tipos-de-volúmenes)
-    * [Listar volúmenes](#listar-volúmenes)
-    * [Eliminar volúmenes no utilizados](#eliminar-volúmenes-no-utilizados)
-    * [Inspeccionar un volumen](#inspeccionar-un-volumen)
-  * [Bind mounts](#bind-mounts)
-  * [Redes](#redes)
-    * [Listar redes](#listar-redes)
-  * [Argumentos <ARG> y variables de entorno <ENV>](#argumentos-arg-y-variables-de-entorno-env)
-  * [Redes](#redes-1)
-    * [Crear redes](#crear-redes)
-    * [Listar redes](#listar-redes-1)
-    * [Drivers](#drivers)
+    * [Introducción](#introducción)
+    * [Instalación](#instalación)
+        * [Post instalación](#post-instalación)
+    * [Comandos básicos](#comandos-básicos)
+        * [Información](#información)
+        * [Limpieza](#limpieza)
+    * [Dockerfile](#dockerfile)
+        * [FROM](#from)
+        * [WORKDIR](#workdir)
+        * [COPY](#copy)
+        * [ADD](#add)
+        * [RUN](#run)
+        * [EXPOSE](#expose)
+        * [ENV](#env)
+        * [VOLUME](#volume)
+        * [LABEL](#label)
+        * [CMD](#cmd)
+        * [ENTRYPOINT](#entrypoint)
+    * [Imágenes](#imágenes)
+        * [Crear una imágen](#crear-una-imágen)
+        * [Ejecutar una imágen y exponer puertos](#ejecutar-una-imágen-y-exponer-puertos)
+        * [Listar imágenes](#listar-imágenes)
+        * [Listar imágenes no utilizadas](#listar-imágenes-no-utilizadas)
+        * [Listar imágenes no utilizadas (sin filtro)](#listar-imágenes-no-utilizadas-sin-filtro)
+        * [Eliminar imágenes no utilizadas](#eliminar-imágenes-no-utilizadas)
+        * [Inspeccionar una imágen](#inspeccionar-una-imágen)
+    * [Contenedores](#contenedores)
+        * [Listar contenedores](#listar-contenedores)
+        * [Eliminar contenedores detenidos](#eliminar-contenedores-detenidos)
+        * [Eliminar redes no utilizadas](#eliminar-redes-no-utilizadas)
+        * [Detener contenedor](#detener-contenedor)
+        * [Reiniciar contenedor](#reiniciar-contenedor)
+        * [Iniciar contenedor](#iniciar-contenedor)
+        * [Escuchar en consola las salidas del contenedor](#escuchar-en-consola-las-salidas-del-contenedor)
+        * [Ver los logs de un contendor](#ver-los-logs-de-un-contendor)
+        * [Copiar archivos desde y hacia un contenedor](#copiar-archivos-desde-y-hacia-un-contenedor)
+        * [Acceder a un contenedor en ejecución](#acceder-a-un-contenedor-en-ejecución)
+        * [Ejecutar un comando desde un contenedor](#ejecutar-un-comando-desde-un-contenedor)
+    * [Volúmenes](#volúmenes)
+        * [Tipos de volúmenes](#tipos-de-volúmenes)
+        * [Listar volúmenes](#listar-volúmenes)
+        * [Eliminar volúmenes no utilizados](#eliminar-volúmenes-no-utilizados)
+        * [Inspeccionar un volumen](#inspeccionar-un-volumen)
+    * [Bind mounts](#bind-mounts)
+    * [Redes](#redes)
+        * [Listar redes](#listar-redes)
+    * [Argumentos <ARG> y variables de entorno <ENV>](#argumentos-arg-y-variables-de-entorno-env)
+    * [Redes](#redes-1)
+        * [Crear redes](#crear-redes)
+        * [Listar redes](#listar-redes-1)
+        * [Drivers](#drivers)
+
 <!-- TOC -->
 
 ## Introducción
@@ -111,19 +113,29 @@ Estos comandos permiten personalizar y optimizar la construcción de imágenes D
 
 La instrucción FROM se utiliza para especificar la imagen base a partir de la cual se construirá la nueva imagen. La imagen base puede ser una imagen oficial de Docker Hub o una imagen personalizada.
 
-`FROM ubuntu:20.04`
+```dockerfile
+FROM ubuntu:20.04
+```
 
 ### WORKDIR
 
 Establece el directorio de trabajo para las instrucciones RUN, CMD, ENTRYPOINT, COPY y ADD que siguen en el Dockerfile. Si el directorio no existe, se creará.
 
-`WORKDIR /app`
+```dockerfile
+WORKDIR /app
+```
 
 ### COPY
 
 Copia archivos o directorios desde el host al sistema de archivos de la imagen.
 
-`COPY . /app/`
+* `--from`: Copia archivos de una etapa especificada.
+
+```dockerfile
+COPY . /app/
+ # o
+COPY --from=builder /app/dist /usr/share/nginx/html
+```
 
 > **Nota:** Se puede ignorar archivos a copiar usando un archivo `.dockerignore`, similar a `.gitignore`.
 
@@ -131,60 +143,78 @@ Copia archivos o directorios desde el host al sistema de archivos de la imagen.
 
 Copia archivos o directorios desde el host al sistema de archivos de la imagen. También puede descomprimir archivos tar.
 
-`ADD . /app/`
-`ADD https://example.com/file.tar.gz /app/`
+```dockerfile
+ADD . /app/
+
+ADD https://example.com/file.tar.gz /app/
+```
 
 ### RUN
 
 Ejecuta comandos durante la construcción de la imagen. Se ejecutarán en la carpeta de trabajo especificada por WORKDIR. Se pueden usar para instalar paquetes, copiar archivos, etc.
 
-`RUN apt-get update && apt-get install -y python3`
-`RUN pip install -r requirements.txt`
-`RUN npm install`
-
-### EXPOSE
+```dockerfile
+RUN apt-get update && apt-get install -y python3
+RUN pip install -r requirements.txt
+RUN npm install \
+```
 
 Expone un puerto específico para que los contenedores puedan comunicarse entre sí. No publica el puerto en el host.
 
-`EXPOSE 80`
+```dockerfile
+EXPOSE 80
+```
 
 ### ENV
 
 Establece variables de entorno en la imagen. Estas variables estarán disponibles para los procesos que se ejecuten en el contenedor.
 
-`ENV APP_ENV=production`
+```dockerfile
+ENV APP_ENV=production
+```
 
 ### VOLUME
 
 Crea un punto de montaje (anónimo) en el contenedor. Permite que los datos persistan incluso si el contenedor se elimina.
 
-`VOLUME ["/app/data"]`
+```dockerfile
+VOLUME ["/app/data"]
+```
 
 ### LABEL
 
 Agrega metadatos a la imagen. Los metadatos son pares de clave-valor que pueden ser utilizados para organizar y categorizar imágenes.
 
-`LABEL version="1.0" description="My Docker image"`
+```dockerfile
+LABEL version="1.0" description="My Docker image"
+```
 
 ### CMD
 
 Especifica el comando que se ejecutará cuando se inicie un contenedor a partir de la imagen. Solo puede haber una instrucción CMD en un Dockerfile. Si hay varias, solo se ejecutará la última.
 Puede ser sobrescrito al ejecutar el contenedor si se especifica un comando al final de `docker run ...`.
 
-`CMD ["python3", "app.py"]`
+```dockerfile
+CMD ["python3", "app.py"]
+```
 
 ### ENTRYPOINT
 
 Especifica el comando que se ejecutará cuando se inicie un contenedor a partir de la imagen. A diferencia de CMD, ENTRYPOINT no puede ser sobrescrito al ejecutar el contenedor.
 Se utiliza para definir el comando principal que se ejecutará en el contenedor. Cualquier comando especificado al final de `docker run ...` se pasará como argumento al comando definido en ENTRYPOINT.
 
-`ENTRYPOINT ["python3", "app.py"]`
+```dockerfile
+ENTRYPOINT ["python3", "app.py"]
+```
 
 ## Imágenes
 
 ### Crear una imágen
 
 Para crear una imagen a partir de un Dockerfile, podemos usar el siguiente comando:
+
+* `-f`: Especifica el nombre del Dockerfile a usar (si no es el predeterminado `Dockerfile`).
+* `--target`: Especifica la etapa de construcción a la que se desea llegar. Esto es útil si se está utilizando un Dockerfile multi-etapa y solo se desea construir una parte de la imagen.
 
 ```bash
  docker build -t <image_name> .
