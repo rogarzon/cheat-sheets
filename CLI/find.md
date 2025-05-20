@@ -78,7 +78,6 @@ https://www.ionos.es/digitalguide/servidores/configuracion/comando-linux-find/#:
 -delete
 ```
 
-
 ## Access time conditions
 
 ```
@@ -92,6 +91,7 @@ https://www.ionos.es/digitalguide/servidores/configuracion/comando-linux-find/#:
 ```
 
 ## File sizes
+
 ```
 c                  # Bytes
 k                  # Kilobytes
@@ -105,54 +105,63 @@ b                  # 512-byte bloques
 
 ## Examples
 
-```
-find . -name '*.jpg'
-find . -name '*.jpg' -exec rm {} \;
-find . -type f -iname “*.jpeg” -or -iname “*.jpg”
-```
-
-```
-find . -newerBt "24 hours ago"
-find . -type f -ctime +100                  # encontrar archivos creados hace más de 100 días
-find . -type f -atime +2 -and -atime -6     # archivos a los que se accedió hace entre tres y cinco días
-find . -type f -mmin -5                     # archivos cuyos cambios tienen menos de cinco minutos de antigüedad
+```bash
+  find . -name '*.jpg'
+  find . -name '*.jpg' -exec rm {} \;
+  find . -type f -iname “*.jpeg” -or -iname “*.jpg”
 ```
 
-```
-find . -type f -mtime +29 # find files modified more than 30 days ago
-find . -type f -newermt 2016-08-07 \! -newermt 2016-08-08 # find in date range
-```
-
-```
-find . -size -500M
-find . -size +400M -and -size -500M
-find . -type f -empty
-find . -type d -empty
+```bash
+  find . -newerBt "24 hours ago"
+  find . -type f -ctime +100                  # encontrar archivos creados hace más de 100 días
+  find . -type f -atime +2 -and -atime -6     # archivos a los que se accedió hace entre tres y cinco días
+  find . -type f -mmin -5                     # archivos cuyos cambios tienen menos de cinco minutos de antigüedad
 ```
 
-
-```
-find . -user $(whoami)                      #  archivos propiedad del propio usuario
-find . -group admin
-find . -perm 777                            # archivos totalmente accesibles para cualquier usuario
-find . -perm 700                            # archivos a los que solo puede acceder el propietario
+```bash
+  find . -type f -mtime +29 # find files modified more than 30 days ago
+  find . -type f -newermt 2016-08-07 \! -newermt 2016-08-08 # find in date range
 ```
 
-
-```
-find . -type f -maxdepth 2 -size +50M
-find . -type f -mindepth 3 -and -maxdepth 5 -size +50M
-```
-
-
-```
-find . -maxdepth 1 -exec chown www-data:www-data {} \;
-find . -type f -maxdepth 1 -perm 777 -exec chmod 664 {} \;
-find . -type d -maxdepth 1 -exec chmod 755 {} \;
-find . -type d -maxdepth 1 -empty -ok rmdir {} \;
-find . -type f -maxdepth 1 -empty -ok rm {} \;
+```bash
+  find . -size -500M
+  find . -size +400M -and -size -500M
+  find . -type f -empty
+  find . -type d -empty
 ```
 
-These conditions only work in MacOS and BSD-like systems (no GNU/Linux support).
+```bash
+  find . -user $(whoami)                      #  archivos propiedad del propio usuario
+  find . -group admin
+  find . -perm 777                            # archivos totalmente accesibles para cualquier usuario
+  find . -perm 700                            # archivos a los que solo puede acceder el propietario
+```
+
+```bash
+  find . -type f -maxdepth 2 -size +50M
+  find . -type f -mindepth 3 -and -maxdepth 5 -size +50M
+```
+
+```bash 
+  find . -maxdepth 1 -exec chown www-data:www-data {} \;
+  find . -type f -maxdepth 1 -perm 777 -exec chmod 664 {} \;
+  find . -type d -maxdepth 1 -exec chmod 755 {} \;
+  find . -type d -maxdepth 1 -empty -ok rmdir {} \;
+  find . -type f -maxdepth 1 -empty -ok rm {} \;
+```
+
+```bash
+  find / -type f -name *.conf -user root -size +20k -newermt 2020-03-03 -exec ls -al {} \; 2>/dev/null
+```
+
+| Option              | Description                                                                                                                                |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| -type f             | Hereby, we define the type of the searched object. In this case, 'f' stands for 'file'.                                                    |
+| -name \*.conf       | With '-name', we indicate the name of the file we are looking for. The asterisk (\*) stands for 'all' files with the '.conf' extension.    |
+| -user root          | This option filters all files whose owner is the root user.                                                                                |
+| -size +20k          | We can then filter all the located files and specify that we only want to see the files that are larger than 20 KiB.                       |
+| -newermt 2020-03-03 | With this option, we set the date. Only files newer than the specified date will be presented.                                             |
+| -exec ls -al {} \;  | This option executes the specified command, using the curly brackets as placeholders for each result. The backslash escapes the semicolon. |
+| 2>/dev/null         | This is a STDERR redirection to the 'null device'. This redirection ensures that no errors are displayed in the terminal.                  |
 
 

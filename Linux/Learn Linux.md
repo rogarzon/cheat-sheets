@@ -1,6 +1,7 @@
 # Linux
 
 ## Sources
+
 https://www.freecodecamp.org/news/learn-linux-for-beginners-book-basic-to-advanced/
 https://www.youtube.com/watch?v=tK9Oc6AEnR4&t=26s
 
@@ -26,6 +27,7 @@ https://www.youtube.com/watch?v=tK9Oc6AEnR4&t=26s
   * [Viewing text files interactively using `less` and `more`](#viewing-text-files-interactively-using-less-and-more)
   * [Displaying the last part of files using `tail`](#displaying-the-last-part-of-files-using-tail)
   * [Displaying the beginning of files using `head`](#displaying-the-beginning-of-files-using-head)
+  * [Sort](#sort)
   * [Counting words, lines, and characters using `wc`](#counting-words-lines-and-characters-using-wc)
   * [Comparing files line by line using `diff`](#comparing-files-line-by-line-using-diff)
     * [Check whether the files are the same or not](#check-whether-the-files-are-the-same-or-not)
@@ -46,10 +48,6 @@ https://www.youtube.com/watch?v=tK9Oc6AEnR4&t=26s
   * [Managing Software Packages in Linux](#managing-software-packages-in-linux)
     * [Installing downloaded packages from a website](#installing-downloaded-packages-from-a-website)
   * [User Management](#user-management)
-    * [Access control: finding and understanding file permission](#access-control-finding-and-understanding-file-permission)
-    * [How to Read Symbolic Permissions or the `rwx` permissions](#how-to-read-symbolic-permissions-or-the-rwx-permissions)
-    * [How to Change File Permissions and Ownership in Linux using `chmod` and `chown`](#how-to-change-file-permissions-and-ownership-in-linux-using-chmod-and-chown)
-    * [How to Change Ownership using the `chown` Command](#how-to-change-ownership-using-the-chown-command)
   * [Managing local user accounts](#managing-local-user-accounts)
     * [Creating users from the command line](#creating-users-from-the-command-line)
     * [Modifying existing users](#modifying-existing-users)
@@ -61,12 +59,8 @@ https://www.youtube.com/watch?v=tK9Oc6AEnR4&t=26s
     * [Text extraction using `sed`](#text-extraction-using-sed)
     * [Text parsing with `awk`](#text-parsing-with-awk)
     * [Parsing log files with `cut`](#parsing-log-files-with-cut)
-  * [Automation in Linux – Automate Tasks with Cron Jobs](#automation-in-linux--automate-tasks-with-cron-jobs)
-    * [How to add cron jobs in Linux](#how-to-add-cron-jobs-in-linux)
-    * [Cron job syntax](#cron-job-syntax)
-    * [Cron job examples](#cron-job-examples)
-    * [How to set up a cron job](#how-to-set-up-a-cron-job)
-    * [How to troubleshoot crons](#how-to-troubleshoot-crons)
+    * [`Tr` replace certain characters](#tr-replace-certain-characters)
+    * [`Column`](#column)
   * [Linux Networking Basics](#linux-networking-basics)
     * [View network interfaces with `ifconfig`](#view-network-interfaces-with-ifconfig)
     * [View network activity with `netstat`](#view-network-activity-with-netstat)
@@ -322,6 +316,28 @@ For example, `head file.txt` will display the **first 10 lines of the file file.
 To change the number of lines displayed, you can use the `-n` option followed by the number of lines you want to
 display.
 
+## Sort
+
+Depending on which results and files are dealt with, they are rarely sorted. Often it is necessary to sort the desired results alphabetically or numerically to get a better overview. For this, we can
+use a tool called `sort`.
+
+* `-u` removes duplicates
+* `-r` reverses the order
+* `-n` sorts numerically
+* `-k` specifies the key to sort by
+
+```bash
+
+cat /etc/passwd | sort
+
+#_apt:x:104:65534::/nonexistent:/usr/sbin/nologin
+#backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+#bin:x:2:2:bin:/bin:/usr/sbin/nologin
+#cry0l1t3:x:1001:1001::/home/cry0l1t3:/bin/bash
+```
+
+As we can see now, the output no longer starts with root but is now sorted alphabetically.
+
 ## Counting words, lines, and characters using `wc`
 
 You can count words, lines and characters in a file using the wc command.
@@ -414,7 +430,7 @@ You can find your bash shell path (which may vary from the above) using the comm
 
 ### Creating your first bash script
 
-```
+```bash
 #!/bin/bash
 echo "Today is " `date`
 
@@ -472,7 +488,7 @@ Assign the value based on the output obtained from a program or command, using c
 
 Syntax:
 
-```
+```bash
 if [[ condition ]];
 then
     statement
@@ -496,7 +512,7 @@ We can use logical operators such as **AND** `-a` and **OR** `-o` to make compar
 In the example below, `(( i += 1 ))` is the counter statement that increments the value of `i`. The loop will run
 exactly 10 times.
 
-```
+```bash
 #!/bin/bash
 i=1
 while [[ $i -le 10 ]] ; do
@@ -507,7 +523,7 @@ done
 
 ### For loop
 
-```
+```bash
 #!/bin/bash
 for i in {1..5}
 do
@@ -517,7 +533,7 @@ done
 
 ### Case statements
 
-```
+```bash
 case expression in
     pattern1)
         # code to execute if expression matches pattern1
@@ -539,7 +555,7 @@ default case, which executes if none of the specified patterns match the express
 
 ### Functions
 
-```
+```bash
 #!/bin/bash
 up="before"
 since="function"
@@ -562,7 +578,7 @@ echo $up
 echo $sice
 ```
 
-```
+```bash
 #!/bin/bash
 
 showname() {
@@ -599,99 +615,6 @@ There are three main types of user accounts:
 
 The id command displays the user ID and group ID of the current user.
 `id username`
-
-### Access control: finding and understanding file permission
-
-File ownership can be viewed using the `ls -l` command.
-
-![Shows ls -l commands prints parts](./assets/ls_command.png "ls -l command")
-
-Let's have a closer look into the `mode` column:
-![](./assets/ls_mode_column.png)
-
-Mode defines two things:
-
-* **File type:** File type defines the type of the file. For regular files that contain simple data it is blank -. For other special file types the
-  symbol is different. For a directory which is a special file, it is d. Special files are treated differently by the OS.
-* **Permission classes:** The next set of characters define the permissions for user, group, and others respectively.
-    1. – **User**: This is the owner of a file and owner of the file belongs to this class.
-    2. – **Group**: The members of the file’s group belong to this class
-    3. – **Other**: Any users that are not part of the user or group classes belong to this class.
-
-> 💡Tip: Directory ownership can be viewed using the `ls -ld` command.
-
-### How to Read Symbolic Permissions or the `rwx` permissions
-
-The `rwx` representation is known as the Symbolic representation of permissions. In the set of permissions,
-
-* `r` stands for read. It is indicated in the first character of the triad.
-* `w` stands for write. It is indicated in the second character of the triad.
-* `x` stands for execution. It is indicated in the third character of the triad.
-
-### How to Change File Permissions and Ownership in Linux using `chmod` and `chown`
-
-Syntax of chmod:
-
-`chmod permissions filename`
-
-Where,
-
-* `permissions` can be **read**, **write**, **execute** or a combination of them.
-* `filename` is the name of the file for which the permissions need to change. This parameter can also be a list if files to change permissions in
-  bulk.
-
-We can change permissions using two modes:
-
-1. Symbolic mode: this method uses symbols like `u`, `g`, `o` to represent **users**, **groups**, and **others**. Permissions are represented as
-   `r`, `w`, `x` for **read**, **write**, and **execute**, respectively. You can modify permissions using `+`, `-` and `=`.
-2. Absolute mode: this method represents permissions as 3-digit octal numbers ranging from 0-7.
-
-| OPERATOR | DESCRIPTION                                                                               |
-|----------|-------------------------------------------------------------------------------------------|
-| +        | Adds a permission to a file or directory                                                  |
-| –        | Removes the permission                                                                    |
-| \=       | Sets the permission if not present before. Also overrides the permissions if set earlier. |
-
-**Example:**
-
-To add execution rights **(x)** to owner **(u)** using symbolic mode, we can use the command below:
-`chmod u+x mymotd.sh`
-
-**Additional examples for changing permissions via symbolic method:**
-
-* Removing `read` and `write` permission for `group` and `others`: `chmod go-rw`.
-* Removing `read` permissions for `others`: `chmod o-r`.
-* Assigning `write` permission to `group` and **overriding existing permission**: `chmod g=w`.
-
-### How to Change Ownership using the `chown` Command
-
-You can change the ownership of a file or folder using the `chown` command
-
-Syntax of chown:
-
-`chown user filename`
-
-**How to change user ownership with chown**
-
-Let's transfer the ownership from user zaira to user news.
-
-`chown news mymotd.sh`
-
-**How to change user and group ownership simultaneously**
-
-`chown user:group filename`
-
-**How to change directory ownership**
-
-You can change ownership recursively for contents in a directory
-
-`chown -R admin /opt/script`
-
-**How to change group ownership**
-
-In case we only need to change the group owner, we can use `chown` by preceding the group name by a colon `:`
-
-`chown :admins /opt/script`
 
 ## Managing local user accounts
 
@@ -891,7 +814,7 @@ In the coming examples, you'll use this log file as an example:
 
 * **Accessing columns using `awk`**
 
-  The fields in `awk` (separated by spaces by default) can be accessed using `$1`, `$2`, `$3`, and so on.
+  The fields in `awk` (separated by spaces by default) can be accessed using `$1`, `$2`, `$3`, and so on. The last field can be accessed using `$NF`.
 
   `awk '{ print $1 }' sample.log`
 
@@ -1026,115 +949,35 @@ Assume you have a log file structured as follows, where fields are space-separat
 
   The above command extracts the first three fields from each log entry that are date, time, and log level.
 
-## Automation in Linux – Automate Tasks with Cron Jobs
+### `Tr` replace certain characters
+The `tr` command is a simple yet powerful command used to **translate** or delete characters from the input. It is often used in conjunction with other commands to manipulate text data.
 
-How to control access to crons
+As the first option, we define which character we want to replace, and as a second option, we define the character we want to replace it with.
 
-In order to use cron jobs, an admin needs to allow cron jobs to be added for users in the `/etc/cron.allow` file
+```bash
 
-If you get a prompt like this, it means you don't have permission to use cron.
+cat /etc/passwd | grep -v "false\|nologin" | tr ":" " "
 
-`$ crontab -e`
+#root x 0 0 root /root /bin/bash
+#sync x 4 65534 sync /bin /bin/sync
+#postgres x 111 117 PostgreSQL administrator,,, /var/lib/postgresql /bin/bash
+```
 
-#You (john) are not allowed to use this program (crontab)
+### `Column`
 
-To allow John to use crons, include his name in `/etc/cron.allow`. Create the file if it doesn't exist.
+Since search results can often have an unclear representation, the tool `column` is well suited to display such results in tabular form using the "`-t.`"
 
-`sudo cat cron.allow john`
+```bash
 
-Users can also be denied access to cron job access by entering their usernames in the file `/etc/cron.d/cron.deny`.
+cat /etc/passwd | grep -v "false\|nologin" | tr ":" " " | column -t
 
-### How to add cron jobs in Linux
+#root         x  0     0      root               /root        		 /bin/bash
+#sync         x  4     65534  sync               /bin         		 /bin/sync
+#postgres     x  111   117    PostgreSQL         administrator,,,    /var/lib/postgresql		/bin/bash
+#mrb3n        x  1000  1000   mrb3n              /home/mrb3n  	     /bin/bash
 
-First, to use cron jobs, you'll need to check the status of the cron service. If cron is not installed
+```
 
-#Check cron service on Linux system
-
-`sudo systemctl status cron.service`
-
-### Cron job syntax
-
-* `crontab -e`: edits crontab entries to add, delete, or edit cron jobs.
-* `crontab -l`: list all the cron jobs for the current user.
-* `crontab -u username -l`: list another user's crons.
-* `crontab -u username -e`: edit another user's crons.
-
-When you list crons and they exist, you'll see something like this:
-
-#Cron job example\
-`* * * * * sh /path/to/script.sh`
-
-In the above example,
-
-* represents **minute(s)** **hour(s)** **day(s)** **month(s)** **weekday(s)**, respectively. See details of these values below:
-
-|          | VALUE | DESCRIPTION                                                  |
-|----------|-------|--------------------------------------------------------------|
-| Minutes  | 0-59  | Command will be executed at the specific minute.             |
-| Hours    | 0-23  | Command will be executed at the specific hour.               |
-| Days     | 1-31  | Commands will be executed in these days of the months.       |
-| Months   | 1-12  | The month in which tasks need to be executed.                |
-| Weekdays | 0-6   | Days of the week where commands will run. Here, 0 is Sunday. |
-
-* `sh` represents that the script is a bash script and should be run from /bin/bash.
-* `/path/to/script.sh` specifies the path to the script.
-
-### Cron job examples
-
-Below are some examples of scheduling cron jobs.
-
-| SCHEDULE     | SCHEDULED VALUE                                           |
-|--------------|-----------------------------------------------------------|
-| 5 0 * 8 *    | At 00:05 in August.                                       |
-| 5 4 * * 6    | At 04:05 on Saturday.                                     |
-| 0 22 * * 1-5 | At 22:00 on every day-of-week from Monday through Friday. |
-
-You can practice and generate cron schedules with the [crontab guru](https://crontab.guru/) website.
-
-### How to set up a cron job
-
-1. Create a script called **date-script.sh** which prints the system date and time and appends it to a file. The script is shown below:
-
-   #!/bin/bash
-
-   ``echo `date` >> date-out.txt``
-2. Make the script executable by giving it execution rights.
-
-   `chmod 775 date-script.sh`
-
-3. Add the script in the crontab using `crontab -e`.
-
-   `*/1 * * * * /bin/sh /root/date-script.sh`
-
-4. Check the output of the file **date-out.txt**. According to the script, the system date should be printed to this file every minute.
-
-   `cat date-out.txt`
-
-   #output\
-   Wed 26 Jun 16:59:33 PKT 2024\
-   Wed 26 Jun 17:00:01 PKT 2024\
-   .............................
-
-### How to troubleshoot crons
-
-1. Check the schedule.
-
-   First, you can try verifying the schedule that's set for the cron. You can do that with the syntax you saw in the above sections.
-
-2. Check cron logs.
-
-   First, you need to check if the cron has run at the intended time or not. In Ubuntu, you can verify this from the cron logs located at
-   `/var/log/syslog`.
-
-   1 Jun 26 17:02:01 zaira-ThinkPad CRON[27834]: (zaira) CMD (/bin/sh /home/zaira/date-script.sh)\
-   2 Jun 26 17:02:02 zaira-ThinkPad systemd[2094]: Started Tracker metadata extractor.\
-   3 Jun 26 17:03:01 zaira-ThinkPad CRON[28255]: (zaira) CMD (/bin/sh /home/zaira/date-script.sh)\
-
-3. Redirect cron output to a file.
-
-   #Redirect cron output to a file
-
-   `* * * * * sh /path/to/script.sh &> log_file.log`
 
 ## Linux Networking Basics
 
@@ -1186,12 +1029,12 @@ To extract IPv4 and IPv6 addresses, you can use `ip -4 addr` and `ip -6 addr`, r
 
     `netstat -e`
 
-
 ## How to Debug and Troubleshoot Bash Scripts
 
 ### Set the `set -x` option
 
-One of the most useful techniques for debugging Bash scripts is to set the `set -x` option at the beginning of the script. This option enables debugging mode, which causes Bash to print each command that it executes to the terminal, preceded by a `+` sign.
+One of the most useful techniques for debugging Bash scripts is to set the `set -x` option at the beginning of the script. This option enables debugging mode, which causes Bash to print each command
+that it executes to the terminal, preceded by a `+` sign.
 
 ```
 #!/bin/bash
@@ -1202,9 +1045,11 @@ set -x
 ```
 
 ### Check the exit code
-When Bash encounters an error, it sets an exit code that indicates the nature of the error. You can check the exit code of the most recent command using the `$?` variable. A value of `0` indicates success, while any other value indicates an error.
 
-```
+When Bash encounters an error, it sets an exit code that indicates the nature of the error. You can check the exit code of the most recent command using the `$?` variable. A value of `0` indicates
+success, while any other value indicates an error.
+
+```bash
 #!/bin/bash
 
 # Your script code goes here
@@ -1219,7 +1064,7 @@ fi
 
 Another useful technique for debugging Bash scripts is to insert echo statements throughout your code.
 
-```
+```bash
 #!/bin/bash
 
 #Your script code goes here
@@ -1232,9 +1077,10 @@ echo "Value of variable x is: $x"
 
 ### Use the `set -e` option
 
-If you want your script to exit immediately when any command in the script fails, you can use the set -e option. This option will cause Bash to exit with an error if any command in the script fails, making it easier to identify and fix errors in your script.
+If you want your script to exit immediately when any command in the script fails, you can use the set -e option. This option will cause Bash to exit with an error if any command in the script fails,
+making it easier to identify and fix errors in your script.
 
-```
+```bash
 #!/bin/bash
 
 set -e

@@ -9,7 +9,7 @@
     * [If your SSH service is inactive, you can start it by executing the following commands:](#if-your-ssh-service-is-inactive-you-can-start-it-by-executing-the-following-commands)
     * [Check SSH Server Listening Port](#check-ssh-server-listening-port)
   * [Allow SSH in Firewall](#allow-ssh-in-firewall)
-* [Autenticarse usando el part de llaves privada/pública](#autenticarse-usando-el-part-de-llaves-privadapública)
+* [Autenticarse usando el par de llaves privada/pública (NO MÁS CONTRASEÑAS)](#autenticarse-usando-el-par-de-llaves-privadapública-no-más-contraseñas)
   * [Generar la llave pública/privada](#generar-la-llave-públicaprivada)
   * [Copiar la llave pública al servidor remoto](#copiar-la-llave-pública-al-servidor-remoto)
   * [Conectarse al servidor remoto](#conectarse-al-servidor-remoto)
@@ -20,31 +20,27 @@
 ### Verify OpenSSH Installation on Your Linux System
 
 ```bash 
-
-sudo apt list --installed | grep openssh-server
+    sudo apt list --installed | grep openssh-server
 ```
 
 ### In case OpenSSH is not installed, we will install it by executing the following command:
 
 ```bash 
-
-sudo apt install openssh-server
+    sudo apt install openssh-server
 ```
 
 ### Check SSH Service
 
 ```bash 
-
-sudo service ssh status
+    sudo service ssh status
 ```
 
 ### If your SSH service is inactive, you can start it by executing the following commands:
 
 ```bash 
-
-sudo service ssh start
-# ó
-sudo service ssh restart
+    sudo service ssh start
+    # ó
+    sudo service ssh restart
 ```
 
 ### Check SSH Server Listening Port
@@ -56,44 +52,39 @@ Before trying to connect, first, verify which port is being used by the SSH serv
 server is listening on default port 22, then you can use the following command syntax to make a connection:
 
 ```bash 
-
-ssh [username]@[remoteserver IP or hostname]
+    ssh [username]@[remoteserver IP or hostname]
 ```
 
 Issue the following command to check on which port the OpenSSH server is listening:
 
 ```bash 
-
-sudo netstat -ltnp | grep sshd
+    sudo netstat -ltnp | grep sshd
 ```
 
 In case, some other port is being used in place of 22, you will issue the command like this:
 
 ```bash 
-
-ssh -p [Port] [username]@[ip_address]
+    ssh -p [Port] [username]@[ip_address]
 ```
 
 ## Allow SSH in Firewall
 
 A connection refused message could also be because the firewall on your system is blocking the SSH port. To allow the port through firewall, execute this command:
 
-```bash 
-
-sudo ufw allow ssh
-# ó
-sudo ufw allow port 22/tcp
-
-# una regla más específica
-sudo ufw allow from 192.168.1.0/24 to any port 22 proto tcp
+```bash  
+    sudo ufw allow ssh
+    # ó
+    sudo ufw allow port 22/tcp
+    
+    # una regla más específica
+    sudo ufw allow from 192.168.1.0/24 to any port 22 proto tcp
 ```
 
 Reload the firewall with this command to update the rules:
 
-```bash 
-
-sudo ufw reload
-sudo ufw status
+```bash    
+    sudo ufw reload
+    sudo ufw status
 ```
 
 # Autenticarse usando el par de llaves privada/pública (NO MÁS CONTRASEÑAS)
@@ -101,22 +92,19 @@ sudo ufw status
 ## Generar la llave pública/privada
 
 ```bash
-
-ssh-keygen -t rsa -b 4096
+    ssh-keygen -t rsa -b 4096
 ```
 
 ## Copiar la llave pública al servidor remoto
 
 ```bash
-
-ssh-copy-id user@remote_host
-# o
-ssh-copy-id -i ~/.ssh/id_rsa.pub user@remote_host
+    ssh-copy-id user@remote_host
+    # o
+    ssh-copy-id -i ~/.ssh/id_rsa.pub user@remote_host
 ```
 
 ## Conectarse al servidor remoto
 
 ```bash
-
-ssh user@remote_host
+    ssh user@remote_host
 ```
