@@ -330,7 +330,7 @@ Una wildcard mask es una máscara que se utiliza en ACLs para especificar qué b
 - La wildcard mask es una inversión de la máscara de subred. Por ejemplo, si la máscara de subred es `255.255.255.0`, la wildcard mask sería `0.0.0.255`. Ej:
 
   | Máscara de Subred     | Wildcard Mask     |
-              |-----------------------|-------------------|
+                  |-----------------------|-------------------|
   | 255.0.0.0             | 0.255.255.255     |
   | 255.255.0.0           | 0.0.255.255       |
   | 255.255.255.252       | 0.0.0.3           |
@@ -444,4 +444,46 @@ Para configurar OSPF en un router Cisco, se siguen los siguientes pasos:
    Router# show ip ospf neighbors
    Router# show ip ospf database
    Router# show ip protocols
+   ```
+
+# Port Security
+
+## ¿Qué es Port Security?
+
+Port Security es una característica de los switches Cisco que permite controlar el acceso a las interfaces del switch, limitando el número de direcciones MAC permitidas en un puerto específico. Esto
+ayuda a prevenir ataques como el **MAC flooding** y mejora la seguridad de la red.
+
+## Configuración de Port Security
+
+Para configurar Port Security en un switch Cisco, se siguen los siguientes pasos:
+
+1. **Habilitar Port Security en la interfaz**:
+   ```plaintext
+   Switch(config)# interface <interface-id>
+   Switch(config-if)# switchport port-security
+   ```
+2. **Configurar el número máximo de direcciones MAC permitidas**:
+   ```plaintext
+    Switch(config-if)# switchport port-security maximum <number>
+    ```
+3. **Configurar la acción a tomar cuando se detecta una violación**:
+   ```plaintext
+    Switch(config-if)# switchport port-security violation <protect/restrict/shutdown>
+    ```
+    - `protect`: Permite el tráfico de direcciones MAC conocidas y descarta el tráfico de direcciones desconocidas.
+    - `restrict`: Permite el tráfico de direcciones MAC conocidas, descarta el tráfico de direcciones desconocidas y envía una notificación SNMP.
+    - `shutdown`: Desactiva el puerto si se detecta una violación de seguridad.
+
+4. **Configurar las direcciones MAC**:
+   ```plaintext
+    Switch(config-if)# switchport port-security mac-address <mac-address/sticky>
+    ```
+    - `sticky`: Permite que el switch aprenda dinámicamente las direcciones MAC y las almacene en la configuración del puerto.
+    - `<mac-address>`: Especifica una dirección MAC específica que se permite en el puerto.
+
+5. **Verificar la configuración de Port Security**:
+   ```plaintext
+   Switch# show port-security interface <interface-id>
+   Switch# show port-security address
+   Switch# show port-security
    ```
