@@ -21,3 +21,14 @@ sudo ./UNINSTALL.sh
     
 ## Instalar, ejecutar aplicaciones ARM y otras cosas
 Hay que instalar la librería `libhoudini`, para eso se usa el repositorio: ([waydroid_script](waydroid_script)) https://github.com/casualsnek/waydroid_script
+
+## Setting up a shared folder
+Setting up a shared folder will allow the user to copy/paste files from the host and they appear inside waydroid/android
+
+```bash
+  sudo mount --bind ~/Documents ~/.local/share/waydroid/data/media/0/Documents 
+  sudo mount --bind ~/Downloads ~/.local/share/waydroid/data/media/0/Download 
+  sudo mount --bind ~/Music ~/.local/share/waydroid/data/media/0/Music 
+  sudo mount --bind ~/Pictures ~/.local/share/waydroid/data/media/0/Pictures 
+  sudo mount --bind ~/Videos ~/.local/share/waydroid/data/media/0/Movies
+```
