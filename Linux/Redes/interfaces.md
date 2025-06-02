@@ -6,6 +6,7 @@
     # También se puede usar
     ifconfig -a  # ifconfig -a pertenece al paquete net-tools
 ```
+> Nota: ifconfig -a pertenece al paquete net-tools
 
 # Identificar qué programas están utilizando una interfaz de red
 
