@@ -108,3 +108,19 @@ Reload the firewall with this command to update the rules:
 ```bash
     ssh user@remote_host
 ```
+
+# Reforzar la seguridad de SSH
+
+```bash
+    sudo nano /etc/ssh/sshd_config
+    # Editar las siguientes líneas:
+    PermitRootLogin no # No permitir el acceso directo al usuario root
+    PasswordAuthentication no # Deshabilitar la autenticación por contraseña
+    PermitEmptyPasswords no # No permitir contraseñas vacías
+    PubkeyAuthentication yes # Habilitar la autenticación por clave pública
+    AllowUsers user1 user2 # Especificar usuarios permitidos
+    AddressFamily inet # Forzar IPv4
+    Port <port> # Opcionalmente cambiar el puerto por defecto (22)
+    # Guardar y salir del editor
+    
+```
