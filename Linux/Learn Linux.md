@@ -759,9 +759,22 @@ Basic syntax of sed:
 Here, command is used to perform operations like **substitution**, **deletion**, **insertion**, and so on, on the text data. The filename is the name
 of the file you want to process.
 
+- `-i`: Edit files in place, modifying the original file.
+- `-e`: Allows you to specify multiple commands to be executed in sequence.
+- `-n`: Suppresses automatic printing of pattern space, allowing you to control what gets printed.
+- `-f`: Allows you to read commands from a file instead of specifying them directly in the command line.
+- `-r`: Enables extended regular expressions, allowing for more complex pattern matching.
+- `-g`: Global replacement, used to replace all occurrences of a pattern in a line.
+- `-i`: In-place editing, modifies the original file directly without creating a backup.
+- `-c`: Count occurrences of a pattern in the input.
+- `-n`: Suppresses automatic printing of pattern space, allowing you to control what gets printed.
+- `-d`: Deletes lines that match a specific pattern.
+- `-s`: Substitute command, used to replace text in the input stream.
+- `-p`: Print command, used to print the pattern space.
+
 1. **Substitution:**
 
-   The s flag is used to replace text. The **old-text** is replaced with **new-text**:\
+   The `s` flag is used to replace text. The **old-text** is replaced with **new-text**:\
    `sed 's/old-text/new-text/' filename`
 
    For example, to change all instances of "**error**" to "**warning**" in the log file system.log:\
