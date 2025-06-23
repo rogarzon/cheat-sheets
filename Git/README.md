@@ -229,7 +229,9 @@ There is another way to do this which is a little simpler, however. If you pass 
 automatically initialize and update each submodule in the repository, including nested submodules if any of the submodules in the repository have
 submodules themselves.
 
-> git clone --recurse-submodules https://github.com/chaconinc/MainProject
+> git clone --recurse-submodules https://github.com/chaconinc/MainProject 
+
+> Note: `git pull --recurse-submodules` is the equivalent command to update submodules after the initial clone.
 
 If you already cloned the project and forgot **--recurse-submodules**, you can combine the **`git submodule init`** and **`git submodule update`**
 steps by running **`git submodule update --init`**. To also initialize, fetch and checkout any nested submodules, you can use the foolproof
