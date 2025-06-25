@@ -481,7 +481,12 @@ Para configurar Port Security en un switch Cisco, se siguen los siguientes pasos
     - `sticky`: Permite que el switch aprenda dinámicamente las direcciones MAC y las almacene en la configuración del puerto.
     - `<mac-address>`: Especifica una dirección MAC específica que se permite en el puerto.
 
-5. **Verificar la configuración de Port Security**:
+5. **Configurar una interfaz como puerto protegido**:**:
+   ```plaintext
+   Switch(config-if)# switchport protected
+   ```
+
+6. **Verificar la configuración de Port Security**:
    ```plaintext
    Switch# show port-security interface <interface-id>
    Switch# show port-security address
