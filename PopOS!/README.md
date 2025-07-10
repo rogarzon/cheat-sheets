@@ -32,7 +32,9 @@
    4. Copiar el contenido de la línea `PS1` y pegarlo en el sitio web.
    5. Modificar los colores y copiar el resultado.
    6. Pegarlo en el archivo `~/.bashrc` en la línea `PS1=`.
-      * `PS1='\[\e[38;5;136;1;3m\]${debian_chroot:+($debian_chroot)}\[\e[23;38;5;51m\]\u\[\e[38;5;202m\]@\[\e[38;5;41m\]\h\[\e[38;5;202m\]:\[\e[93m\][\[\e[38;5;63m\]\w\[\e[93m\]]\[\e[38;5;202m\]\$\[\e[0m\]'`
+      * `PS1='\[\e[38;5;39m\]┌──\[\e[38;5;208;1;3m\]${debian_chroot:+($debian_chroot)}\[\e[23;38;5;51m\]\u\[\e[38;5;202m\]@\[\e[38;5;41m\]\h\[\e[38;5;202m\]:\[\e[93m\][\[\e[38;5;39m\]\w\[\e[93m\]]\n\[\e[38;5;39m\]└─\[\e[38;5;51m\]\$\[\e[0m\] '`
+      * Configuración normal:
+      * `PS1='┌──${debian_chroot:+($debian_chroot)}\u@\h:\w\n└─\$ '`
    7. Descomentar la línea `force_color_prompt=yes` si está comentada. _Paso necesario si el usuario es el **root**._
    8. Guardar el archivo.
    9. Ejecutar el comando `source ~/.bashrc` para aplicar los cambios.
