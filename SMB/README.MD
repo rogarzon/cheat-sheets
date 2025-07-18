@@ -2,15 +2,18 @@
 
 <!-- TOC -->
 * [SMB (Server Message Block) Protocol](#smb-server-message-block-protocol)
+  * [Características](#características)
   * [Opciones](#opciones)
   * [Commandos](#commandos)
   * [Acceso a recursos compartidos](#acceso-a-recursos-compartidos)
 <!-- TOC -->
 
+## Características
 - Sirve para transferir archivos, impresoras y otros recursos en una red local.
 - Usa el puerto **TCP 445**.
 - Funciona en la capa de aplicación y presentación del modelo OSI.
 - Habilita un almacenamiento compartido y acceso a recursos en red llamado share.
+- Permite conexiones anónimas o autenticadas.
 
 ## Opciones
 
