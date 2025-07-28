@@ -766,8 +766,6 @@ of the file you want to process.
 - `-r`: Enables extended regular expressions, allowing for more complex pattern matching.
 - `-g`: Global replacement, used to replace all occurrences of a pattern in a line.
 - `-i`: In-place editing, modifies the original file directly without creating a backup.
-- `-c`: Count occurrences of a pattern in the input.
-- `-n`: Suppresses automatic printing of pattern space, allowing you to control what gets printed.
 - `-d`: Deletes lines that match a specific pattern.
 - `-s`: Substitute command, used to replace text in the input stream.
 - `-p`: Print command, used to print the pattern space.
