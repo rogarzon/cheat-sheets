@@ -62,10 +62,11 @@ grep '^[0-9]\{3\}-[0-9]\{2\
 **Example:**
 
 ```bash
-  grep 'foo\?bar' file.txt
-  grep 'foo\+bar' file.txt
-  grep 'foo\{2\}bar' file.txt
-  grep 'foo\|bar' file.txt
+  grep 'foo\?bar' file.txt # matches "bar" or "foobar"
+  grep 'foo\+bar' file.txt # matches "foobar" but not "bar"
+  grep 'foo\{2\}bar' file.txt # matches "foofoobar" but not "bar" or "foobar"
+  grep 'foo\|bar' file.txt # matches "foo" or "bar"
+  grep 'foo\(bar\|baz\)' file.txt # matches "foobar" or foobaz
 ```
 
 _Extended Regular Expressions (ERE)_
@@ -88,9 +89,11 @@ _Extended Regular Expressions (ERE)_
 **Example:**
 
 ```bash
-grep -E '^foo.*bar$' file.txt
-grep -E '^[a-zA-Z0-9_]*$' file.txt
-grep -E '^[0-9]{3}-[0-9]{2}'
+grep -E '^foo.*bar$' file.txt # matches lines starting with "foo" and ending with "bar"
+grep -E '^[a-zA-Z0-9_]*$' file.txt # matches lines containing only alphanumeric characters and underscores
+grep -E '^[0-9]{3}-[0-9]{2}' # file.txt # matches lines starting with a three-digit number followed by a hyphen and a two-digit number
+grep -E 'foo|bar' file.txt # matches lines containing either "foo" or "bar"
+grep -E 'foo(bar|baz)' file.txt # matches lines containing "foobar
 ```
 
 _Perl Compatible Regular Expressions (PCRE)_
