@@ -1,4 +1,5 @@
 # GNU grep
+
 https://devhints.io/grep
 
 ## Usage
@@ -24,16 +25,48 @@ https://devhints.io/grep
 -E, --extended-regexp # extended regular expression
 -P, --perl-regexp     # perl compatible regular expression
 ```
+
 ## Expressions
+
 _Basic Regular Expressions (BRE)_
 
 **In BRE, these characters have a special meaning unless they are escaped with a backslash:**
 
 `^ $ . * [ ] \`
 
+- `^` matches the start of a line
+- `$` matches the end of a line
+- `.` matches any single character except a newline
+- `*` matches zero or more occurrences of the preceding character
+- `[ ]` defines a character class, matching any single character within the brackets
+- `\` is used to escape special characters
+
+**Example:**
+
+```bash
+grep '^foo.*bar$' file.txt
+grep '^[a-zA-Z0-9_]*$' file.txt
+grep '^[0-9]\{3\}-[0-9]\{2\
+```
+
 **However, these characters do not have any special meaning unless they are escaped with a backslash:**
 
 `? + { } | ( )`
+
+- `?` matches zero or one occurrence of the preceding character
+- `+` matches one or more occurrences of the preceding character
+- `{}` specifies a specific number of occurrences of the preceding character
+- `|` is used for alternation (logical OR)
+- `()` groups patterns together
+
+**Example:**
+
+```bash
+  grep 'foo\?bar' file.txt
+  grep 'foo\+bar' file.txt
+  grep 'foo\{2\}bar' file.txt
+  grep 'foo\|bar' file.txt
+```
 
 _Extended Regular Expressions (ERE)_
 
@@ -41,12 +74,32 @@ _Extended Regular Expressions (ERE)_
 
 `^ $ . * + ? [ ] ( ) | { }`
 
+- `^` matches the start of a line
+- `$` matches the end of a line
+- `.` matches any single character except a newline
+- `*` matches zero or more occurrences of the preceding character
+- `+` matches one or more occurrences of the preceding character
+- `?` matches zero or one occurrence of the preceding character
+- `[ ]` defines a character class, matching any single character within the brackets
+- `()` groups patterns together
+- `|` is used for alternation (logical OR)
+- `{}` specifies a specific number of occurrences of the preceding character
+
+**Example:**
+
+```bash
+grep -E '^foo.*bar$' file.txt
+grep -E '^[a-zA-Z0-9_]*$' file.txt
+grep -E '^[0-9]{3}-[0-9]{2}'
+```
+
 _Perl Compatible Regular Expressions (PCRE)_
 
 **PCRE has even more options such as additional anchors and character classes, lookahead/lookbehind, conditional expressions, comments, and more. See
 the regexp cheatsheet.**
 
 ## Output Options
+
 ```
 -c, --count           # print the count of matching lines. suppresses normal output
 
@@ -57,15 +110,16 @@ the regexp cheatsheet.**
 -s, --no-messages     # suppress error messages about nonexistent or unreadable files
 ```
 
-
 ## Context Options
+
 ```
 -B NUM, --before-context=NUM  # print NUM lines before a match
 -A NUM, --after-context=NUM   # print NUM lines after a match
 -C NUM, -NUM, --context=NUM   # print NUM lines before and after a match
 ```
+
 ## Examples
- 
+
 ```
 Case insensitive: match any line in foo.txt that contains "bar"
 
