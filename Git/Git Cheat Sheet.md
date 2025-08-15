@@ -84,6 +84,20 @@ Creates a new branch.
 
 Switches to the specified branch and updates the working directory.
 
+`git checkout -b rgarzon origin/rgarzon`
+
+Creates a new branch named `rgarzon` based on the remote branch `origin/rgarzon` and switches to it. This is useful for starting work on a feature or bug fix that exists in the remote repository.
+
+
+`git branch -vv`
+
+Lists all branches with their last commit information, showing which branch is tracking which remote branch and whether it is ahead or behind.
+
+`git branch --set-upstream-to=origin/rgarzon rgarzon`
+
+Sets the upstream branch for the local branch `rgarzon` to track the remote branch `origin/rgarzon`. This allows you to use `git push` and `git pull`
+
+
 `git branch`
 
 Lists all branches.
@@ -395,7 +409,7 @@ Displays the commits log.
 `git log --oneline`
 Displays a summary of commits with one line each.
 
-`git log --graph`
+`git log --graph --all`
 Shows a graphical representation of the commit history.
 
 `git log --stat`
