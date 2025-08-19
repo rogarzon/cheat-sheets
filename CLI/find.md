@@ -154,6 +154,11 @@ b                  # 512-byte bloques
   find / -type f -name *.conf -user root -size +20k -newermt 2020-03-03 -exec ls -al {} \; 2>/dev/null
 ```
 
+```bash
+  #Obtiene los archivos .html en el directorio actual que no contienen "brou" en su nombre
+  find . -maxdepth 1 -type f -name "*.html" -and -not -name "*brou*"
+```
+
 | Option              | Description                                                                                                                                |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | -type f             | Hereby, we define the type of the searched object. In this case, 'f' stands for 'file'.                                                    |
