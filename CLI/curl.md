@@ -33,10 +33,13 @@ https://devhints.io/curl
 ```
 -A <str>         # --user-agent
 -b name=val      # --cookie
--b FILE          # --cookie
+-b FILE          # --cookie-file: read cookies from file
+-c name=val      # --cookie-jar: send cookie
+-c FILE          # --cookie-jar: save cookies to file
 -H "X-Foo: y"    # --header
 --compressed     # use deflate/gzip
 ```
+ - You can capture cookies with `-c cookies.txt` and send them back with `-b cookies.txt`
 
 ## SSL
 ```
@@ -49,28 +52,46 @@ https://devhints.io/curl
 ```
 
 ## Examples
-```
-Post data:
-curl -d password=x http://x.com/y
-```
-
-```
-Auth/data:
-curl -u user:pass -d status="Hello" http://twitter.com/statuses/update.xml
+```bash
+  #Post data:
+  curl -d password=x http://x.com/y
 ```
 
-```
-multipart file upload
-curl -v --include --form key1=value1 --form upload=@localfilename URL
-```
-
-```
-multipart form: send data from text field and upload file
-curl -F person=anonymous -F secret=@file.txt http://example.com/submit.cgi
+```bash
+  #Auth/data:
+  curl -u user:pass -d status="Hello" http://twitter.com/statuses/update.xml
 ```
 
+```bash
+  #multipart file upload
+  curl -v --include --form key1=value1 --form upload=@localfilename URL
 ```
-Use Curl to Check if a remote resource is available
-details https://matthewsetter.com/check-if-file-is-available-with-curl/
-curl -o /dev/null --silent -Iw "%{http_code}" https://example.com/my.remote.tarball.gz
+
+```bash
+  #multipart form: send data from text field and upload file
+  curl -F person=anonymous -F secret=@file.txt http://example.com/submit.cgi
+```
+
+```bash
+  #Use Curl to Check if a remote resource is available
+  #details https://matthewsetter.com/check-if-file-is-available-with-curl/
+  curl -o /dev/null --silent -Iw "%{http_code}" https://example.com/my.remote.tarball.gz
+```
+
+```bash
+  #Send a request as Google Chrome
+  curl -L \
+  -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.118 Safari/537.36" \
+  -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" \
+  -H "Accept-Language: en-US,en;q=0.5" \
+  -H "Accept-Encoding: gzip, deflate, br" \
+  -H "Connection: keep-alive" \
+  -H "Upgrade-Insecure-Requests: 1" \
+  -H "Cache-Control: max-age=0" \
+  -H "Sec-Fetch-Dest: document" \
+  -H "Sec-Fetch-Mode: navigate" \
+  -H "Sec-Fetch-Site: none" \
+  -H "Sec-Fetch-User: ?1" \
+  --compressed \
+  "https://www.brou.com.uy/web/guest/cotizaciones"
 ```
