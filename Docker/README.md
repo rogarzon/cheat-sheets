@@ -272,7 +272,13 @@ Para inspeccionar una imagen y ver su configuración, podemos usar el siguiente 
 
 ## Contenedores
 
-El comando `docker run` se utiliza para crear y ejecutar un contenedor a partir de una imagen. La sintaxis básica es:
+- `--restart` e indica al demonio Docker que, una vez que el contenedor se detenga, debe intentar arrancarlo de nuevo siempre.
+    - `always`: El contenedor se reiniciará siempre que se detenga (termina normalmente, falla o se reinicia el demonio de decker).
+    - `unless-stopped`: El contenedor se reiniciará siempre que se detenga, excepto si se detuvo manualmente.
+    - `on-failure`: El contenedor se reiniciará solo si falla
+    - `no`: El contenedor no se reiniciará automáticamente (este es el valor predeterminado).
+
+- `docker run` se utiliza para crear y ejecutar un contenedor a partir de una imagen. La sintaxis básica es:
 
 ```bash
  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
