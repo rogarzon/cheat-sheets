@@ -187,3 +187,25 @@ Three types of Ethernet cables are available:
 5. **Frames are converted to bits**, and a digital encoding and clocking scheme is used.
 
 ![](./resources/PDU%20and%20layer%20addressing.png "PDU and layer addressing")
+
+## The Cisco Three-Layer Hierarchical Model
+
+The definition of the layers is logical, not physical.
+
+![](./resources/The%20Cisco%20hierarchical%20model.png "The Cisco hierarchical model")
+
+The following are the three layers and their typical functions:
+
+* The core layer:
+    * **backbone**
+    * The only purpose of the network’s core layer is to switch traffic as fast as possible
+* The distribution layer:
+    * **routing**
+    * The primary functions of the distribution layer are to provide routing, filtering, and WAN access and to determine how packets can access the core, if needed.
+* The access layer: switching
+
+## Summary
+
+- **Hubs** are Physical layer devices and repeat the digital signal to all segments except the one from which it was received.
+- **Switches** segment the network using hardware addresses and break up collision domains.
+- **Routers** break up broadcast domains (and collision domains) and use logical addressing to send packets through an internetwork.
