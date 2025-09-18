@@ -101,8 +101,8 @@ Here's how it works:
 ### Set alternative versions for Python
 
 ```
-update-alternatives --install /usr/bin/python python /usr/bin/python3.6 1
-update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
+update-alternatives --install /usr/bin/python python /usr/bin/python3.6 1 0
+update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2 1
 ```
 
 ### List installed versions of Python
