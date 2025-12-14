@@ -1,5 +1,6 @@
 <!-- TOC -->
 * [Installation Instructions](#installation-instructions)
+* [Download Node.js® using `nvm` (Node Version Manager):](#download-nodejs-using-nvm-node-version-manager)
 <!-- TOC -->
 
 # [Installation Instructions ](https://github.com/nodesource/distributions/blob/master/README.md)
@@ -23,3 +24,22 @@ Install Node.js:
 Verify the installation:
 
 `node -v`
+
+# Download Node.js® using `nvm` (Node Version Manager):
+```bash
+# Download and install nvm:
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+
+# in lieu of restarting the shell
+\. "$HOME/.nvm/nvm.sh"
+
+# Download and install Node.js:
+nvm install 24
+
+# Verify the Node.js version:
+node -v # Should print "v24.12.0".
+
+# Verify npm version:
+npm -v # Should print "11.6.2".
+
+```
