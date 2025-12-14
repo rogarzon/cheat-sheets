@@ -54,6 +54,10 @@ We can change permissions using two modes:
 1. Symbolic mode: this method uses symbols like `u`, `g`, `o` to represent **users**, **groups**, and **others**. Permissions are represented as
    `r`, `w`, `x` for **read**, **write**, and **execute**, respectively. You can modify permissions using `+`, `-` and `=`.
 2. Absolute mode: this method represents permissions as 3-digit octal numbers ranging from 0-7.
+   * 0 - No permission
+   * 1 - execution
+   * 2 - write
+   * 4 - read
 
 | OPERATOR | DESCRIPTION                                                                               |
 |----------|-------------------------------------------------------------------------------------------|
