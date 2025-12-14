@@ -10,6 +10,8 @@
   * [Linux:](#linux)
 * [Restaurar de un backup comprimido](#restaurar-de-un-backup-comprimido)
 * [Ejecutar un script SQL almacenados en un archivo](#ejecutar-un-script-sql-almacenados-en-un-archivo)
+* [Creando usuarios en postgres](#creando-usuarios-en-postgres)
+  * [Crear usuario administrador](#crear-usuario-administrador)
 <!-- TOC -->
 
 # psql Commands
@@ -53,33 +55,44 @@ psql supports some types of output format and allows you to customize how the ou
 
 ## Connect to PostgreSQL database
 
-`psql -d database -U  user -W`
+```bash
+psql -d database -U  user -W
+```
 
 If you want to connect to a database that resides on another host, you add the -h option as follows:
 
-`psql -h host -d database -U user -W`
+```bash
+psql -h host -d database -U user -W
+```
 
 In case you want to use SSL mode for the connection, just specify it as shown in the following command:
 
-`psql -U user -h host "dbname=db sslmode=require"`
+```bash
+psql -U user -h host "dbname=db sslmode=require"
+```
 
 # Cambiar a la cuenta de postgres
 
-`sudo -i -u postgres`
+```bash
+sudo -i -u postgres
+```
 
 # Acceder a una línea de comandos de Postgres sin cambiar de cuenta
 
-`sudo -u postgres psql`
+```sudo -u postgres psql
+```
 
 # Hacer un backup comprimido
 
 ## Windows:
 
-`pg_dump --verbose --dbname=bps --username=postgres | gzip > bps-dump.sql.gz`
+```bash
+pg_dump --verbose --dbname=bps --username=postgres | gzip > bps-dump.sql.gz
+```
 
 ## Linux:
 
-```
+```bash
 (pg_dump --verbose --dbname=grp9_test.2024-09-04-test --username=odoo | gzip -9) > grp9_test.2024-09-04-test-`date +%Y-%m-%d-%H-%M-%S`.sql.gz
 ```
 
@@ -100,6 +113,27 @@ zcat grp_test.2023-09-01-test.sql.gz | psql --username=odoo --host="127.0.0.1" -
 
 # Ejecutar un script SQL almacenados en un archivo
 
-```
+```bash
 psql -h <host> -d <database> -U <user> -W -a -f <archivo.sql> 
 ```
+
+# Creando usuarios en postgres
+
+## Crear usuario administrador
+
+```postgresql
+-- Crea el usuario administrador
+CREATE ROLE admin_user WITH LOGIN PASSWORD 'tu_contraseña_segura' SUPERUSER CREATEDB CREATEROLE;
+-- 3. (Opcional) Otorgar todos los privilegios sobre una base de datos específica
+CREATE DATABASE mi_base_de_datos;
+REVOKE ALL PRIVILEGES ON DATABASE mi_base_de_datos FROM public;
+GRANT ALL PRIVILEGES ON DATABASE mi_base_de_datos TO admin_user;
+
+-- 4. (Opcional) Verificar el usuario
+\du admin_user
+```
+
+* `SUPERUSER`: Le da todos los permisos, equivalente a ser el superusuario postgres.
+* `CREATEDB`: Permite crear nuevas bases de datos.
+* `CREATEROLE`: Permite crear otros roles (usuarios).
+* `LOGIN`: Permite al usuario iniciar sesión. 
