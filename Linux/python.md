@@ -1,26 +1,28 @@
 <!-- TOC -->
+
 * [Python](#python)
-  * [Managing Multiple Versions of Python on Ubuntu 18.04](#managing-multiple-versions-of-python-on-ubuntu-1804)
-    * [Obligatory updates](#obligatory-updates)
-    * [Install Python dependencies](#install-python-dependencies)
-    * [Download Python](#download-python)
-    * [Get an optimized build of Python](#get-an-optimized-build-of-python)
-    * [Build Instructions](#build-instructions)
-    * [Installing Alternative Python from Source](#installing-alternative-python-from-source)
-    * [Managing Alternative Python Installations](#managing-alternative-python-installations)
-    * [Set alternative versions for Python](#set-alternative-versions-for-python)
-    * [List installed versions of Python](#list-installed-versions-of-python)
-    * [Swapping between versions](#swapping-between-versions)
-    * [Install pip3](#install-pip3)
-  * [Cómo crear un entorno virtual Python 3](#cómo-crear-un-entorno-virtual-python-3)
-    * [Actualizar el sistema](#actualizar-el-sistema)
-    * [Instalar pip para python3](#instalar-pip-para-python3)
-    * [Crea un entorno virtual](#crea-un-entorno-virtual)
-    * [Activando entorno virtual](#activando-entorno-virtual)
-    * [Desactivar entorno virtual](#desactivar-entorno-virtual)
-  * [How to create python2.7 virtualenv](#how-to-create-python27-virtualenv)
-      * [Install python2:](#install-python2)
-    * [Create virtual environment using python2.7 the next way:](#create-virtual-environment-using-python27-the-next-way)
+    * [Managing Multiple Versions of Python on Ubuntu 18.04](#managing-multiple-versions-of-python-on-ubuntu-1804)
+        * [Obligatory updates](#obligatory-updates)
+        * [Install Python dependencies](#install-python-dependencies)
+        * [Download Python](#download-python)
+        * [Get an optimized build of Python](#get-an-optimized-build-of-python)
+        * [Build Instructions](#build-instructions)
+        * [Installing Alternative Python from Source](#installing-alternative-python-from-source)
+        * [Managing Alternative Python Installations](#managing-alternative-python-installations)
+        * [Set alternative versions for Python](#set-alternative-versions-for-python)
+        * [List installed versions of Python](#list-installed-versions-of-python)
+        * [Swapping between versions](#swapping-between-versions)
+        * [Install pip3](#install-pip3)
+    * [Cómo crear un entorno virtual Python 3](#cómo-crear-un-entorno-virtual-python-3)
+        * [Actualizar el sistema](#actualizar-el-sistema)
+        * [Instalar pip para python3](#instalar-pip-para-python3)
+        * [Crea un entorno virtual](#crea-un-entorno-virtual)
+        * [Activando entorno virtual](#activando-entorno-virtual)
+        * [Desactivar entorno virtual](#desactivar-entorno-virtual)
+    * [How to create python2.7 virtualenv](#how-to-create-python27-virtualenv)
+        * [Install python2:](#install-python2)
+        * [Create virtual environment using python2.7 the next way:](#create-virtual-environment-using-python27-the-next-way)
+
 <!-- TOC -->
 
 # Python
@@ -100,7 +102,8 @@ Here's how it works:
 
 ### Set alternative versions for Python
 
-```
+```bash
+# --install <enlace> <nombre> <ruta> <prioridad>
 update-alternatives --install /usr/bin/python python /usr/bin/python3.6 1 0
 update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2 1
 ```
@@ -145,7 +148,8 @@ Ahora, para crear un entorno virtual, escriba:
 
 `python3 -m venv <directorio>`
 
-El comando anterior crea un directorio llamado '**directorio**' en el directorio actual, que contiene pip, intérprete, scripts y bibliotecas.
+El comando anterior crea un directorio llamado '**directorio**' en el directorio actual, que contiene pip, intérprete,
+scripts y bibliotecas.
 
 ### Activando entorno virtual
 
@@ -157,19 +161,60 @@ Tú puedes ahora activar el entorno virtual, escribe:
 
 `(<directorio>) oltjano@ubuntu:~ deactivate`
 
-## How to create python2.7 virtualenv
+## Crear entorno virtual python2.7
 
-#### Install python2:
+### Instalar python2:
 
-Universe repository is being used for this. You could add it if not added the next way: `sudo add-apt-repository universe`.
+```bash
+sudo apt install build-essential libssl-dev libbz2-dev libreadline-dev \
+libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev
 
-`sudo apt install python2 virtualenv`
+wget https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tgz
+tar -xvf Python-2.7.13.tgz
+cd Python-2.7.13
+./configure --prefix=/usr/local/python2.7.13
+make
+sudo make install
+# Esto instalará Python 2.7.13 en /usr/local/python2.7.13/bin/python2.7
+# O
+sudo make altinstall
+# Esto instalará Python 2.7.13 en /usr/local/bin/python2.7
+```
 
-### Create virtual environment using python2.7 the next way:
+### Instalar `virtualenv` (necesario para Python 2):
 
-`virtualenv --python=$(which python2) /path/to/newenv/folder/`
+Python 2 no trae venv, así que debes usar `virtualenv`:
 
-`$(which python2)` will return path to python2 which would be correct argument.
+```bash
+sudo apt install python2-dev
+sudo pip2 install virtualenv
+```
 
+Si no tienes pip2, instálalo así:
 
+```bash
+curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
+sudo python2 get-pip.py
+```
 
+### Crear el entorno virtual
+
+Si usas la versión del sistema:
+
+```bash
+virtualenv -p python2 venv_py27
+source venv_py27/bin/activate
+```
+
+Si usas la versión compilada manualmente:
+
+```bash
+virtualenv -p /usr/local/python2.7.13/bin/python2.7 venv_py27
+source venv_py27/bin/activate
+```
+
+### Desactivar el entorno virtual
+
+```bash
+deactivate
+```
