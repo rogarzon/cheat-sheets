@@ -1,17 +1,15 @@
 <!-- TOC -->
-
 * [Java](#java)
-    * [Installing Java](#installing-java)
-        * [How to install Oracle JDK 11](#how-to-install-oracle-jdk-11)
-        * [Download the Oracle JDK file](#download-the-oracle-jdk-file)
-        * [Extract The File To A New “JVM” Directory](#extract-the-file-to-a-new-jvm-directory)
-        * [Configure The Java Installation](#configure-the-java-installation)
-        * [Inform the System About the Location of the Java Installation](#inform-the-system-about-the-location-of-the-java-installation)
-        * [Verify if Everything is Working Properly](#verify-if-everything-is-working-properly)
-    * [Uninstalling Java](#uninstalling-java)
-        * [Uninstall OpenJDK](#uninstall-openjdk)
-        * [Uninstall OracleJDK](#uninstall-oraclejdk)
-
+  * [Installing Java](#installing-java)
+    * [How to install Oracle JDK 11](#how-to-install-oracle-jdk-11)
+    * [Download the Oracle JDK file](#download-the-oracle-jdk-file)
+    * [Extract The File To A New “JVM” Directory](#extract-the-file-to-a-new-jvm-directory)
+    * [Configure The Java Installation](#configure-the-java-installation)
+    * [Inform the System About the Location of the Java Installation](#inform-the-system-about-the-location-of-the-java-installation)
+    * [Verify if Everything is Working Properly](#verify-if-everything-is-working-properly)
+  * [Uninstalling Java](#uninstalling-java)
+    * [Uninstall OpenJDK](#uninstall-openjdk)
+    * [Uninstall OracleJDK](#uninstall-oraclejdk)
 <!-- TOC -->
 
 # Java
