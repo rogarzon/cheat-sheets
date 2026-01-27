@@ -255,6 +255,19 @@ For example,
 * -mtime -10 means less than 10 days.
 * -mtime 10 If you skip + or – it means exactly 10 days.
 
+### How to search files by depth
+
+* `-maxdepth N` : Specifies the maximum depth to which the search should be performed.
+* `-mindepth N` : Specifies the minimum depth from which the search should start.
+* `N` : Represents the depth level. The root directory is considered depth 0, its immediate subdirectories are depth 1, and so on.
+
+
+```bash
+find /ruta/inicial -maxdepth 2 -name "*.txt"
+# Search for files larger than 1M in subdirectories with depth between 3 and 5 in `/home/user`
+find /home/usuario -mindepth 3 -maxdepth 5 -type f -size +1M
+```
+
 ## Concatenate and display files using the `cat` command
 
 The `cat` command in Linux is used to display the contents of a file. It can also be used to concatenate files and

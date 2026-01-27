@@ -38,6 +38,7 @@ https://www.ionos.es/digitalguide/servidores/configuracion/comando-linux-find/#:
 
 -depth 2           # At least 3 levels deep
 -maxdepth
+-mindepth
 -regex PATTERN
 
 
