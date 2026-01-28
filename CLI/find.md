@@ -36,9 +36,8 @@ https://www.ionos.es/digitalguide/servidores/configuracion/comando-linux-find/#:
 -type l            # Symlink
 
 
--depth 2           # At least 3 levels deep
--maxdepth
--mindepth
+-maxdepth 3        # At most 3 levels deep
+-mindepth 1        # At least 1 level deep
 -regex PATTERN
 
 
