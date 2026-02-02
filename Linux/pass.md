@@ -1,11 +1,11 @@
 <!-- TOC -->
-
 * [`pass` (gestor de contraseñas de línea de comandos)](#pass-gestor-de-contraseñas-de-línea-de-comandos)
-    * [Instalación](#instalación)
-    * [Configurar con GPG:](#configurar-con-gpg)
-    * [Ejemplos de uso](#ejemplos-de-uso)
-    * [Autenticarse a Docker Hub usando `pass`](#autenticarse-a-docker-hub-usando-pass)
-
+  * [Instalación](#instalación)
+  * [Configurar con GPG:](#configurar-con-gpg)
+  * [Ejemplos de uso](#ejemplos-de-uso)
+  * [Comando para autenticar con Docker](#comando-para-autenticar-con-docker)
+    * [Advertencias importantes](#advertencias-importantes)
+    * [Ejemplo práctico paso a paso](#ejemplo-práctico-paso-a-paso)
 <!-- TOC -->
 
 # `pass` (gestor de contraseñas de línea de comandos)
