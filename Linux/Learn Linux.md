@@ -23,6 +23,7 @@ https://www.youtube.com/watch?v=tK9Oc6AEnR4&t=26s
     * [How to search directories](#how-to-search-directories)
     * [How to search files by size](#how-to-search-files-by-size)
     * [How to search files by modification time](#how-to-search-files-by-modification-time)
+    * [How to search files by depth](#how-to-search-files-by-depth)
   * [Concatenate and display files using the `cat` command](#concatenate-and-display-files-using-the-cat-command)
   * [Viewing text files interactively using `less` and `more`](#viewing-text-files-interactively-using-less-and-more)
   * [Displaying the last part of files using `tail`](#displaying-the-last-part-of-files-using-tail)
