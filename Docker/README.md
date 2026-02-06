@@ -22,6 +22,7 @@
   * [Imágenes](#imágenes)
     * [Crear una imágen](#crear-una-imágen)
     * [Ejecutar una imágen y exponer puertos](#ejecutar-una-imágen-y-exponer-puertos)
+    * [Ejecutar una imágen en modo interactivo y entrar en la terminal del contenedor](#ejecutar-una-imágen-en-modo-interactivo-y-entrar-en-la-terminal-del-contenedor)
     * [Listar imágenes](#listar-imágenes)
     * [Listar imágenes no utilizadas](#listar-imágenes-no-utilizadas)
     * [Listar imágenes no utilizadas (sin filtro)](#listar-imágenes-no-utilizadas-sin-filtro)
@@ -56,7 +57,8 @@
 
 ## Introducción
 
-Docker es una plataforma de software que permite crear, probar y desplegar aplicaciones en contenedores. Los contenedores son entornos ligeros y portátiles que incluyen todo lo necesario para ejecutar
+Docker es una plataforma de software que permite crear, probar y desplegar aplicaciones en contenedores. Los contenedores son entornos ligeros y portátiles que incluyen todo lo
+necesario para ejecutar
 una aplicación, lo que facilita su despliegue en diferentes entornos sin preocuparse por las dependencias del sistema operativo.
 
 Para ver las imágenes disponibles por docker hub puedes visitar el siguiente enlace: [Docker Hub](https://hub.docker.com/)
@@ -108,7 +110,8 @@ Estos comandos permiten personalizar y optimizar la construcción de imágenes D
 
 ### FROM
 
-La instrucción FROM se utiliza para especificar la imagen base a partir de la cual se construirá la nueva imagen. La imagen base puede ser una imagen oficial de Docker Hub o una imagen personalizada.
+La instrucción FROM se utiliza para especificar la imagen base a partir de la cual se construirá la nueva imagen. La imagen base puede ser una imagen oficial de Docker Hub o una
+imagen personalizada.
 
 ```dockerfile
 FROM ubuntu:20.04
@@ -188,7 +191,8 @@ LABEL version="1.0" description="My Docker image"
 
 ### CMD
 
-Especifica el comando que se ejecutará cuando se inicie un contenedor a partir de la imagen. Solo puede haber una instrucción CMD en un Dockerfile. Si hay varias, solo se ejecutará la última.
+Especifica el comando que se ejecutará cuando se inicie un contenedor a partir de la imagen. Solo puede haber una instrucción CMD en un Dockerfile. Si hay varias, solo se ejecutará
+la última.
 Puede ser sobrescrito al ejecutar el contenedor si se especifica un comando al final de `docker run ...`.
 
 ```dockerfile
@@ -198,7 +202,8 @@ CMD ["python3", "app.py"]
 ### ENTRYPOINT
 
 Especifica el comando que se ejecutará cuando se inicie un contenedor a partir de la imagen. A diferencia de CMD, ENTRYPOINT no puede ser sobrescrito al ejecutar el contenedor.
-Se utiliza para definir el comando principal que se ejecutará en el contenedor. Cualquier comando especificado al final de `docker run ...` se pasará como argumento al comando definido en ENTRYPOINT.
+Se utiliza para definir el comando principal que se ejecutará en el contenedor. Cualquier comando especificado al final de `docker run ...` se pasará como argumento al comando
+definido en ENTRYPOINT.
 
 ```dockerfile
 ENTRYPOINT ["python3", "app.py"]
@@ -211,13 +216,15 @@ ENTRYPOINT ["python3", "app.py"]
 Para crear una imagen a partir de un Dockerfile, podemos usar el siguiente comando:
 
 * `-f`: Especifica el nombre del Dockerfile a usar (si no es el predeterminado `Dockerfile`).
-* `--target`: Especifica la etapa de construcción a la que se desea llegar. Esto es útil si se está utilizando un Dockerfile multi-etapa y solo se desea construir una parte de la imagen.
+* `--target`: Especifica la etapa de construcción a la que se desea llegar. Esto es útil si se está utilizando un Dockerfile multi-etapa y solo se desea construir una parte de la
+  imagen.
 
 ```bash
  docker build -t <image_name> .
 ```
 
-Donde `<image_name>` es el nombre que le queremos dar a la imagen, `-t` es la forma corta de --tag y `.` indica la ubicación del fichero **Dockerfile**, el cual está el directorio actual.
+Donde `<image_name>` es el nombre que le queremos dar a la imagen, `-t` es la forma corta de --tag y `.` indica la ubicación del fichero **Dockerfile**, el cual está el directorio
+actual.
 El tag se utiliza para etiquetar la imagen con un nombre y una versión. Por ejemplo, `my_image:1.0` etiquetaría la imagen como `my_image` con la versión `1.0`.
 
 ### Ejecutar una imágen y exponer puertos
@@ -228,7 +235,21 @@ Para ejecutar una imagen y exponer puertos, podemos usar el siguiente comando:
  docker run -p <host_port>:<container_port> <image_name>
 ```
 
-Donde `<host_port>` es el puerto del host que queremos exponer, `<container_port>` es el puerto del contenedor que queremos exponer y `<image_name>` es el nombre de la imagen que queremos ejecutar.
+Donde `<host_port>` es el puerto del host que queremos exponer, `<container_port>` es el puerto del contenedor que queremos exponer y `<image_name>` es el nombre de la imagen que
+queremos ejecutar.
+
+### Ejecutar una imágen en modo interactivo y entrar en la terminal del contenedor
+
+Para ejecutar una imagen en modo interactivo y entrar en la terminal del contenedor, podemos usar el siguiente comando:
+
+```bash
+ docker run -it <host_port>:<container_port> <image_name> /bin/bash
+ # o
+ docker run -it <host_port>:<container_port> <image_name> /bin/sh
+```
+
+* `-i` (interactive): Mantiene el STDIN abierto.
+* -`t` (tty): Asigna una terminal. 
 
 ### Listar imágenes
 
@@ -436,8 +457,10 @@ docker exec -it goal-frontend-prod sh -c "apk add --no-cache curl && curl http:/
 
 ## Volúmenes
 
-Los volúmenes son una forma de persistir datos generados y utilizados por contenedores. Los volúmenes específicos tienen mayor prioridad que los genéricos, por lo que si un contenedor tiene un volumen
-específico y otro contenedor tiene un volumen genérico, por ejemplo, `-v /app/node_module`, tendrá prioridad sobre el volumen `-v $(pwd):/app` ya que indica una sub carpeta. Esto se puede usar para
+Los volúmenes son una forma de persistir datos generados y utilizados por contenedores. Los volúmenes específicos tienen mayor prioridad que los genéricos, por lo que si un
+contenedor tiene un volumen
+específico y otro contenedor tiene un volumen genérico, por ejemplo, `-v /app/node_module`, tendrá prioridad sobre el volumen `-v $(pwd):/app` ya que indica una sub carpeta. Esto
+se puede usar para
 evitar que ciertas partes se sobreescriban dentro del contenedor en el momento de su creación.
 
 ### Tipos de volúmenes
@@ -469,7 +492,8 @@ evitar que ciertas partes se sobreescriban dentro del contenedor en el momento d
     * Se montan directorios del host en el contenedor
     * Los cambios en los archivos del host se reflejan en el contenedor y viceversa
     * Se pueden usar para compartir archivos entre el host y el contenedor
-    * En ocasiones conviene hacerlos de **solo lectura** para el contenedor, de tal forma que no se puedan modificar los archivos del host desde el contenedor, esto se indica adicionando `:ro` al
+    * En ocasiones conviene hacerlos de **solo lectura** para el contenedor, de tal forma que no se puedan modificar los archivos del host desde el contenedor, esto se indica
+      adicionando `:ro` al
       final
     * No son manejados por Docker
 
@@ -505,7 +529,8 @@ Para inspeccionar un volumen y ver su configuración, podemos usar el siguiente 
 
 ## Bind mounts
 
-Los bind mounts son una forma de montar un directorio del host en un contenedor. Esto permite compartir archivos entre el host y el contenedor, los cambios en los archivos del host se reflejan en el
+Los bind mounts son una forma de montar un directorio del host en un contenedor. Esto permite compartir archivos entre el host y el contenedor, los cambios en los archivos del host
+se reflejan en el
 contendor, lo que es útil para el desarrollo y la depuración.
 Para crear un bind mount, podemos usar el siguiente comando:
 
@@ -513,10 +538,12 @@ Para crear un bind mount, podemos usar el siguiente comando:
  docker run -v <host_path>:<container_path> <image_name>
 ```
 
-> **Nota:** Cuidado cuando se asocie el directorio de trabajo del contenedor con un directorio del host, ya que los archivos del host pueden sobrescribir los archivos del contenedor (los copiados
+> **Nota:** Cuidado cuando se asocie el directorio de trabajo del contenedor con un directorio del host, ya que los archivos del host pueden sobrescribir los archivos del
+> contenedor (los copiados
 > mediante la instrucción `COPY` en el **Dockerfile** y otros comandos como `RUN npm install`) y así eliminar las dependencias instaladas.
 >
-> Para solucionar esto le indicamos a Docker que hay archivos en el contenedor que no queremos que se sobrescriban, para ello podemos usar un volumen anónimo, la instrucción `VOLUME` en el *
+> Para solucionar esto le indicamos a Docker que hay archivos en el contenedor que no queremos que se sobrescriban, para ello podemos usar un volumen anónimo, la instrucción
+`VOLUME` en el *
 *Dockerfile**, o ambos. Por ejemplo:
 >  ```bash
 >  docker run -v <host_path>:<container_path> -v <container_path> <image_name>
@@ -612,7 +639,8 @@ The driver can be set when a Network is created, simply by adding the --driver o
 Docker also supports these alternative drivers - though you will use the "**bridge**" driver in most cases:
 
 * **host**: For standalone containers, isolation between container and host system is removed (i.e. they share localhost as a network)
-* **overlay**: Multiple Docker daemons (i.e. Docker running on different machines) are able to connect with each other. Only works in "Swarm" mode which is a dated / almost deprecated way of
+* **overlay**: Multiple Docker daemons (i.e. Docker running on different machines) are able to connect with each other. Only works in "Swarm" mode which is a dated / almost
+  deprecated way of
   connecting multiple containers
 * **macvlan**: You can set a custom MAC address to a container - this address can then be used for communication with that container
 * **none**: All networking is disabled.
