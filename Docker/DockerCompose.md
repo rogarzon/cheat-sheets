@@ -54,8 +54,21 @@ services:
       - "80:80"
   db:
     image: mysql
+    restart: always
+    user: db_user
+    secrets:
+      - my_secret
+    volumes:
+      - db-data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: example
+    expose:
+      - 3006
+volumes:
+    db-data:
+secrets:
+  my_secret:
+    file: ./secrets/my_secret.txt
 ```
 
 ### Image
@@ -192,5 +205,12 @@ Especifica el directorio de trabajo dentro del contenedor. Esto es útil si dese
 
 ```yaml
 working_dir: /app
+```
+### secrets
+Define secretos que se pueden usar en los servicios. Esto es útil para manejar información sensible como contraseñas o claves de API.
+```yaml
+secrets:
+  my_secret:
+    file: ./secrets/my_secret.txt
 ```
 
