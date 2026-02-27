@@ -20,6 +20,7 @@
 - `-sY`: SCTP INIT scan (for SCTP services)
 - `-sZ`: SCTP COOKIE-ECHO scan (for SCTP services)
 - `-sN`: TCP NULL scan (no flags set)
+- `-sn`: Ping scan (no port scan)
 - `-sF`: TCP FIN scan (FIN flag set)
 - `-sX`: TCP Xmas scan (FIN, URG, and PSH flags set)
 - `-sW`: TCP Window scan (uses window size for detection)
@@ -50,6 +51,20 @@ The **TCP-SYN** scan sends one packet with the **SYN** flag and, therefore, neve
 - If our target sends a **SYN-ACK** flagged packet back to us, Nmap detects that the port is `open`.
 - If the target responds with an **RST** flagged packet, it is an indicator that the port is `closed`.
 - If Nmap does not receive a packet back, it will display it as `filtered`. Depending on the firewall configuration, certain packets may be dropped or ignored by the firewall.
+
+# Basic Scanning
+```bash
+# 1. Host discovery
+  sudo nmap -sn <target>
+# 2. Default script scan and version detection
+  sudo nmap -sC -sV <target>
+# 3. All ports scan
+  sudo nmap -p- <target>
+# 4. OS detection
+  sudo nmap -O <target>
+# 5. Scan security vulnerabilities
+  sudo nmap --script vuln <target>
+```
 
 # Example Commands
 
