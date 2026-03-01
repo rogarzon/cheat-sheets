@@ -13,6 +13,7 @@
   * [Generar la llave pública/privada](#generar-la-llave-públicaprivada)
   * [Copiar la llave pública al servidor remoto](#copiar-la-llave-pública-al-servidor-remoto)
   * [Conectarse al servidor remoto](#conectarse-al-servidor-remoto)
+* [Reforzar la seguridad de SSH](#reforzar-la-seguridad-de-ssh)
 <!-- TOC -->
 
 ## [How to Fix Connection Refused by Port 22 Debian/Ubuntu](https://linuxhint.com/fix_connection_refused_ubuntu/)
