@@ -1,29 +1,36 @@
 # NC Command
 
 <!-- TOC -->
+
 * [NC Command](#nc-command)
-  * [Description](#description)
-  * [Usage](#usage)
-  * [Options](#options)
-  * [Examples](#examples)
-    * [Basic Connection](#basic-connection)
-    * [Listening on a Port](#listening-on-a-port)
-    * [Sending Data](#sending-data)
-    * [Receiving Data](#receiving-data)
-    * [Scanning for Open Ports](#scanning-for-open-ports)
-    * [Using UDP](#using-udp)
-    * [Connecting with a Timeout](#connecting-with-a-timeout)
-    * [Reverse shell](#reverse-shell-)
+    * [Description](#description)
+    * [Usage](#usage)
+    * [Options](#options)
+    * [Examples](#examples)
+        * [Basic Connection](#basic-connection)
+        * [Listening on a Port](#listening-on-a-port)
+        * [Sending Data](#sending-data)
+        * [Receiving Data](#receiving-data)
+        * [Scanning for Open Ports](#scanning-for-open-ports)
+        * [Using UDP](#using-udp)
+        * [Connecting with a Timeout](#connecting-with-a-timeout)
+        * [Reverse shell](#reverse-shell-)
+
 <!-- TOC -->
 
 ## Description
-The `nc` command, also known as **Netcat**, is a versatile networking utility that can read and write data across network connections using TCP or UDP protocols. It is often referred to as the "Swiss Army knife" of networking due to its wide range of capabilities.
+
+The `nc` command, also known as **Netcat**, is a versatile networking utility that can read and write data across network connections using TCP or UDP protocols. It is often
+referred to as the "Swiss Army knife" of networking due to its wide range of capabilities.
 
 ## Usage
+
 ```bash
 nc [options] [hostname] [port]
 ```
+
 ## Options
+
 - `-C`: Use CRLF line endings instead of LF, useful for compatibility with certain protocols.
 - `-e <program>`: Execute a program after establishing a connection (note: this option may not be available in all versions of Netcat due to security concerns).
 - `-h`: Display help information and exit.
@@ -59,36 +66,51 @@ nc [options] [hostname] [port]
 - `--no-close`: Prevent closing the connection after sending data, allowing for persistent connections.
 
 ## Examples
+
 ### Basic Connection
+
 ```bash
   nc example.com 80
 ```
+
 ### Listening on a Port
+
 ```bash 
   nc -l -p 1234
 ```
+
 ### Sending Data
+
 ```bash
   echo "Hello, World!" | nc example.com 1234
 ```
+
 ### Receiving Data
+
 ```bash
   nc -l -p 1234 > received.txt
 ```
+
 ### Scanning for Open Ports
+
 ```bash
   nc -z -v example.com 1-1000
 ```
+
 ### Using UDP
+
 ```bash
   nc -u example.com 1234
 ```
+
 ### Connecting with a Timeout
+
 ```bash
   nc -w 5 example.com 1234
 ```
 
-### Reverse shell   
+### Reverse shell
+
 ```bash
 # On the target machine:
   # Delete the file if exists and create a named pipe - data written to it can be read from the other end
@@ -116,3 +138,39 @@ nc [options] [hostname] [port]
     don't need it anymore:
     
     $ rm -f /tmp/f
+
+### HTTP request
+
+Para realizar una petición HTTP usando `netcat` (también conocido como `nc`), sigue estos pasos. Este método es útil para pruebas básicas o en entornos donde otras herramientas
+como `curl` no están disponibles.
+
+* Paso 1: Conectar al servidor
+  Primero, debes establecer una conexión con el servidor al que deseas enviar la petición HTTP. Para esto, utiliza el siguiente comando:
+
+```bash
+nc example.com 80
+```
+
+* Paso 2: Escribir la petición HTTP
+  Una vez conectado, debes escribir la petición HTTP en el formato correcto. Por ejemplo, para realizar una petición `GET` a la `raíz` del sitio, puedes escribir lo siguiente:
+
+> Nota: Escribe la solicitud HTTP (presiona Enter después de cada línea y dos veces al final para enviar los headers)
+
+```
+GET / HTTP/1.1
+Host: example.com
+Connection: close
+
+```
+
+Recibirás la respuesta del servidor (el HTML de la página, headers, etc.).
+
+#### Ejemplo practico:
+
+> Nota: Si usas echo, asegúrate de usar `-e` (en sistemas Linux/macOS). En algunos sistemas, `echo` no interpreta `\r\n`, por eso `printf` es más seguro.
+
+```bash
+  printf "GET / HTTP/1.1\r\nHost: example.com\r\nConnection: close\r\n\r\n" | nc example.com 80
+  # or
+  echo -e "GET / HTTP/1.1\r\nHost: example.com\r\nConnection: close\r\n\r\n" | nc example.com 80
+```
