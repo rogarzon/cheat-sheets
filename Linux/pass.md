@@ -1,14 +1,19 @@
 <!-- TOC -->
-* [`pass` (gestor de contraseñas de línea de comandos)](#pass-gestor-de-contraseñas-de-línea-de-comandos)
-  * [Instalación](#instalación)
-  * [Configurar con GPG:](#configurar-con-gpg)
-  * [Ejemplos de uso](#ejemplos-de-uso)
-  * [Comando para autenticar con Docker](#comando-para-autenticar-con-docker)
-    * [Advertencias importantes](#advertencias-importantes)
-    * [Ejemplo práctico paso a paso](#ejemplo-práctico-paso-a-paso)
+
+* [`pass` Gestor de contraseñas de línea de comandos](#pass-gestor-de-contraseñas-de-línea-de-comandos)
+    * [Instalación](#instalación)
+    * [Configurar con GPG:](#configurar-con-gpg)
+    * [Ejemplos de uso](#ejemplos-de-uso)
+    * [Comando para autenticar con Docker](#comando-para-autenticar-con-docker)
+        * [Advertencias importantes](#advertencias-importantes)
+        * [Ejemplo práctico paso a paso](#ejemplo-práctico-paso-a-paso)
+        * [Insertar contraseña manualmente](#insertar-contraseña-manualmente)
+        * [Generar nueva contraseña](#generar-nueva-contraseña)
+        * [Editar una contraseña existente](#editar-una-contraseña-existente)
+
 <!-- TOC -->
 
-# `pass` (gestor de contraseñas de línea de comandos)
+# `pass` [Gestor de contraseñas de línea de comandos](https://www.passwordstore.org/)
 
 Este es un herramienta externa (no instalada por defecto) para gestionar contraseñas de forma segura usando GPG.
 
@@ -40,6 +45,7 @@ sudo apt install pass
 |------------------------------------|----------------------------------------------------------|
 | `pass insert nombre_servicio`      | Insertar una nueva contraseña (te pedirá la contraseña). |
 | `pass generate nombre_servicio 20` | Generar una contraseña aleatoria de 20 caracteres.       |
+| `pass -c nombre_servicio`          | Copia la contraseña en el portapapeles                   |
 | `pass show nombre_servicio`        | Mostrar la contraseña en pantalla (encriptada).          |
 | `pass ls`                          | Listar todos los servicios guardados.                    |
 | `pass rm nombre_servicio`          | Eliminar una entrada.                                    |
@@ -78,6 +84,7 @@ sudo apt install pass
     * Almacena solo el token en Pass (ej: `docker/hub`).
 
 ### Ejemplo práctico paso a paso
+
 1. Almacena el PAT en Pass
     ```bash
    echo "tu_token_de_acceso" | pass insert -m docker/hub
@@ -88,3 +95,30 @@ sudo apt install pass
     docker login -u tu_usuario -p "$PASS" docker.io
     unwset PASS  # Elimina el token de memoria
     ```
+
+### Insertar contraseña manualmente
+
+* `--multiline` o `-m`: Permite ingresar una contraseña de varias líneas (útil para claves SSH o tokens largos).
+
+```bash
+   pass insert -m docker/hub
+   # Esto te permitirá ingresar una contraseña de varias líneas para docker/hub.
+```
+
+### Generar nueva contraseña
+
+* `--no-symbols` o `-n`: Excluye caracteres especiales.
+* `--length` o `-l`: Especifica la longitud de la contraseña.
+* `--clip` o `-c`: Copia la contraseña al portapapeles (usa con cuidado).
+
+```bash
+   pass generate docker/hub 20
+   # Esto generará una contraseña aleatoria de 20 caracteres y la almacenará en docker/hub.
+```
+
+### Editar una contraseña existente
+
+```bash
+   pass edit docker/hub
+   # Esto abrirá tu editor de texto predeterminado para editar la contraseña almacenada en docker/hub.
+```
