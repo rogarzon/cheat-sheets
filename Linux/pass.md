@@ -1,16 +1,14 @@
 <!-- TOC -->
-
 * [`pass` Gestor de contraseñas de línea de comandos](#pass-gestor-de-contraseñas-de-línea-de-comandos)
-    * [Instalación](#instalación)
-    * [Configurar con GPG:](#configurar-con-gpg)
-    * [Ejemplos de uso](#ejemplos-de-uso)
-    * [Comando para autenticar con Docker](#comando-para-autenticar-con-docker)
-        * [Advertencias importantes](#advertencias-importantes)
-        * [Ejemplo práctico paso a paso](#ejemplo-práctico-paso-a-paso)
-        * [Insertar contraseña manualmente](#insertar-contraseña-manualmente)
-        * [Generar nueva contraseña](#generar-nueva-contraseña)
-        * [Editar una contraseña existente](#editar-una-contraseña-existente)
-
+  * [Instalación](#instalación)
+  * [Configurar con GPG:](#configurar-con-gpg)
+  * [Ejemplos de uso](#ejemplos-de-uso)
+  * [Comando para autenticar con Docker](#comando-para-autenticar-con-docker)
+    * [Advertencias importantes](#advertencias-importantes)
+    * [Ejemplo práctico paso a paso](#ejemplo-práctico-paso-a-paso)
+    * [Insertar contraseña manualmente](#insertar-contraseña-manualmente)
+    * [Generar nueva contraseña](#generar-nueva-contraseña)
+    * [Editar una contraseña existente](#editar-una-contraseña-existente)
 <!-- TOC -->
 
 # `pass` [Gestor de contraseñas de línea de comandos](https://www.passwordstore.org/)
