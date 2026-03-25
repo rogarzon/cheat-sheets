@@ -1,5 +1,17 @@
 # [How to Dual Boot Pop OS 22.04 LTS and Windows 11 2023 (EASIEST WAY)](https://www.youtube.com/watch?v=qYqPBrTudUY)
 
+<!-- TOC -->
+* [How to Dual Boot Pop OS 22.04 LTS and Windows 11 2023 (EASIEST WAY)](#how-to-dual-boot-pop-os-2204-lts-and-windows-11-2023--easiest-way-)
+  * [Si instalas PopOS después de Windows](#si-instalas-popos-después-de-windows)
+  * [Si instalas Windows después de PopOS](#si-instalas-windows-después-de-popos)
+* ["Menú GRUB no se muestra directamente: consola intermedia con 'set pager=1'"](#menú-grub-no-se-muestra-directamente-consola-intermedia-con-set-pager1)
+  * [Resumen de lo que pasó:](#resumen-de-lo-que-pasó)
+    * [Verificación adicional:](#verificación-adicional)
+    * [Descomentar y forzar modo gráfico](#descomentar-y-forzar-modo-gráfico)
+<!-- TOC -->
+
+## Si instalas PopOS después de Windows
+
 `sudo apt update`
 
 `sudo apt install os-prober`
@@ -38,6 +50,14 @@ windows boot**
 > presionar la letra `(t)` para aumentar el tiempo.
 
 > **Nota:** Creo que ya al PopOS al instalar monto dicho menu, pero el tiempo era demasiado rapido comopara poder elegir
+
+## Si instalas Windows después de PopOS
+
+Ejecutar desde windows el siguiente comando para reparar el arranque:
+
+```powershell
+bcdedit /set {bootmgr} path \EFI\pop!_os\grubx64.efi
+```
 
 # "Menú GRUB no se muestra directamente: consola intermedia con 'set pager=1'"
 
