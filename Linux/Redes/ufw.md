@@ -50,6 +50,9 @@ sudo ufw allow in on waydroid0 to any port 67 proto udp
 
 # Permitir enrutado de la interfaz wlo1 (wi-fi) a la interfaz waydroid0 (Waydroid)
 sudo ufw route allow in on waydroid0 out on wlo1 comment "FWD from wlo1 to waydorid0"
+
+# Permitir trafico desde la subred de Docker a través de la interfaz de red de Docker (br-5961a0facaea) al puerto 11434 para conexiones TCP, con un comentario descriptivo
+sudo ufw allow in on br-5961a0facaea from 172.18.0.0/16 to any port 11434 proto tcp comment 'IN FROM AI-NET INTERFACE TO OLLAMA'
 ```
 
 ## Denegar conexiones
