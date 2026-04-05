@@ -16,6 +16,8 @@ docker volume create n8n_data
 
 docker run -it --rm \
  --name n8n \
+ --restart always \
+ --add-host=host.docker.internal:host-gateway \
  -p 127.0.0.1:5678:5678 \
  -e GENERIC_TIMEZONE="<YOUR_TIMEZONE>" \
  -e TZ="<YOUR_TIMEZONE>" \
@@ -33,6 +35,8 @@ docker run -it --rm \
 - Enforces secure file permissions for the n8n configuration file.
 - Enables [task runners](https://docs.n8n.io/hosting/configuration/task-runners/), the recommended way of executing tasks in n8n.
 - Mounts the `n8n_data` volume to the `/home/node/.n8n` directory to persist your data across container restarts.
+- `restart always`: Automatically restarts the container if it stops or if the Docker daemon restarts.
+- `add-host=host.docker.internal:host-gateway:` Adds a host entry to the container's /etc/hosts file, allowing the container to access services running on the host machine using the hostname `host.docker.internal`.
 
 ## Using with PostgreSQL
 
@@ -42,6 +46,8 @@ docker volume create n8n_data
 
 docker run -it --rm \
  --name n8n \
+ --restart always \
+ --add-host=host.docker.internal:host-gateway \
  -p 5678:5678 \
  -e GENERIC_TIMEZONE="<YOUR_TIMEZONE>" \
  -e TZ="<YOUR_TIMEZONE>" \
