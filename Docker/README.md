@@ -1,58 +1,60 @@
 # Tutorial de Docker
 
 <!-- TOC -->
+
 * [Tutorial de Docker](#tutorial-de-docker)
-  * [Introducción](#introducción)
-  * [Instalación](#instalación)
-    * [Post instalación](#post-instalación)
-  * [Comandos básicos](#comandos-básicos)
-    * [Información](#información)
-    * [Limpieza](#limpieza)
-  * [Dockerfile](#dockerfile)
-    * [FROM](#from)
-    * [WORKDIR](#workdir)
-    * [COPY](#copy)
-    * [ADD](#add)
-    * [RUN](#run)
-    * [ENV](#env)
-    * [VOLUME](#volume)
-    * [LABEL](#label)
-    * [CMD](#cmd)
-    * [ENTRYPOINT](#entrypoint)
-  * [Imágenes](#imágenes)
-    * [Crear una imágen](#crear-una-imágen)
-    * [Ejecutar una imágen y exponer puertos](#ejecutar-una-imágen-y-exponer-puertos)
-    * [Ejecutar una imágen en modo interactivo y entrar en la terminal del contenedor](#ejecutar-una-imágen-en-modo-interactivo-y-entrar-en-la-terminal-del-contenedor)
-    * [Listar imágenes](#listar-imágenes)
-    * [Listar imágenes no utilizadas](#listar-imágenes-no-utilizadas)
-    * [Listar imágenes no utilizadas (sin filtro)](#listar-imágenes-no-utilizadas-sin-filtro)
-    * [Eliminar imágenes no utilizadas](#eliminar-imágenes-no-utilizadas)
-    * [Inspeccionar una imágen](#inspeccionar-una-imágen)
-  * [Contenedores](#contenedores)
-    * [Listar contenedores](#listar-contenedores)
-    * [Eliminar contenedores detenidos](#eliminar-contenedores-detenidos)
-    * [Eliminar redes no utilizadas](#eliminar-redes-no-utilizadas)
-    * [Detener contenedor](#detener-contenedor)
-    * [Reiniciar contenedor](#reiniciar-contenedor)
-    * [Iniciar contenedor](#iniciar-contenedor)
-    * [Escuchar en consola las salidas del contenedor](#escuchar-en-consola-las-salidas-del-contenedor)
-    * [Ver los logs de un contendor](#ver-los-logs-de-un-contendor)
-    * [Copiar archivos desde y hacia un contenedor](#copiar-archivos-desde-y-hacia-un-contenedor)
-    * [Acceder a un contenedor en ejecución](#acceder-a-un-contenedor-en-ejecución)
-    * [Ejecutar un comando desde un contenedor](#ejecutar-un-comando-desde-un-contenedor)
-  * [Volúmenes](#volúmenes)
-    * [Tipos de volúmenes](#tipos-de-volúmenes)
-    * [Listar volúmenes](#listar-volúmenes)
-    * [Eliminar volúmenes no utilizados](#eliminar-volúmenes-no-utilizados)
-    * [Inspeccionar un volumen](#inspeccionar-un-volumen)
-  * [Bind mounts](#bind-mounts)
-  * [Redes](#redes)
-    * [Listar redes](#listar-redes)
-  * [Argumentos <ARG> y variables de entorno <ENV>](#argumentos-arg-y-variables-de-entorno-env)
-  * [Redes](#redes-1)
-    * [Crear redes](#crear-redes)
-    * [Listar redes](#listar-redes-1)
-    * [Drivers](#drivers)
+    * [Introducción](#introducción)
+    * [Instalación](#instalación)
+        * [Post instalación](#post-instalación)
+    * [Comandos básicos](#comandos-básicos)
+        * [Información](#información)
+        * [Limpieza](#limpieza)
+    * [Dockerfile](#dockerfile)
+        * [FROM](#from)
+        * [WORKDIR](#workdir)
+        * [COPY](#copy)
+        * [ADD](#add)
+        * [RUN](#run)
+        * [ENV](#env)
+        * [VOLUME](#volume)
+        * [LABEL](#label)
+        * [CMD](#cmd)
+        * [ENTRYPOINT](#entrypoint)
+    * [Imágenes](#imágenes)
+        * [Crear una imágen](#crear-una-imágen)
+        * [Ejecutar una imágen y exponer puertos](#ejecutar-una-imágen-y-exponer-puertos)
+        * [Ejecutar una imágen en modo interactivo y entrar en la terminal del contenedor](#ejecutar-una-imágen-en-modo-interactivo-y-entrar-en-la-terminal-del-contenedor)
+        * [Listar imágenes](#listar-imágenes)
+        * [Listar imágenes no utilizadas](#listar-imágenes-no-utilizadas)
+        * [Listar imágenes no utilizadas (sin filtro)](#listar-imágenes-no-utilizadas-sin-filtro)
+        * [Eliminar imágenes no utilizadas](#eliminar-imágenes-no-utilizadas)
+        * [Inspeccionar una imágen](#inspeccionar-una-imágen)
+    * [Contenedores](#contenedores)
+        * [Listar contenedores](#listar-contenedores)
+        * [Eliminar contenedores detenidos](#eliminar-contenedores-detenidos)
+        * [Eliminar redes no utilizadas](#eliminar-redes-no-utilizadas)
+        * [Detener contenedor](#detener-contenedor)
+        * [Reiniciar contenedor](#reiniciar-contenedor)
+        * [Iniciar contenedor](#iniciar-contenedor)
+        * [Escuchar en consola las salidas del contenedor](#escuchar-en-consola-las-salidas-del-contenedor)
+        * [Ver los logs de un contendor](#ver-los-logs-de-un-contendor)
+        * [Copiar archivos desde y hacia un contenedor](#copiar-archivos-desde-y-hacia-un-contenedor)
+        * [Acceder a un contenedor en ejecución](#acceder-a-un-contenedor-en-ejecución)
+        * [Ejecutar un comando desde un contenedor](#ejecutar-un-comando-desde-un-contenedor)
+    * [Volúmenes](#volúmenes)
+        * [Tipos de volúmenes](#tipos-de-volúmenes)
+        * [Listar volúmenes](#listar-volúmenes)
+        * [Eliminar volúmenes no utilizados](#eliminar-volúmenes-no-utilizados)
+        * [Inspeccionar un volumen](#inspeccionar-un-volumen)
+    * [Bind mounts](#bind-mounts)
+    * [Redes](#redes)
+        * [Listar redes](#listar-redes)
+    * [Argumentos <ARG> y variables de entorno <ENV>](#argumentos-arg-y-variables-de-entorno-env)
+    * [Redes](#redes-1)
+        * [Crear redes](#crear-redes)
+        * [Listar redes](#listar-redes-1)
+        * [Drivers](#drivers)
+
 <!-- TOC -->
 
 ## Introducción
@@ -249,7 +251,7 @@ Para ejecutar una imagen en modo interactivo y entrar en la terminal del contene
 ```
 
 * `-i` (interactive): Mantiene el STDIN abierto.
-* -`t` (tty): Asigna una terminal. 
+* -`t` (tty): Asigna una terminal.
 
 ### Listar imágenes
 
@@ -551,16 +553,6 @@ Para crear un bind mount, podemos usar el siguiente comando:
 >  docker run -v $(pwd):app -v app/node_modules <image_name>
 >  ```
 
-## Redes
-
-### Listar redes
-
-Para listar las redes que tenemos en nuestro sistema, podemos usar el siguiente comando:
-
-```bash
- docker network ls
-```
-
 ## Argumentos <ARG> y variables de entorno <ENV>
 
 * **Argumentos `<ARG>`**
@@ -623,6 +615,12 @@ Para listar las redes que tenemos en nuestro sistema, podemos usar el siguiente 
 ```bash
  docker network ls
 ```
+
+### [UFW y Docker (ufw-docker)](https://github.com/chaifeng/ufw-docker)
+
+UFW es un cortafuegos popular para iptables en Ubuntu que facilita la gestión de las reglas del cortafuegos. Sin embargo, cuando se instala Docker, este omite las reglas de UFW y
+los puertos publicados pueden ser accedidos desde el exterior. `ufw-docker` es un complemento para UFW que permite integrar las reglas de Docker con UFW, asegurando que los puertos
+publicados por Docker estén protegidos por las reglas de UFW.
 
 ### Drivers
 

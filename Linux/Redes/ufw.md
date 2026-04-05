@@ -1,5 +1,17 @@
 # Comandos más usados en UFW
 
+<!-- TOC -->
+* [Comandos más usados en UFW](#comandos-más-usados-en-ufw)
+  * [Habilitar/Deshabilitar UFW](#habilitardeshabilitar-ufw)
+  * [Ver el estado de UFW](#ver-el-estado-de-ufw)
+  * [Permitir conexiones](#permitir-conexiones)
+  * [Denegar conexiones](#denegar-conexiones)
+  * [Eliminar reglas](#eliminar-reglas)
+  * [Restablecer UFW](#restablecer-ufw)
+  * [Registrar actividad](#registrar-actividad)
+  * [Otras configuraciones](#otras-configuraciones)
+<!-- TOC -->
+
 ## Habilitar/Deshabilitar UFW
 ```bash
 
