@@ -38,6 +38,7 @@ https://www.ionos.es/digitalguide/servidores/configuracion/comando-linux-find/#:
 
 -maxdepth 3        # At most 3 levels deep
 -mindepth 1        # At least 1 level deep
+-path PATTERN      # Path matches PATTERN
 -regex PATTERN
 
 
@@ -140,6 +141,10 @@ b                  # 512-byte bloques
 ```bash
   find . -type f -maxdepth 2 -size +50M
   find . -type f -mindepth 3 -and -maxdepth 5 -size +50M
+  # Buscar archivos dentro de cualquier carpeta llamada config
+  find . -path "*/config/*"
+  # Encontrar archivos .txt solo en directorios que contengan backup
+  find /var -path "*backup/*.txt"
 ```
 
 ```bash 
