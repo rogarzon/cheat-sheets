@@ -194,6 +194,8 @@ Este comando genera un certificado autofirmado y una clave privada en un solo ar
 
 Resultado: Se crea un archivo server.pem que contiene tanto el certificado autofirmado como la clave privada, útil para pruebas o servidores locales.
 
+> Nota: Si da error al intentar iniciar el servidor, presentar la ruta absoluta de python3, por ejemplo: `/usr/bin/python3 -m uploadserver 443 --server-certificate ~/server.pem`
+
 ### Linux - Upload Multiple Files
 
 ```bash
