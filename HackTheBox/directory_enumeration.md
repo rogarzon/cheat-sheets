@@ -21,16 +21,10 @@
 gobuster dir -u <URL> -w <wordlist>
 ```
 
-### Modo DNS
+### Modo Subdominios DNS
 
 ```bash
 gobuster dns -d <dominio> -w <wordlist>
-```
-
-### Modo Subdominios
-
-```bash
-gobuster subdomain -d <dominio> -w <wordlist>
 ```
 
 ## Opciones Más Importantes
