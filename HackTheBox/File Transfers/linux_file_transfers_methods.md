@@ -216,7 +216,7 @@ Resultado: Se crea un archivo server.pem que contiene tanto el certificado autof
 
 > Nota: Si da error al intentar iniciar el servidor, presentar la ruta absoluta de python3, por ejemplo: `/usr/bin/python3 -m uploadserver 443 --server-certificate ~/server.pem`
 
-- `--directory`: Especifica el directorio donde se guardarán los archivos subidos. Si no se proporciona, se usará el directorio actual.
+- `--directory`, `-d`: Especifica el directorio donde se guardarán los archivos subidos. Si no se proporciona, se usará el directorio actual.
 - `--server-certificate`: Especifica el archivo de certificado SSL para habilitar HTTPS. Si se proporciona, el servidor se ejecutará en modo seguro.
 - `--basic-auth`: Habilita la autenticación básica HTTP. Si se proporciona, se solicitará un nombre de usuario y contraseña para acceder al servidor.
 - `--basic-auth-upload`: Habilita la autenticación básica solo para la ruta de carga. Si se proporciona, se solicitará autenticación solo para subir archivos,mientras que la descarga seguirá siendo pública.
@@ -239,6 +239,8 @@ We used the option `--insecure` because we used a self-signed certificate that w
   python3 -m http.server
   # Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 ```
+- `--directory` o `-d`: Especifica el directorio desde el cual se servirán los archivos. Si no se proporciona, se usará el directorio actual.
+- `--bind` o `-b`: Especifica la dirección IP a la que el servidor se vinculará. Por defecto, se vincula a todas las interfaces disponibles 
 
 ### Linux - Creating a Web Server with Python2.7
 ```bash
