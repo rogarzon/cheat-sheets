@@ -1,4 +1,5 @@
 # Gobuster - Directory Enumeration
+Gobuster es una herramienta de fuerza bruta para descubrir directorios, archivos y subdominios en aplicaciones web. Es especialmente útil para la enumeración de directorios ocultos que no están listados en los archivos de índice del servidor.
 
 <!-- TOC -->
 * [Gobuster - Directory Enumeration](#gobuster---directory-enumeration)
