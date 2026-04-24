@@ -235,22 +235,32 @@ unzip <archivo>.zip
 unzip -l <archivo>.zip
 ```
 
-## Proteger el grub
+## Proteger el GRUB
+
+### Método: Editando `/etc/default/grub` (Debian/Ubuntu)
 
 ```bash
-# Proteger el grub
-# Editar el archivo /etc/grub.d/00_header y agregar la siguiente línea al final
-cat << EOF
-set superusers="<username>"
-password_pbkdf2 <usernam> <hash>
-EOF
-# Generar el hash de la contraseña
+# 1. Generar el hash de la contraseña
 sudo grub-mkpasswd-pbkdf2
-# Escribir la contraseña y copiar el hash generado
-# Guardar el archivo
-# Actualizar el grub
-update-grub
+
+# 2. Editar /etc/default/grub
+sudo nano /etc/default/grub
+
+# Añadir o modificar las siguientes líneas:
+GRUB_SUPERUSER="<username>"
+GRUB_PASSWORD_PBKDF2="grub.pbkdf2.sha512.<hash_generado>"
+
+# 3. Actualizar GRUB
+sudo update-grub
 ```
+
+**Nota:** El método editando `/etc/grub.d/00_header` requiere manipular un script complejo y puede causar errores. Usar `/etc/default/grub` es más simple y seguro.
+
+### ¿Qué protege?
+
+- Requiere autenticación para entrar al editor de menú (tecla `e`)
+- Requiere autenticación para modificar parámetros de arranque
+- Previene modificaciones no autorizadas del kernel
 
 ## [Unidades APFS de macOS en Linux](https://recoverit.wondershare.es/harddrive-tips/mount-apfs-linux.html)
 
