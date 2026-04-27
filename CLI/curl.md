@@ -95,3 +95,66 @@ https://devhints.io/curl
   --compressed \
   "https://www.brou.com.uy/web/guest/cotizaciones"
 ```
+
+## Transferencias de archivos (carpeta ↔ servidor)
+
+### Descargar archivos desde servidor
+
+```bash
+# Descargar un archivo
+curl -o archivo.zip https://ejemplo.com/ruta/archivo.zip
+
+# Descargar guardando con el mismo nombre
+curl -O https://ejemplo.com/ruta/archivo.zip
+
+# Descargar múltiples archivos
+curl -O https://ejemplo.com/file1.zip -O https://ejemplo.com/file2.zip
+
+# Descargar archivo con autenticación
+curl -u usuario:contraseña -O https://ejemplo.com/archivo.zip
+
+# Descargar archivo privado con token
+curl -H "Authorization: Bearer TOKEN" -O https://ejemplo.com/archivo.zip
+
+# Descargar un directorio completo (recursivo)
+curl -r -R https://ejemplo.com/directorio/
+
+# Descargar con velocidad limitada (500KB/s)
+curl --limit-rate 500k -O https://ejemplo.com/archivo-grande.iso
+```
+
+### Subir archivos a servidor
+
+```bash
+# Subir archivo mediante POST (multipart/form-data)
+curl -X POST -F "file=@/ruta/local/archivo.txt" https://ejemplo.com/subir
+
+# Subir archivo con campo personalizado
+curl -X POST -F "archivo=@/home/usuario/documento.pdf" https://ejemplo.com/upload
+
+# Subir archivo con autenticación
+curl -u usuario:contraseña -X POST -F "file=@archivo.jpg" https://ejemplo.com/upload
+
+# Subir archivo con token de autorización
+curl -H "Authorization: Bearer TOKEN" -X POST -F "file=@archivo.png" https://ejemplo.com/api/upload
+
+# Subir múltiples archivos
+curl -X POST -F "files[]=@archivo1.jpg" -F "files[]=@archivo2.jpg" https://ejemplo.com/upload
+
+# Subir archivo con metadata adicional
+curl -X POST -F "file=@archivo.zip" -F "descripcion=Backup diario" -F "usuario=admin" https://ejemplo.com/upload
+```
+
+### Descargar carpetas completas (espejar)
+
+```bash
+# Descargar estructura de directorios completa
+curl -R -r -O https://ejemplo.com/directorio/
+
+# Descargar con seguimiento de enlaces
+curl -L -R -O https://ejemplo.com/recursos/
+
+# Descargar con timeout y reintentos
+curl --connect-timeout 30 --max-time 300 -O https://ejemplo.com/archivo.zip
+```
+

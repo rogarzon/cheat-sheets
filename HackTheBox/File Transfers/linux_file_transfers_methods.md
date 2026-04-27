@@ -231,6 +231,8 @@ Resultado: Se crea un archivo server.pem que contiene tanto el certificado autof
 
 We used the option `--insecure` because we used a self-signed certificate that we trust.
 
+> Nota: Si da problemas con que falta el campo files, usar dobles comillas para el nombre del campo, por ejemplo: `-F "files=@/etc/passwd"`
+
 ## Alternative Web File Transfer Method
 
 ### Linux - Creating a Web Server with Python3
