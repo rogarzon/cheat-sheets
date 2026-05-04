@@ -12,6 +12,10 @@ https://devhints.io/grep
 -e, --regexp=PATTERN
 -f, --file=FILE
 -i, --ignore-case
+-l, --files-with-matches 
+-L, --files-without-matches
+-n, --line-number
+-r, --recursive
 -v, --invert-match
 -w, --word-regexp
 -x, --line-regexp
@@ -123,38 +127,43 @@ the regexp cheatsheet.**
 
 ## Examples
 
-```
-Case insensitive: match any line in foo.txt that contains "bar"
+```bash
+# Case insensitive: match any line in foo.txt that contains "bar"
 
 grep -i bar foo.txt
 ```
 
-```
-Match any line in bar.txt that contains either "foo" or "oof"
+```bash
+# Match any line in bar.txt that contains either "foo" or "oof"
 
 grep -E "foo|oof" bar.txt
 ```
 
-```
-Match anything that resembles a URL in foo.txt and only print out the match
+```bash
+# Match anything that resembles a URL in foo.txt and only print out the match
 
 grep -oE "https?://((\w+[_-]?)+\.?)+" foo.txt
 ```
 
-```
-Can also be used with pipes:
-match any line that contains "export" in
-.bash_profile, pipe to another grep that
-matches any of the first set of matches
-containing "PATH"
+```bash
+# Can also be used with pipes:
+# match any line that contains "export" in
+# .bash_profile, pipe to another grep that
+# matches any of the first set of matches
+# containing "PATH"
 
 grep "export" .bash_profile | grep "PATH"
 ```
 
-```
-follow the tail of server.log, pipe to grep
-and print out any line that contains "error"
-and include 5 lines of context
+```bash
+# follow the tail of server.log, pipe to grep
+# and print out any line that contains "error"
+# and include 5 lines of context
 
 tail -f server.log | grep -iC 5 error
+```
+
+```bash
+# Prints the the files that contain "foo" and the line number of the match
+grep -nrl "foo" .
 ```

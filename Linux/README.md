@@ -233,6 +233,10 @@ zip <archivo>.zip <directorio>
 unzip <archivo>.zip
 # Mostrar contenido de archivo comprimido con zip
 unzip -l <archivo>.zip
+# Extraer sin crear subdirectorios internos
+unzip -j <archivo>.zip -d <directorio_destino>
+# Descomprimir varios archivos ZIP, cada uno en su propia carpeta con el mismo nombre del archivo (pero sin la extensión .zip)
+for f in *.zip; do unzip "$f" -d "${f%.zip}"; done
 ```
 
 ## Proteger el GRUB
