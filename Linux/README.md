@@ -235,6 +235,10 @@ unzip <archivo>.zip
 unzip -l <archivo>.zip
 # Extraer sin crear subdirectorios internos
 unzip -j <archivo>.zip -d <directorio_destino>
+# Extraer un archivo específico de un archivo zip
+unzip <archivo>.zip <archivo_a_extraer> -d <directorio_destino>
+# Descomprimir un archivo zip con contraseña
+unzip -P <contraseña> <archivo>.zip
 # Descomprimir varios archivos ZIP, cada uno en su propia carpeta con el mismo nombre del archivo (pero sin la extensión .zip)
 for f in *.zip; do unzip "$f" -d "${f%.zip}"; done
 ```
