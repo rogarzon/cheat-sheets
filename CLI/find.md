@@ -21,7 +21,7 @@ https://www.ionos.es/digitalguide/servidores/configuracion/comando-linux-find/#:
 
 ## Conditions
 
-```
+```bash
 -name "*.c"
 -iname
 
@@ -61,7 +61,7 @@ https://www.ionos.es/digitalguide/servidores/configuracion/comando-linux-find/#:
 
 ## Condition flow
 
-```
+```bash
 \! -name "*.c" # NOT named "*.c"
 \( x -or y \)
 
@@ -73,15 +73,17 @@ https://www.ionos.es/digitalguide/servidores/configuracion/comando-linux-find/#:
 
 ## Actions
 
-```
--exec rm {} \;
--print
--delete
+```bash
+-exec rm {} \; # Ejecuta el comando rm para cada archivo encontrado, donde {} se reemplaza por el nombre del archivo
+-print         # Imprime el nombre de cada archivo encontrado
+-delete        # Elimina cada archivo encontrado
+-ok rm {} \;   # Similar a -exec, pero solicita confirmación antes de ejecutar
+-quit       # Detiene la búsqueda después de encontrar el primer resultado
 ```
 
 ## Access time conditions
 
-```
+```bash
 -atime 0           # Last accessed between now and 24 hours ago
 -atime +0          # Accessed more than 24 hours ago
 -atime 1           # Accessed between 24 and 48 hours ago
@@ -93,7 +95,7 @@ https://www.ionos.es/digitalguide/servidores/configuracion/comando-linux-find/#:
 
 ## File sizes
 
-```
+```bash
 c                  # Bytes
 k                  # Kilobytes
 M                  # Megabytes
@@ -164,7 +166,7 @@ b                  # 512-byte bloques
   find . -maxdepth 1 -type f -name "*.html" -and -not -name "*brou*"
 ```
 
-| Option              | Description                                                                                                                                |
+| Option              | Description                                                                        -exec                                                         |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | -type f             | Hereby, we define the type of the searched object. In this case, 'f' stands for 'file'.                                                    |
 | -name \*.conf       | With '-name', we indicate the name of the file we are looking for. The asterisk (\*) stands for 'all' files with the '.conf' extension.    |
