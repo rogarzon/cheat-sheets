@@ -5,6 +5,7 @@ https://devhints.io/curl
 ## Options
 ```
 -o <file>    # --output: write to file
+-O           # --remote-name: Write output to a file named as the remote file
 -u user:pass # --user: Authentication
 -v           # --verbose
 -vv          # Even more verbose
