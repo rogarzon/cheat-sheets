@@ -1,19 +1,18 @@
-
 # [Xpath cheatsheet](https://devhints.io/xpath)
 
+<!-- TOC -->
 
-<!-- TOC -->
-* [XPath cheatsheet](#xpath-cheatsheet)
-    * [Online XPath Tester](#online-xpath-tester)
-    * [Selectors](#selectors)
-    * [Axes](#axes)
-    * [Functions](#functions)
-    * [Predicates](#predicates)
-<!-- TOC -->
+- [XPath cheatsheet](#xpath-cheatsheet)
+  _ [Online XPath Tester](#online-xpath-tester)
+  _ [Selectors](#selectors)
+  _ [Axes](#axes)
+  _ [Functions](#functions) \* [Predicates](#predicates)
+    <!-- TOC -->
 
 # XPath Cheatsheet
 
 ### Online XPath Tester
+
 - https://extendsclass.com/xpath-tester.html
 - http://www.whitebeam.org/library/guide/TechNotes/xpathtestbed.rhtm
 - **Browser console**: `$x("//div")` - Works in Firefox and Chromium
@@ -72,7 +71,8 @@
 | Has children | `//ul[*]` |
 | Has specific child | `//ul[li]` |
 | Or logic | `//a[@name or @href]` |
-| Union | `//a | //div` |
+| And logic | `//a[@name and @href]` |
+| Union | `//a \| //div` |
 
 ### Axes
 
@@ -99,12 +99,14 @@
 ### Functions
 
 **Node functions**
+
 - `name()` - `//*[starts-with(name(), 'h')]`
 - `text()` - `//button[text()="Submit"]`
 - `count()` - `count(//*)` or `//table[count(tr)=1]`
 - `position()` - `//ol/li[position()=2]`
 
 **String functions**
+
 - `contains()` - `//a[contains(@href, '://')]`
 - `starts-with()` - `//a[starts-with(@href, '/')]`
 - `ends-with()` - `//a[ends-with(@href, '.pdf')]`
@@ -113,14 +115,17 @@
 - `string-length()` - `string-length(text())`
 
 **Boolean functions**
+
 - `not()` - `//h1[not(@id)]`
 
 **Type conversion**
+
 - `string()`, `number()`, `boolean()`
 
 ### Predicates
 
 **Indexing**
+
 ```xpath
 //a[1]                  # first <a>
 //a[last()]             # last <a>
@@ -130,22 +135,26 @@
 ```
 
 **Class check (complex)**
+
 ```xpath
 //div[contains(concat(' ', normalize-space(@class), ' '), ' foobar ')]
 ```
 
 **Chaining order matters**
+
 ```xpath
 a[1][@href='/']         # first, then filter
 a[@href='/'][1]         # filter then first
 ```
 
 **Nesting**
+
 ```xpath
 //section[.//h1[@id='hi']]
 ```
 
 **Examples**
+
 ```xpath
 //*                     # all elements
 (//h1)[1]/text()        # text of first h1
@@ -154,4 +163,3 @@ a[@href='/'][1]         # filter then first
 //section[h1[@id='section-name']]     # directly contains
 ./ancestor-or-self::[@class="box"]   # closest ancestor
 ```
-
