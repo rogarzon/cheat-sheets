@@ -98,6 +98,7 @@ done | grep -v 'wchan=0' > /tmp/freeze-wchan.txt
 ```
 
 **Purpose of each**:
+
 - `journalctl -p err` — every error from current boot. NVIDIA, cos-comp, ACPI, kernel all flow here.
 - `journalctl -g gpu|drm|...` — narrower filter for the GPU/compositor stack that's the suspect.
 - `ps auxf` — full process tree. Tells you what spawned what. Frozen children of a hung parent are easy to spot.
@@ -160,18 +161,18 @@ kill -KILL $(pgrep cosmic-comp)     # compositor-only reset
 
 Once you've recovered, the output is in `/tmp/freeze-DATE/` and you can show it to me so I can tell you exactly what went wrong.
 
-## TL;DR cheat sheet
+## cheat sheet
 
-| Want | Command |
-|---|---|
-| Kill whole session, get login screen | `sudo loginctl terminate-user omen` |
-| Kill only the compositor, keep OS alive | `kill -KILL $(pgrep cosmic-comp)` |
-| Capture diagnostics before resetting | `~/bin/freeze-debug.sh` |
-| Check if GPU is hung | `timeout 10 nvidia-smi` |
-| See what's eating CPU | `ps -eo pid,stat,pcpu,pmem,etime,comm --sort=-pcpu \| head -20` |
-| Read recent errors | `journalctl -b -p err --no-pager \| tail -50` |
-| Find which TTY I'm on | `fgconsole` |
-| List all sessions | `loginctl list-sessions` |
-| Last resort (avoid) | `sudo reboot` |
+| Want                                    | Command                                                         |
+| --------------------------------------- | --------------------------------------------------------------- |
+| Kill whole session, get login screen    | `sudo loginctl terminate-user omen`                             |
+| Kill only the compositor, keep OS alive | `kill -KILL $(pgrep cosmic-comp)`                               |
+| Capture diagnostics before resetting    | `~/bin/freeze-debug.sh`                                         |
+| Check if GPU is hung                    | `timeout 10 nvidia-smi`                                         |
+| See what's eating CPU                   | `ps -eo pid,stat,pcpu,pmem,etime,comm --sort=-pcpu \| head -20` |
+| Read recent errors                      | `journalctl -b -p err --no-pager \| tail -50`                   |
+| Find which TTY I'm on                   | `fgconsole`                                                     |
+| List all sessions                       | `loginctl list-sessions`                                        |
+| Last resort (avoid)                     | `sudo reboot`                                                   |
 
 If you can run the debug script before resetting and share the contents of `/tmp/freeze-DATE/` next time, I can pinpoint the cause instead of guessing.
