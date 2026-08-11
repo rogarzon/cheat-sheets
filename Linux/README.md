@@ -38,8 +38,7 @@
 
 ### Operator "&"
 
-This operator allows us to execute commands in the background. For example, let's say we want to copy a large file. This will obviously take quite a long time and will leave us unable to do anything
-else until the file successfully copies.
+This operator allows us to execute commands in the background. For example, let's say we want to copy a large file. This will obviously take quite a long time and will leave us unable to do anything else until the file successfully copies.
 
 The "&" shell operator allows us to execute a command and have it run in the background (such as this file copy) allowing us to do other things!
 

@@ -807,11 +807,28 @@ of the file you want to process.
    For example, to remove all lines containing "DEBUG":\
    `sed '/DEBUG/d' system.log`
 
-4. Extracting specific fields from a log line:
+4. **Extracting specific fields from a log line:**
 
    You can use regular expressions to extract parts of lines. Suppose each log line starts with a date in the format "YYYY-MM-DD". You could extract
    just the date from each line:\
    `sed -n 's/^\([0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}\).*/\1/p' system.log`
+
+5. **Append  multiple lines after a specific pattern:**
+
+    Add three new lines **after** every line that matches /PATTERN/
+
+    ```bash 
+      sed -i '/PATTERN/a\
+      Line 1 to add\
+      Line 2 to add\
+      Line 3 to add' file.txt
+    ```
+
+    > **Tip** In a single‑line shell invocation you can escape newlines as `\n` and use `$''` quoting:
+    >> ```bash
+    >> sed -i "/PATTERN/a$'\nLine 1 to add\nLine 2 to add'" file.txt
+    >> ```
+
 
 ### Text parsing with `awk`
 
