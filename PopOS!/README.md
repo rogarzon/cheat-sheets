@@ -76,3 +76,8 @@ For switching to hybrid graphics:
 
 For switching to compute mode:
 `sudo system76-power graphics compute`
+
+# Abrir la interfaz clásica de Redes GNOME
+```bash
+    nm-connection-editor
+```
