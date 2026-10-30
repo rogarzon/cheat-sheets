@@ -7,7 +7,7 @@
 ## Dependencies
 ```commandline
 sudo apt-get update      
-sudo apt-get install python3-dev libxml2-dev libxslt1-dev zlib1g-dev libsasl2-dev libldap2-dev build-essential libssl-dev libffi-dev libmysqlclient-dev libjpeg-dev libpq-dev libjpeg8-dev liblcms2-dev libblas-dev libatlas-base-dev
+sudo apt-get install python3-dev libxml2-dev libxslt1-dev zlib1g-dev libsasl2-dev libldap2-dev python3-pip build-essential libssl-dev libffi-dev libmysqlclient-dev libjpeg-dev libpq-dev libjpeg8-dev liblcms2-dev libblas-dev libatlas-base-dev libodbc2 python3-dev libffi-dev libssl-dev pkg-config libev-dev libc-ares-dev
 
 # If you find errors, force to install the dependencies
 sudo apt-get install -f
