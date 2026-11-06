@@ -63,21 +63,35 @@ If you are not using the GNOME Desktop Environment, you can use the system76-pow
 `system76-power help`
 
 For seeing which graphics mode the system is using:
-`sudo system76-power graphics`
+```bash 
+sudo system76-power graphics
+```
 
 For switching to NVIDIA graphics:
-`sudo system76-power graphics nvidia`
+```bash 
+sudo system76-power graphics nvidia
+```
 
 For switching to integrated graphics:
-`sudo system76-power graphics integrated`
+```bash 
+sudo system76-power graphics integrated
+```
 
 For switching to hybrid graphics:
-`sudo system76-power graphics hybrid`
+```bash 
+sudo system76-power graphics hybrid
+```
 
 For switching to compute mode:
-`sudo system76-power graphics compute`
+```bash 
+sudo system76-power graphics compute
+```
 
 # Abrir la interfaz clásica de Redes GNOME
 ```bash
     nm-connection-editor
 ```
+
+# [Pop!_OS COSMIC Capture Freeze Fix](https://github.com/MagnetosphereLabs/pop-os-cosmic-capture-freeze-fix/tree/main?tab=readme-ov-file)
+
+Fixes screen and window capture freezing caused by COSMIC's duplicate_frame protocol error.
